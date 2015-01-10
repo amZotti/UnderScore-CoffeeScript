@@ -25,4 +25,27 @@
     });
   });
 
+  describe("map", function() {
+    it("shoud return a new array with the provided function applied to each element of an array", function() {
+      var arr, newArr;
+      arr = [1, 2, 3];
+      newArr = _.map(arr, function(element, index) {
+        return element * 2;
+      });
+      return expect(newArr).toEqual([2, 4, 6]);
+    });
+    return it("should return an array with the provided function applied to each value of an object", function() {
+      var newArr, obj;
+      obj = {
+        a: 1,
+        b: 2,
+        c: 3
+      };
+      newArr = _.map(obj, function(value, key) {
+        return obj[key] = obj[key] * 2;
+      });
+      return expect(newArr).toEqual([2, 4, 6]);
+    });
+  });
+
 }).call(this);
