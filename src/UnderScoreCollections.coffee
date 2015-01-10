@@ -27,3 +27,9 @@ _.find = (container, callback) ->
     result = result or value for own key, value of container when callback(value) is true
   result
 
+_.filter = (container, callback) ->
+  if Array.isArray container
+    result = (element for element in container when callback(element) is true)
+  else
+    result = (value for own key, value of container when callback(value) is true)
+  result

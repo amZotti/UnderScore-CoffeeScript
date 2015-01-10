@@ -85,4 +85,35 @@
     return result;
   };
 
+  _.filter = function(container, callback) {
+    var element, key, result, value;
+    if (Array.isArray(container)) {
+      result = (function() {
+        var _i, _len, _results;
+        _results = [];
+        for (_i = 0, _len = container.length; _i < _len; _i++) {
+          element = container[_i];
+          if (callback(element) === true) {
+            _results.push(element);
+          }
+        }
+        return _results;
+      })();
+    } else {
+      result = (function() {
+        var _results;
+        _results = [];
+        for (key in container) {
+          if (!__hasProp.call(container, key)) continue;
+          value = container[key];
+          if (callback(value) === true) {
+            _results.push(value);
+          }
+        }
+        return _results;
+      })();
+    }
+    return result;
+  };
+
 }).call(this);
