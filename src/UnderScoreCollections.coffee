@@ -19,3 +19,11 @@ _.reduce = (container, callback, startingValue = 0) ->
     for own key, value of container
       startingValue = callback startingValue, value, key, container
   startingValue
+
+_.find = (container, callback) ->
+  if Array.isArray container
+    result = result or element for element in container when callback(element) is true
+  else
+    result = result or value for own key, value of container when callback(value) is true
+  result
+

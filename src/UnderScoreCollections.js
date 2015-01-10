@@ -64,4 +64,25 @@
     return startingValue;
   };
 
+  _.find = function(container, callback) {
+    var element, key, result, value, _i, _len;
+    if (Array.isArray(container)) {
+      for (_i = 0, _len = container.length; _i < _len; _i++) {
+        element = container[_i];
+        if (callback(element) === true) {
+          result = result || element;
+        }
+      }
+    } else {
+      for (key in container) {
+        if (!__hasProp.call(container, key)) continue;
+        value = container[key];
+        if (callback(value) === true) {
+          result = result || value;
+        }
+      }
+    }
+    return result;
+  };
+
 }).call(this);
