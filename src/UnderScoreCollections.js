@@ -24,4 +24,22 @@
     }
   };
 
+  _.map = function(container, callback) {
+    var index, item, key, newArr, value, _i, _len;
+    newArr = [];
+    if (Array.isArray(container)) {
+      for (index = _i = 0, _len = container.length; _i < _len; index = ++_i) {
+        item = container[index];
+        newArr.push(callback(item, index, container));
+      }
+    } else {
+      for (key in container) {
+        if (!__hasProp.call(container, key)) continue;
+        value = container[key];
+        newArr.push(callback(value, key, container));
+      }
+    }
+    return newArr;
+  };
+
 }).call(this);
