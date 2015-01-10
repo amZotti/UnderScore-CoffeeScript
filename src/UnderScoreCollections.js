@@ -25,21 +25,43 @@
   };
 
   _.map = function(container, callback) {
-    var index, item, key, newArr, value, _i, _len;
-    newArr = [];
+    var index, item, key, value, _i, _len, _results, _results1;
     if (Array.isArray(container)) {
+      _results = [];
       for (index = _i = 0, _len = container.length; _i < _len; index = ++_i) {
         item = container[index];
-        newArr.push(callback(item, index, container));
+        _results.push(callback(item, index, container));
+      }
+      return _results;
+    } else {
+      _results1 = [];
+      for (key in container) {
+        if (!__hasProp.call(container, key)) continue;
+        value = container[key];
+        _results1.push(callback(value, key, container));
+      }
+      return _results1;
+    }
+  };
+
+  _.reduce = function(container, callback, startingValue) {
+    var element, index, key, value, _i, _len;
+    if (startingValue == null) {
+      startingValue = 0;
+    }
+    if (Array.isArray(container)) {
+      for (index = _i = 0, _len = container.length; _i < _len; index = ++_i) {
+        element = container[index];
+        startingValue = callback(startingValue, element, index, container);
       }
     } else {
       for (key in container) {
         if (!__hasProp.call(container, key)) continue;
         value = container[key];
-        newArr.push(callback(value, key, container));
+        startingValue = callback(startingValue, value, key, container);
       }
     }
-    return newArr;
+    return startingValue;
   };
 
 }).call(this);

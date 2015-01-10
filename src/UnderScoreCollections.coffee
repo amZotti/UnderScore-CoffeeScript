@@ -1,18 +1,21 @@
 window._ = {}
 _.each = (container, callback) ->
-  if Array.isArray(container)
-    for item, index in container 
-      callback(item, index, container)
+  if Array.isArray container
+    callback item, index, container for item, index in container 
   else
-    for own key, value of container 
-      callback(value, key, container)
+    callback value, key, container for own key, value of container 
 
 _.map = (container, callback) ->
-  newArr = []
-  if Array.isArray(container)
-    for item, index in container
-      newArr.push callback(item, index, container)
+  if Array.isArray container
+    (callback item, index, container for item, index in container)
+  else
+    (callback value, key, container for own key, value of container)
+
+_.reduce = (container, callback, startingValue = 0) ->
+  if Array.isArray container
+    for element, index in container
+      startingValue = callback startingValue, element, index, container
   else
     for own key, value of container
-      newArr.push callback(value, key, container)
-  newArr
+      startingValue = callback startingValue, value, key, container
+  startingValue
