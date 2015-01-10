@@ -1,3 +1,8 @@
+obj =
+  a: 1
+  b: 2
+  c: 3
+
 describe "each", ->
   it "should apply the function to every value in array", ->
     arr = [1, 2, 3]
@@ -6,10 +11,6 @@ describe "each", ->
     expect(newArr[0]).toEqual(2)
 
   it "should apply the function to every value in object", ->
-    obj =
-      a: 1
-      b: 2
-      c: 3
 
     newObj = {}
     _.each(obj, (value, key) -> newObj[key] = value + 1)
@@ -22,11 +23,6 @@ describe "map", ->
     expect(newArr).toEqual([2,4,6])
 
   it "should return an array with the provided function applied to each value of an object", ->
-    obj =
-      a: 1
-      b: 2
-      c: 3
-
     newArr = _.map(obj, (value, key) -> obj[key] = obj[key] * 2)
     expect(newArr).toEqual([2,4,6])
 
@@ -36,16 +32,11 @@ describe "reduce", ->
   arrayCallback = (startingValue, element, index, arr) ->
     startingValue += element
 
-  beforeEach ->
-    arr = [1, 2, 3]
+  beforeEach -> arr = [1, 2, 3]
 
   it "should reduce all elements of an array into one by applying the provided function", ->
     result = _.reduce(arr, arrayCallback)
     expect(result).toEqual(6)
-
-  it "should reduce correctly when provided a starting value", ->
-    result = _.reduce(arr, arrayCallback, startingValue)
-    expect(result).toEqual(16)
 
   it "should reduce all values of an object into one by applying the provided function", ->
     obj =
@@ -53,8 +44,28 @@ describe "reduce", ->
       b: 2
       c: 3
 
-    objCallback = (startingValue, value, key, obj) ->
-      startingValue += value
+    objCallback = (startingValue, value, key, obj) -> startingValue += value
 
     result = _.reduce(obj, objCallback)
     expect(result).toEqual(6)
+
+  it "should reduce correctly when provided a starting value", ->
+    result = _.reduce(arr, arrayCallback, startingValue)
+    expect(result).toEqual(16)
+
+describe "find", ->
+  callback = (num)-> num % 2 is 0
+
+  it "should return the first element in an array which passes the provided predicate callback", ->
+    arr = [1, 3, 5, 8, 10, 7, 6]
+    result = _.find(arr, callback)
+    expect(result).toEqual(8)
+
+  it "should return the first value in an object which passes the provided predicate callback", ->
+    result = _.find(obj, callback)
+    expect(result).toEqual(2)
+
+  it "should return undefined if predicate fails every element in array", ->
+    arr = [1, 3, 5]
+    result = _.find(arr, callback)
+    expect(result).toEqual(undefined)
