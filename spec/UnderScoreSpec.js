@@ -48,4 +48,39 @@
     });
   });
 
+  describe("reduce", function() {
+    var arr, arrayCallback, startingValue;
+    arr = [];
+    startingValue = 10;
+    arrayCallback = function(startingValue, element, index, arr) {
+      return startingValue += element;
+    };
+    beforeEach(function() {
+      return arr = [1, 2, 3];
+    });
+    it("should reduce all elements of an array into one by applying the provided function", function() {
+      var result;
+      result = _.reduce(arr, arrayCallback);
+      return expect(result).toEqual(6);
+    });
+    it("should reduce correctly when provided a starting value", function() {
+      var result;
+      result = _.reduce(arr, arrayCallback, startingValue);
+      return expect(result).toEqual(16);
+    });
+    return it("should reduce all values of an object into one by applying the provided function", function() {
+      var obj, objCallback, result;
+      obj = {
+        a: 1,
+        b: 2,
+        c: 3
+      };
+      objCallback = function(startingValue, value, key, obj) {
+        return startingValue += value;
+      };
+      result = _.reduce(obj, objCallback);
+      return expect(result).toEqual(6);
+    });
+  });
+
 }).call(this);
