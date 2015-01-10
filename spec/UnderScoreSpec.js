@@ -105,4 +105,30 @@
     });
   });
 
+  describe("filter", function() {
+    var callback;
+    callback = function(num) {
+      return num % 2 === 0;
+    };
+    it("should return all array elements in an array which pass the provided predicate callback", function() {
+      var arr, result;
+      arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+      result = _.filter(arr, callback);
+      return expect(result).toEqual([2, 4, 6, 8, 10]);
+    });
+    return it("should return all object values in an array which pass the provided predicate callback", function() {
+      var result;
+      obj = {
+        a: 1,
+        b: 2,
+        c: 3,
+        d: 4,
+        f: 5,
+        g: 6
+      };
+      result = _.filter(obj, callback);
+      return expect(result).toEqual([2, 4, 6]);
+    });
+  });
+
 }).call(this);

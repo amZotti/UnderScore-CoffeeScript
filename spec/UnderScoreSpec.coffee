@@ -69,3 +69,23 @@ describe "find", ->
     arr = [1, 3, 5]
     result = _.find(arr, callback)
     expect(result).toEqual(undefined)
+
+describe "filter", ->
+  callback = (num) -> num % 2 is 0
+
+  it "should return all array elements in an array which pass the provided predicate callback", ->
+    arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    result = _.filter(arr, callback)
+    expect(result).toEqual([2, 4, 6, 8, 10])
+
+  it "should return all object values in an array which pass the provided predicate callback", ->
+    obj =
+      a: 1
+      b: 2
+      c: 3
+      d: 4
+      f: 5
+      g: 6
+
+    result = _.filter(obj, callback)
+    expect(result).toEqual([2, 4, 6])
