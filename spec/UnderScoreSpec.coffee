@@ -89,3 +89,38 @@ describe "filter", ->
 
     result = _.filter(obj, callback)
     expect(result).toEqual([2, 4, 6])
+
+describe "where", ->
+  arrayOfHomes = [
+    {location: "Paris Island", age: 18}
+      {location: "29 Palms", age: 18}
+      {location: "Camp Lejeune", age: 19}
+      {location: "Iraq", age: 20}
+      {location: "Camp Lejeune", age: 20}
+      {location: "Mesa Verda", age: 22}
+  ]
+
+  objectOfHomes = 
+    a: {location: "Paris Island", age: 18}
+    b: {location: "29 Palms", age: 18}
+    c: {location: "Camp Lejeune", age: 19}
+    d: {location: "Iraq", age: 20}
+    e: {location: "Camp Lejeune", age: 20}
+    f: {location: "Mesa Verda", age: 22}
+
+
+
+
+  it "should returns all matching key/value pairs from array of objects", ->
+    result = _.where(arrayOfHomes, {age: 18})
+    expect(result).toEqual([{location: "Paris Island", age: 18}, {location: "29 Palms", age: 18}])
+
+  it "should returns all matching key/value pairs from an object of objects", ->
+    result = _.where(objectOfHomes, {age: 18})
+    expect(result).toEqual([{location: "Paris Island", age: 18}, {location: "29 Palms", age: 18}])
+
+  it "should return an empty array when there are no matches", ->
+    result = _.where(arrayOfHomes, {age: 28})
+    expect(result).toEqual([])
+
+
