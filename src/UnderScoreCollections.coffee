@@ -33,3 +33,27 @@ _.filter = (container, callback) ->
   else
     result = (value for own key, value of container when callback(value) is true)
   result
+
+_.where = (container, properties) ->
+  results = []
+  if Array.isArray container
+    for object in container
+      if checkObjectForProperties(object, properties)
+        results.push object
+  else
+    for key of container
+      if checkObjectForProperties(container[key], properties)
+        results.push container[key]
+  results
+
+checkObjectForProperties = (object, properties) ->
+  for key of properties
+    unless checkObjectForProperty(key, properties[key], object)
+      return false
+  true
+
+checkObjectForProperty = (key, value, object) ->
+  for otherKey of object
+    if (otherKey is key and value is object[key])
+      return true
+  false
