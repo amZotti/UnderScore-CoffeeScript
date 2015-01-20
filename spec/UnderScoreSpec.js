@@ -219,4 +219,82 @@
     });
   });
 
+  describe("findWhere", function() {
+    var arrayOfHomes, objectOfHomes;
+    arrayOfHomes = [
+      {
+        location: "Paris Island",
+        age: 18
+      }, {
+        location: "29 Palms",
+        age: 18
+      }, {
+        location: "Camp Lejeune",
+        age: 19
+      }, {
+        location: "Iraq",
+        age: 20
+      }, {
+        location: "Camp Lejeune",
+        age: 20
+      }, {
+        location: "Mesa Verda",
+        age: 22
+      }
+    ];
+    objectOfHomes = {
+      a: {
+        location: "Paris Island",
+        age: 18
+      },
+      b: {
+        location: "29 Palms",
+        age: 18
+      },
+      c: {
+        location: "Camp Lejeune",
+        age: 19
+      },
+      d: {
+        location: "Iraq",
+        age: 20
+      },
+      e: {
+        location: "Camp Lejeune",
+        age: 20
+      },
+      f: {
+        location: "Mesa Verda",
+        age: 22
+      }
+    };
+    it("should return the first matching key/value pairs from array of objects", function() {
+      var result;
+      result = _.findWhere(arrayOfHomes, {
+        age: 18
+      });
+      return expect(result).toEqual({
+        location: "Paris Island",
+        age: 18
+      });
+    });
+    it("should return the first matching key/value pairs from an object of objects", function() {
+      var result;
+      result = _.findWhere(objectOfHomes, {
+        age: 18
+      });
+      return expect(result).toEqual({
+        location: "Paris Island",
+        age: 18
+      });
+    });
+    return it("should return undefined when there are no matches", function() {
+      var result;
+      result = _.findWhere(arrayOfHomes, {
+        age: 28
+      });
+      return expect(result).toEqual(void 0);
+    });
+  });
+
 }).call(this);

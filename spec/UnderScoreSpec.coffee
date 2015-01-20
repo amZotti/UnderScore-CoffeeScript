@@ -108,9 +108,6 @@ describe "where", ->
     e: {location: "Camp Lejeune", age: 20}
     f: {location: "Mesa Verda", age: 22}
 
-
-
-
   it "should returns all matching key/value pairs from array of objects", ->
     result = _.where(arrayOfHomes, {age: 18})
     expect(result).toEqual([{location: "Paris Island", age: 18}, {location: "29 Palms", age: 18}])
@@ -124,3 +121,32 @@ describe "where", ->
     expect(result).toEqual([])
 
 
+describe "findWhere", ->
+  arrayOfHomes = [
+    {location: "Paris Island", age: 18}
+      {location: "29 Palms", age: 18}
+      {location: "Camp Lejeune", age: 19}
+      {location: "Iraq", age: 20}
+      {location: "Camp Lejeune", age: 20}
+      {location: "Mesa Verda", age: 22}
+  ]
+
+  objectOfHomes = 
+    a: {location: "Paris Island", age: 18}
+    b: {location: "29 Palms", age: 18}
+    c: {location: "Camp Lejeune", age: 19}
+    d: {location: "Iraq", age: 20}
+    e: {location: "Camp Lejeune", age: 20}
+    f: {location: "Mesa Verda", age: 22}
+
+  it "should return the first matching key/value pairs from array of objects", ->
+    result = _.findWhere(arrayOfHomes, {age: 18})
+    expect(result).toEqual({location: "Paris Island", age: 18})
+
+  it "should return the first matching key/value pairs from an object of objects", ->
+    result = _.findWhere(objectOfHomes, {age: 18})
+    expect(result).toEqual({location: "Paris Island", age: 18})
+
+  it "should return undefined when there are no matches", ->
+    result = _.findWhere(arrayOfHomes, {age: 28})
+    expect(result).toEqual(undefined)
