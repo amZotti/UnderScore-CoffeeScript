@@ -445,10 +445,49 @@
       }, "sort");
       return expect(result).toEqual([[1, 5, 7], [2, 3, 66]]);
     });
-    return it("should pass extra arguments onto the method invocation", function() {
+    return it("should pass extra arguments onto method invocation", function() {
       var result;
       result = _.invoke(["lol"], "concat", "bbq");
       return expect(result).toEqual(["lolbbq"]);
+    });
+  });
+
+  describe("pluck", function() {
+    it("should extract property value from each object in array container", function() {
+      var arr, result;
+      arr = [
+        {
+          name: 'moe',
+          age: 40
+        }, {
+          name: 'larry',
+          age: 50
+        }, {
+          name: 'curly',
+          age: 60
+        }
+      ];
+      result = _.pluck(arr, 'name');
+      return expect(result).toEqual(["moe", "larry", "curly"]);
+    });
+    return it("should extract property value from each object in object container", function() {
+      var result;
+      obj = {
+        a: {
+          name: 'moe',
+          age: 40
+        },
+        b: {
+          name: 'larry',
+          age: 50
+        },
+        c: {
+          name: 'curly',
+          age: 60
+        }
+      };
+      result = _.pluck(obj, 'name');
+      return expect(result).toEqual(["moe", "larry", "curly"]);
     });
   });
 

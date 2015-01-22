@@ -247,3 +247,15 @@ describe "invoke", ->
   it "should pass extra arguments onto method invocation", ->
     result = _.invoke(["lol"], "concat", "bbq")
     expect(result).toEqual(["lolbbq"])
+
+describe "pluck", ->
+
+  it "should extract property value from each object in array container", ->
+    arr = [{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}]
+    result = _.pluck(arr, 'name')
+    expect(result).toEqual(["moe", "larry", "curly"])
+
+  it "should extract property value from each object in object container", ->
+    obj = {a: {name: 'moe', age: 40}, b: {name: 'larry', age: 50}, c: {name: 'curly', age: 60}}
+    result = _.pluck(obj, 'name')
+    expect(result).toEqual(["moe", "larry", "curly"])
