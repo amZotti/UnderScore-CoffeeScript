@@ -176,4 +176,33 @@
     return void 0;
   };
 
+  _.reject = function(container, callback) {
+    var element, key, results;
+    if (Array.isArray(container)) {
+      return results = (function() {
+        var _i, _len, _results;
+        _results = [];
+        for (_i = 0, _len = container.length; _i < _len; _i++) {
+          element = container[_i];
+          if (callback(element) !== true) {
+            _results.push(element);
+          }
+        }
+        return _results;
+      })();
+    } else {
+      console.log(container);
+      return results = (function() {
+        var _results;
+        _results = [];
+        for (key in container) {
+          if (callback(container[key]) !== true) {
+            _results.push(container[key]);
+          }
+        }
+        return _results;
+      })();
+    }
+  };
+
 }).call(this);

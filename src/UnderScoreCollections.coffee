@@ -68,3 +68,9 @@ _.findWhere = (container, properties) ->
       if checkObjectForProperties(container[key], properties)
         return container[key]
   undefined
+
+_.reject = (container, callback) ->
+  if Array.isArray(container)
+    results = (element for element in container when callback(element) isnt true)
+  else
+    results = (container[key] for key of container when callback(container[key]) isnt true)
