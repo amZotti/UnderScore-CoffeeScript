@@ -401,4 +401,34 @@
     });
   });
 
+  describe("contains", function() {
+    var containsArr, containsObj;
+    containsArr = [1, 2, 3];
+    containsObj = {
+      a: 1,
+      b: 2,
+      c: 4
+    };
+    it("should return true if the value is in the array", function() {
+      var result;
+      result = _.contains(containsArr, 2);
+      return expect(result).toBe(true);
+    });
+    it("should return false if the value is not in the array", function() {
+      var result;
+      result = _.contains(containsArr, 99);
+      return expect(result).toBe(false);
+    });
+    it("should return true if the value is in the object", function() {
+      var result;
+      result = _.contains(containsObj, 2);
+      return expect(result).toBe(true);
+    });
+    return it("should return false if the value is not in the object", function() {
+      var result;
+      result = _.contains(containsObj, 99);
+      return expect(result).toBe(false);
+    });
+  });
+
 }).call(this);

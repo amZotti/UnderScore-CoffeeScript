@@ -212,3 +212,24 @@ describe "some", ->
   it "should return false if all values in object evaluate to false when passed predicate callback", ->
     result = _.some(someObj2, callback)
     expect(result).toBe(false)
+
+describe "contains", ->
+
+  containsArr = [1, 2, 3]
+  containsObj = {a: 1, b: 2, c: 4}
+
+  it "should return true if the value is in the array", ->
+    result = _.contains(containsArr, 2)
+    expect(result).toBe(true)
+
+  it "should return false if the value is not in the array", ->
+    result = _.contains(containsArr, 99)
+    expect(result).toBe(false)
+
+  it "should return true if the value is in the object", ->
+    result = _.contains(containsObj, 2)
+    expect(result).toBe(true)
+
+  it "should return false if the value is not in the object", ->
+    result = _.contains(containsObj, 99)
+    expect(result).toBe(false)
