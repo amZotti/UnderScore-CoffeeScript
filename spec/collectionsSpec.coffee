@@ -259,3 +259,10 @@ describe "pluck", ->
     obj = {a: {name: 'moe', age: 40}, b: {name: 'larry', age: 50}, c: {name: 'curly', age: 60}}
     result = _.pluck(obj, 'name')
     expect(result).toEqual(["moe", "larry", "curly"])
+
+describe "max", ->
+
+  it "should return the maximum value in the container", ->
+    stooges = [{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}];
+    result = _.max(stooges, (stooge) -> stooge.age);
+    expect(result).toEqual({name: 'curly', age: 60})

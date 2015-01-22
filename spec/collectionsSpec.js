@@ -491,4 +491,29 @@
     });
   });
 
+  describe("max", function() {
+    return it("should return the maximum value in the container", function() {
+      var result, stooges;
+      stooges = [
+        {
+          name: 'moe',
+          age: 40
+        }, {
+          name: 'larry',
+          age: 50
+        }, {
+          name: 'curly',
+          age: 60
+        }
+      ];
+      result = _.max(stooges, function(stooge) {
+        return stooge.age;
+      });
+      return expect(result).toEqual({
+        name: 'curly',
+        age: 60
+      });
+    });
+  });
+
 }).call(this);
