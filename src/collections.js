@@ -266,4 +266,10 @@
     }
   };
 
+  _.pluck = function(container, key) {
+    return _.map(container, function(obj) {
+      return obj[key];
+    });
+  };
+
 }).call(this);

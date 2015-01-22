@@ -100,6 +100,5 @@ _.invoke = (container, methodName) ->
       for key of container
         container[key][methodName].apply(container[key], [].slice.call(arguments, 2))
 
-
-
-
+_.pluck = (container, key) ->
+  _.map(container, (obj) -> obj[key])
