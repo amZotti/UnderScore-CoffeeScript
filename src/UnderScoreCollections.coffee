@@ -81,3 +81,10 @@ _.every = (container, callback) ->
   else
     return false for key of container when callback(container[key]) isnt true
   true
+
+_.some = (container, callback) ->
+  if Array.isArray(container)
+    return true for element in container when callback(element)
+  else
+    return true for key of container when callback(container[key])
+  false

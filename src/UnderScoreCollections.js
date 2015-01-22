@@ -223,4 +223,23 @@
     return true;
   };
 
+  _.some = function(container, callback) {
+    var element, key, _i, _len;
+    if (Array.isArray(container)) {
+      for (_i = 0, _len = container.length; _i < _len; _i++) {
+        element = container[_i];
+        if (callback(element)) {
+          return true;
+        }
+      }
+    } else {
+      for (key in container) {
+        if (callback(container[key])) {
+          return true;
+        }
+      }
+    }
+    return false;
+  };
+
 }).call(this);
