@@ -157,4 +157,23 @@
     return false;
   };
 
+  _.findWhere = function(container, properties) {
+    var key, object, _i, _len;
+    if (Array.isArray(container)) {
+      for (_i = 0, _len = container.length; _i < _len; _i++) {
+        object = container[_i];
+        if (checkObjectForProperties(object, properties)) {
+          return object;
+        }
+      }
+    } else {
+      for (key in container) {
+        if (checkObjectForProperties(container[key], properties)) {
+          return container[key];
+        }
+      }
+    }
+    return void 0;
+  };
+
 }).call(this);

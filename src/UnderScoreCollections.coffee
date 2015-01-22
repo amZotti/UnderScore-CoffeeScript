@@ -57,3 +57,14 @@ checkObjectForProperty = (key, value, object) ->
     if (otherKey is key and value is object[key])
       return true
   false
+
+_.findWhere = (container, properties) ->
+  if Array.isArray container
+    for object in container
+      if checkObjectForProperties(object, properties)
+        return object
+  else
+    for key of container
+      if checkObjectForProperties(container[key], properties)
+        return container[key]
+  undefined
