@@ -80,7 +80,7 @@ _.any = _.some
 _.contains = (container, value) ->
    _.some container, (element) -> element is value
 
-#alias 
+#alias
 _.include = _.contains
 
 _.invoke = (container, methodName) ->
@@ -90,3 +90,14 @@ _.invoke = (container, methodName) ->
 
 _.pluck = (container, key) ->
   _.map(container, (obj) -> obj[key])
+
+_.max = (container, callback) ->
+  result = undefined
+  maxVal = undefined
+  _.each container, (value) ->
+    maxVal = maxVal or callback(value)
+    result = result or value
+    if callback(value) > maxVal
+      result = value
+  result
+

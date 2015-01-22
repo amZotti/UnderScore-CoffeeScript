@@ -163,4 +163,18 @@
     });
   };
 
+  _.max = function(container, callback) {
+    var maxVal, result;
+    result = void 0;
+    maxVal = void 0;
+    _.each(container, function(value) {
+      maxVal = maxVal || callback(value);
+      result = result || value;
+      if (callback(value) > maxVal) {
+        return result = value;
+      }
+    });
+    return result;
+  };
+
 }).call(this);
