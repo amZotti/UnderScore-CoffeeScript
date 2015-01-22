@@ -46,94 +46,49 @@
   };
 
   _.reduce = function(container, callback, startingValue) {
-    var element, index, key, value, _i, _len;
     if (startingValue == null) {
       startingValue = 0;
     }
-    if (Array.isArray(container)) {
-      for (index = _i = 0, _len = container.length; _i < _len; index = ++_i) {
-        element = container[index];
-        startingValue = callback(startingValue, element, index, container);
-      }
-    } else {
-      for (key in container) {
-        if (!__hasProp.call(container, key)) continue;
-        value = container[key];
-        startingValue = callback(startingValue, value, key, container);
-      }
-    }
+    _.each(container, function(element, index, container) {
+      return startingValue = callback(startingValue, element, index, container);
+    });
     return startingValue;
   };
 
   _.find = function(container, callback) {
-    var element, key, result, value, _i, _len;
-    if (Array.isArray(container)) {
-      for (_i = 0, _len = container.length; _i < _len; _i++) {
-        element = container[_i];
-        if (callback(element) === true) {
-          result = result || element;
-        }
+    var result;
+    result = void 0;
+    _.each(container, function(value, index, container) {
+      if (result === void 0 && callback(value) === true) {
+        return result = value;
       }
-    } else {
-      for (key in container) {
-        if (!__hasProp.call(container, key)) continue;
-        value = container[key];
-        if (callback(value) === true) {
-          result = result || value;
-        }
-      }
-    }
+    });
     return result;
   };
+
+  _.detect = _.find;
 
   _.filter = function(container, callback) {
-    var element, key, result, value;
-    if (Array.isArray(container)) {
-      result = (function() {
-        var _i, _len, _results;
-        _results = [];
-        for (_i = 0, _len = container.length; _i < _len; _i++) {
-          element = container[_i];
-          if (callback(element) === true) {
-            _results.push(element);
-          }
-        }
-        return _results;
-      })();
-    } else {
-      result = (function() {
-        var _results;
-        _results = [];
-        for (key in container) {
-          if (!__hasProp.call(container, key)) continue;
-          value = container[key];
-          if (callback(value) === true) {
-            _results.push(value);
-          }
-        }
-        return _results;
-      })();
-    }
-    return result;
+    var results;
+    results = [];
+    _.each(container, function(value, index, container) {
+      if (callback(value)) {
+        return results.push(value);
+      }
+    });
+    return results;
   };
 
+  _.select = _.filter;
+
   _.where = function(container, properties) {
-    var key, object, results, _i, _len;
+    var results;
     results = [];
-    if (Array.isArray(container)) {
-      for (_i = 0, _len = container.length; _i < _len; _i++) {
-        object = container[_i];
-        if (checkObjectForProperties(object, properties)) {
-          results.push(object);
-        }
+    _.each(container, function(value, index, container) {
+      if (checkObjectForProperties(value, properties)) {
+        return results.push(value);
       }
-    } else {
-      for (key in container) {
-        if (checkObjectForProperties(container[key], properties)) {
-          results.push(container[key]);
-        }
-      }
-    }
+    });
     return results;
   };
 
@@ -158,89 +113,33 @@
   };
 
   _.findWhere = function(container, properties) {
-    var key, object, _i, _len;
-    if (Array.isArray(container)) {
-      for (_i = 0, _len = container.length; _i < _len; _i++) {
-        object = container[_i];
-        if (checkObjectForProperties(object, properties)) {
-          return object;
-        }
-      }
-    } else {
-      for (key in container) {
-        if (checkObjectForProperties(container[key], properties)) {
-          return container[key];
-        }
-      }
-    }
-    return void 0;
+    return _.where(container, properties)[0];
   };
 
   _.reject = function(container, callback) {
-    var element, key, results;
-    if (Array.isArray(container)) {
-      return results = (function() {
-        var _i, _len, _results;
-        _results = [];
-        for (_i = 0, _len = container.length; _i < _len; _i++) {
-          element = container[_i];
-          if (callback(element) !== true) {
-            _results.push(element);
-          }
-        }
-        return _results;
-      })();
-    } else {
-      return results = (function() {
-        var _results;
-        _results = [];
-        for (key in container) {
-          if (callback(container[key]) !== true) {
-            _results.push(container[key]);
-          }
-        }
-        return _results;
-      })();
-    }
+    return _.filter(container, function(value) {
+      return !callback(value);
+    });
   };
 
   _.every = function(container, callback) {
-    var element, key, _i, _len;
-    if (Array.isArray(container)) {
-      for (_i = 0, _len = container.length; _i < _len; _i++) {
-        element = container[_i];
-        if (callback(element) !== true) {
-          return false;
-        }
+    var status;
+    status = true;
+    _.each(container, function(value) {
+      if (!callback(value)) {
+        return status = false;
       }
-    } else {
-      for (key in container) {
-        if (callback(container[key]) !== true) {
-          return false;
-        }
-      }
-    }
-    return true;
+    });
+    return status;
   };
 
+  _.all = _.every;
+
   _.some = function(container, callback) {
-    var element, key, _i, _len;
-    if (Array.isArray(container)) {
-      for (_i = 0, _len = container.length; _i < _len; _i++) {
-        element = container[_i];
-        if (callback(element)) {
-          return true;
-        }
-      }
-    } else {
-      for (key in container) {
-        if (callback(container[key])) {
-          return true;
-        }
-      }
-    }
-    return false;
+    return _.filter(container, callback).length !== 0;
   };
+
+  _.any = _.some;
 
   _.contains = function(container, value) {
     return _.some(container, function(element) {
@@ -248,22 +147,14 @@
     });
   };
 
+  _.include = _.contains;
+
   _.invoke = function(container, methodName) {
-    var element, key, _i, _len, _results, _results1;
-    if (Array.isArray(container)) {
-      _results = [];
-      for (_i = 0, _len = container.length; _i < _len; _i++) {
-        element = container[_i];
-        _results.push(element[methodName].apply(element, [].slice.call(arguments, 2)));
-      }
-      return _results;
-    } else {
-      _results1 = [];
-      for (key in container) {
-        _results1.push(container[key][methodName].apply(container[key], [].slice.call(arguments, 2)));
-      }
-      return _results1;
-    }
+    var args;
+    args = [].slice.call(arguments, 2);
+    return _.map(container, function(value) {
+      return value[methodName].apply(value, args);
+    });
   };
 
   _.pluck = function(container, key) {

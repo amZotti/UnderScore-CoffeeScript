@@ -1,9 +1,9 @@
 window._ = {}
 _.each = (container, callback) ->
   if Array.isArray container
-    callback item, index, container for item, index in container 
+    callback item, index, container for item, index in container
   else
-    callback value, key, container for own key, value of container 
+    callback value, key, container for own key, value of container
 
 _.map = (container, callback) ->
   if Array.isArray container
@@ -12,38 +12,33 @@ _.map = (container, callback) ->
     (callback value, key, container for own key, value of container)
 
 _.reduce = (container, callback, startingValue = 0) ->
-  if Array.isArray container
-    for element, index in container
-      startingValue = callback startingValue, element, index, container
-  else
-    for own key, value of container
-      startingValue = callback startingValue, value, key, container
+  _.each container, (element, index, container) ->
+    startingValue = callback startingValue, element, index, container
   startingValue
 
 _.find = (container, callback) ->
-  if Array.isArray container
-    result = result or element for element in container when callback(element) is true
-  else
-    result = result or value for own key, value of container when callback(value) is true
+  result = undefined
+  _.each container, (value, index, container) ->
+    result = value if result is undefined and callback(value) is true
   result
 
+#alias
+_.detect = _.find
+
 _.filter = (container, callback) ->
-  if Array.isArray container
-    result = (element for element in container when callback(element) is true)
-  else
-    result = (value for own key, value of container when callback(value) is true)
-  result
+  results = []
+  _.each container, (value, index, container) ->
+    if callback(value) then results.push(value)
+  results
+
+#alias
+_.select = _.filter
 
 _.where = (container, properties) ->
   results = []
-  if Array.isArray container
-    for object in container
-      if checkObjectForProperties(object, properties)
-        results.push object
-  else
-    for key of container
-      if checkObjectForProperties(container[key], properties)
-        results.push container[key]
+  _.each container, (value, index, container) ->
+      if checkObjectForProperties(value, properties)
+        results.push(value)
   results
 
 checkObjectForProperties = (object, properties) ->
@@ -54,51 +49,44 @@ checkObjectForProperties = (object, properties) ->
 
 checkObjectForProperty = (key, value, object) ->
   for otherKey of object
-    if (otherKey is key and value is object[key])
+    if otherKey is key and value is object[key]
       return true
   false
 
 _.findWhere = (container, properties) ->
-  if Array.isArray container
-    for object in container
-      if checkObjectForProperties(object, properties)
-        return object
-  else
-    for key of container
-      if checkObjectForProperties(container[key], properties)
-        return container[key]
-  undefined
+  _.where(container, properties)[0]
+
 
 _.reject = (container, callback) ->
-  if Array.isArray(container)
-    results = (element for element in container when callback(element) isnt true)
-  else
-    results = (container[key] for key of container when callback(container[key]) isnt true)
+  _.filter container, (value) ->
+    !callback(value)
 
 _.every = (container, callback) ->
-  if Array.isArray(container)
-    return false for element in container when callback(element) isnt true
-  else
-    return false for key of container when callback(container[key]) isnt true
-  true
+  status = true
+  _.each container, (value) ->
+    unless callback(value)
+      status = false
+  status
+
+#alias
+_.all = _.every
 
 _.some = (container, callback) ->
-  if Array.isArray(container)
-    return true for element in container when callback(element)
-  else
-    return true for key of container when callback(container[key])
-  false
+  _.filter(container, callback).length isnt 0
+
+#alias
+_.any = _.some
 
 _.contains = (container, value) ->
-   _.some(container, (element) -> element is value)
+   _.some container, (element) -> element is value
+
+#alias 
+_.include = _.contains
 
 _.invoke = (container, methodName) ->
-    if Array.isArray(container)
-      for element in container
-        element[methodName].apply(element, [].slice.call(arguments, 2))
-    else
-      for key of container
-        container[key][methodName].apply(container[key], [].slice.call(arguments, 2))
+  args = [].slice.call(arguments, 2)
+  _.map container, (value) ->
+        value[methodName].apply(value, args)
 
 _.pluck = (container, key) ->
   _.map(container, (obj) -> obj[key])
