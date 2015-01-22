@@ -317,8 +317,47 @@
     return it("should return only values from object which fail the predicate callback", function() {
       var result;
       result = _.reject(rejectObj, callback);
-      console.log(result);
       return expect(result).toEqual([1, 3]);
+    });
+  });
+
+  describe("every", function() {
+    var callback, everyArr1, everyArr2, everyObj1, everyObj2;
+    everyArr1 = [1, 2, 3, 4, 5, 6];
+    everyArr2 = [2, 4, 6];
+    everyObj1 = {
+      a: 1,
+      b: 2,
+      c: 3,
+      d: 4
+    };
+    everyObj2 = {
+      a: 2,
+      b: 4,
+      c: 6
+    };
+    callback = function(value) {
+      return value % 2 === 0;
+    };
+    it("should return false if a single value in array fails predicate callback", function() {
+      var result;
+      result = _.every(everyArr1, callback);
+      return expect(result).toBe(false);
+    });
+    it("should return true only if all values in array pass predicate callback", function() {
+      var result;
+      result = _.every(everyArr2, callback);
+      return expect(result).toBe(true);
+    });
+    it("should return false if a single value in object fails predicate callback", function() {
+      var result;
+      result = _.every(everyObj1, callback);
+      return expect(result).toBe(false);
+    });
+    return it("should return true only if all values in object pass predicate callback", function() {
+      var result;
+      result = _.every(everyObj2, callback);
+      return expect(result).toBe(true);
     });
   });
 

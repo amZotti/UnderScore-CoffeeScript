@@ -164,3 +164,27 @@ describe "reject", ->
   it "should return only values from object which fail the predicate callback", ->
     result = _.reject(rejectObj, callback)
     expect(result).toEqual([1, 3])
+
+describe "every", ->
+
+  everyArr1 = [1, 2, 3, 4, 5, 6]
+  everyArr2 = [2, 4, 6]
+  everyObj1 = {a: 1, b: 2, c: 3, d: 4}
+  everyObj2 = {a: 2, b: 4, c: 6}
+  callback = (value) -> value % 2 is 0
+
+  it "should return false if a single value in array fails predicate callback", ->
+    result = _.every(everyArr1, callback)
+    expect(result).toBe(false)
+
+  it "should return true only if all values in array pass predicate callback", ->
+    result = _.every(everyArr2, callback)
+    expect(result).toBe(true)
+
+  it "should return false if a single value in object fails predicate callback", ->
+    result = _.every(everyObj1, callback)
+    expect(result).toBe(false)
+
+  it "should return true only if all values in object pass predicate callback", ->
+    result = _.every(everyObj2, callback)
+    expect(result).toBe(true)
