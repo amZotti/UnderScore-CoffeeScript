@@ -233,3 +233,17 @@ describe "contains", ->
   it "should return false if the value is not in the object", ->
     result = _.contains(containsObj, 99)
     expect(result).toBe(false)
+
+describe "invoke", ->
+
+  it "should call sort method on each element in an array and return results in an array", ->
+    result = _.invoke([[5, 1, 7], [3, 2, 1]], "sort");
+    expect(result).toEqual([[1, 5, 7], [1, 2, 3]])
+
+  it "should call sort method on each value in an object and return results in an array", ->
+    result = _.invoke({a: [5, 1, 7], b: [3, 2, 66]}, "sort")
+    expect(result).toEqual([[1, 5, 7], [2, 3, 66]])
+
+  it "should pass extra arguments onto method invocation", ->
+    result = _.invoke(["lol"], "concat", "bbq")
+    expect(result).toEqual(["lolbbq"])

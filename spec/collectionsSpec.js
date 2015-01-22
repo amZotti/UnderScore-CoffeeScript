@@ -431,4 +431,25 @@
     });
   });
 
+  describe("invoke", function() {
+    it("should call sort method on each element in an array and return results in an array", function() {
+      var result;
+      result = _.invoke([[5, 1, 7], [3, 2, 1]], "sort");
+      return expect(result).toEqual([[1, 5, 7], [1, 2, 3]]);
+    });
+    it("should call sort method on each value in an object and return results in an array", function() {
+      var result;
+      result = _.invoke({
+        a: [5, 1, 7],
+        b: [3, 2, 66]
+      }, "sort");
+      return expect(result).toEqual([[1, 5, 7], [2, 3, 66]]);
+    });
+    return it("should pass extra arguments onto the method invocation", function() {
+      var result;
+      result = _.invoke(["lol"], "concat", "bbq");
+      return expect(result).toEqual(["lolbbq"]);
+    });
+  });
+
 }).call(this);
