@@ -297,4 +297,29 @@
     });
   });
 
+  describe("reject", function() {
+    var arr, callback, rejectObj;
+    arr = [1, 2, 3, 4, 5, 6];
+    rejectObj = {
+      a: 1,
+      b: 2,
+      c: 3,
+      d: 4
+    };
+    callback = function(value) {
+      return value % 2 === 0;
+    };
+    it("should return only values from array which fail the predicate callback", function() {
+      var result;
+      result = _.reject(arr, callback);
+      return expect(result).toEqual([1, 3, 5]);
+    });
+    return it("should return only values from object which fail the predicate callback", function() {
+      var result;
+      result = _.reject(rejectObj, callback);
+      console.log(result);
+      return expect(result).toEqual([1, 3]);
+    });
+  });
+
 }).call(this);

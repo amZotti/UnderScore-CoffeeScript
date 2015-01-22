@@ -100,7 +100,7 @@ describe "where", ->
       {location: "Mesa Verda", age: 22}
   ]
 
-  objectOfHomes = 
+  objectOfHomes =
     a: {location: "Paris Island", age: 18}
     b: {location: "29 Palms", age: 18}
     c: {location: "Camp Lejeune", age: 19}
@@ -131,7 +131,7 @@ describe "findWhere", ->
       {location: "Mesa Verda", age: 22}
   ]
 
-  objectOfHomes = 
+  objectOfHomes =
     a: {location: "Paris Island", age: 18}
     b: {location: "29 Palms", age: 18}
     c: {location: "Camp Lejeune", age: 19}
@@ -150,3 +150,17 @@ describe "findWhere", ->
   it "should return undefined when there are no matches", ->
     result = _.findWhere(arrayOfHomes, {age: 28})
     expect(result).toEqual(undefined)
+
+describe "reject", ->
+
+  arr = [1, 2, 3, 4, 5, 6]
+  rejectObj = {a: 1, b: 2, c: 3, d: 4}
+  callback = (value) -> value % 2 is 0
+
+  it "should return only values from array which fail the predicate callback", ->
+    result = _.reject(arr, callback)
+    expect(result).toEqual([1, 3, 5])
+
+  it "should return only values from object which fail the predicate callback", ->
+    result = _.reject(rejectObj, callback)
+    expect(result).toEqual([1, 3])
