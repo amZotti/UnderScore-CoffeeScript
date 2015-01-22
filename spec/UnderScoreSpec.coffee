@@ -188,3 +188,27 @@ describe "every", ->
   it "should return true only if all values in object pass predicate callback", ->
     result = _.every(everyObj2, callback)
     expect(result).toBe(true)
+
+describe "some", ->
+
+  someArr1 = [1, 2, 3, 4, 5, 6]
+  someArr2 = [1, 3, 5]
+  someObj1 = {a: 1, b: 2, c: 3, d: 4}
+  someObj2 = {a: 1, b: 3, c: 9}
+  callback = (value) -> value % 2 is 0
+
+  it "should return true if any of the values in the array evaluate to true when passed predicate callback", ->
+    result = _.some(someArr1, callback)
+    expect(result).toBe(true)
+
+  it "should return false if all values in array evaluate to false when passed predicate callback", ->
+    result = _.some(someArr2, callback)
+    expect(result).toBe(false)
+
+  it "should return true if any of the values in the object evaluate to true when passed predicate callback", ->
+    result = _.some(someObj1, callback)
+    expect(result).toBe(true)
+
+  it "should return false if all values in object evaluate to false when passed predicate callback", ->
+    result = _.some(someObj2, callback)
+    expect(result).toBe(false)

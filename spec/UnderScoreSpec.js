@@ -361,4 +361,44 @@
     });
   });
 
+  describe("some", function() {
+    var callback, someArr1, someArr2, someObj1, someObj2;
+    someArr1 = [1, 2, 3, 4, 5, 6];
+    someArr2 = [1, 3, 5];
+    someObj1 = {
+      a: 1,
+      b: 2,
+      c: 3,
+      d: 4
+    };
+    someObj2 = {
+      a: 1,
+      b: 3,
+      c: 9
+    };
+    callback = function(value) {
+      return value % 2 === 0;
+    };
+    it("should return true if any of the values in the array evaluate to true when passed predicate callback", function() {
+      var result;
+      result = _.some(someArr1, callback);
+      return expect(result).toBe(true);
+    });
+    it("should return false if all values in array evaluate to false when passed predicate callback", function() {
+      var result;
+      result = _.some(someArr2, callback);
+      return expect(result).toBe(false);
+    });
+    it("should return true if any of the values in the object evaluate to true when passed predicate callback", function() {
+      var result;
+      result = _.some(someObj1, callback);
+      return expect(result).toBe(true);
+    });
+    return it("should return false if all values in object evaluate to false when passed predicate callback", function() {
+      var result;
+      result = _.some(someObj2, callback);
+      return expect(result).toBe(false);
+    });
+  });
+
 }).call(this);
