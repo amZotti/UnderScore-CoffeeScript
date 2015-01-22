@@ -248,4 +248,22 @@
     });
   };
 
+  _.invoke = function(container, methodName) {
+    var element, key, _i, _len, _results, _results1;
+    if (Array.isArray(container)) {
+      _results = [];
+      for (_i = 0, _len = container.length; _i < _len; _i++) {
+        element = container[_i];
+        _results.push(element[methodName].apply(element, [].slice.call(arguments, 2)));
+      }
+      return _results;
+    } else {
+      _results1 = [];
+      for (key in container) {
+        _results1.push(container[key][methodName].apply(container[key], [].slice.call(arguments, 2)));
+      }
+      return _results1;
+    }
+  };
+
 }).call(this);

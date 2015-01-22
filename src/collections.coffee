@@ -91,3 +91,15 @@ _.some = (container, callback) ->
 
 _.contains = (container, value) ->
    _.some(container, (element) -> element is value)
+
+_.invoke = (container, methodName) ->
+    if Array.isArray(container)
+      for element in container
+        element[methodName].apply(element, [].slice.call(arguments, 2))
+    else
+      for key of container
+        container[key][methodName].apply(container[key], [].slice.call(arguments, 2))
+
+
+
+
