@@ -191,7 +191,6 @@
         return _results;
       })();
     } else {
-      console.log(container);
       return results = (function() {
         var _results;
         _results = [];
@@ -203,6 +202,25 @@
         return _results;
       })();
     }
+  };
+
+  _.every = function(container, callback) {
+    var element, key, _i, _len;
+    if (Array.isArray(container)) {
+      for (_i = 0, _len = container.length; _i < _len; _i++) {
+        element = container[_i];
+        if (callback(element) !== true) {
+          return false;
+        }
+      }
+    } else {
+      for (key in container) {
+        if (callback(container[key]) !== true) {
+          return false;
+        }
+      }
+    }
+    return true;
   };
 
 }).call(this);

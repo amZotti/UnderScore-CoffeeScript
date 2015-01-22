@@ -74,3 +74,10 @@ _.reject = (container, callback) ->
     results = (element for element in container when callback(element) isnt true)
   else
     results = (container[key] for key of container when callback(container[key]) isnt true)
+
+_.every = (container, callback) ->
+  if Array.isArray(container)
+    return false for element in container when callback(element) isnt true
+  else
+    return false for key of container when callback(container[key]) isnt true
+  true
