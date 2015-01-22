@@ -88,3 +88,6 @@ _.some = (container, callback) ->
   else
     return true for key of container when callback(container[key])
   false
+
+_.contains = (container, value) ->
+   _.some(container, (element) -> element is value)

@@ -242,4 +242,10 @@
     return false;
   };
 
+  _.contains = function(container, value) {
+    return _.some(container, function(element) {
+      return element === value;
+    });
+  };
+
 }).call(this);
