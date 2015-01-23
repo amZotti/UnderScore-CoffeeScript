@@ -122,5 +122,8 @@ _.min = (container, callback) ->
   result or Number.POSITIVE_INFINITY
 
 _.sortBy = (container, callback) ->
-  arr = _.map(container)
-  arr
+  _.map _.map(container, (value) ->
+    {key: callback(value), value: value}).sort((a,b) ->
+      a.key > b.key), (obj) ->
+        obj.value
+

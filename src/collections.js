@@ -207,9 +207,16 @@
   };
 
   _.sortBy = function(container, callback) {
-    var arr;
-    arr = _.map(container);
-    return arr;
+    return _.map(_.map(container, function(value) {
+      return {
+        key: callback(value),
+        value: value
+      };
+    }).sort(function(a, b) {
+      return a.key > b.key;
+    }), function(obj) {
+      return obj.value;
+    });
   };
 
 }).call(this);
