@@ -219,4 +219,29 @@
     });
   };
 
+  _.groupBy = function(container, callback) {
+    var arr, iteratee, result;
+    iteratee = function(value, callback) {
+      if (typeof callback === "string") {
+        return value[callback];
+      } else {
+        return callback(value);
+      }
+    };
+    result = {};
+    arr = _.map(container, function(value) {
+      return {
+        key: iteratee(value, callback),
+        value: value
+      };
+    });
+    _.each(arr, function(obj) {
+      if (result[obj.key] === void 0) {
+        result[obj.key] = [];
+      }
+      return result[obj.key].push(obj.value);
+    });
+    return result;
+  };
+
 }).call(this);

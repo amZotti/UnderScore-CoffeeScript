@@ -127,3 +127,19 @@ _.sortBy = (container, callback) ->
       a.key > b.key), (obj) ->
         obj.value
 
+_.groupBy = (container, callback) ->
+
+  iteratee = (value, callback)->
+    if typeof callback is "string"
+      value[callback]
+    else
+      callback(value)
+
+  result = {}
+  arr = _.map container, (value) ->
+    {key: iteratee(value, callback), value: value}
+  _.each arr, (obj) ->
+    if result[obj.key] is undefined
+      result[obj.key] = []
+    result[obj.key].push(obj.value)
+  result
