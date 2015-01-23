@@ -206,10 +206,10 @@
     return result || Number.POSITIVE_INFINITY;
   };
 
-  _.sortBy = function(container, callback) {
+  _.sortBy = function(container, iteratee) {
     return _.map(_.map(container, function(value) {
       return {
-        key: callback(value),
+        key: iteratee(value),
         value: value
       };
     }).sort(function(a, b) {
@@ -219,27 +219,40 @@
     });
   };
 
-  _.groupBy = function(container, callback) {
-    var arr, iteratee, result;
-    iteratee = function(value, callback) {
-      if (typeof callback === "string") {
-        return value[callback];
+  _.organizeBy = function(container, iteratee) {
+    var getKey;
+    getKey = function(value, iteratee) {
+      if (typeof iteratee === "string") {
+        return value[iteratee];
       } else {
-        return callback(value);
+        return iteratee(value);
       }
     };
-    result = {};
-    arr = _.map(container, function(value) {
+    return _.map(container, function(value) {
       return {
-        key: iteratee(value, callback),
+        key: getKey(value, iteratee),
         value: value
       };
     });
-    _.each(arr, function(obj) {
+  };
+
+  _.groupBy = function(container, iteratee) {
+    var result;
+    result = {};
+    _.each(_.organizeBy(container, iteratee), function(obj) {
       if (result[obj.key] === void 0) {
         result[obj.key] = [];
       }
       return result[obj.key].push(obj.value);
+    });
+    return result;
+  };
+
+  _.indexBy = function(container, iteratee) {
+    var result;
+    result = {};
+    _.each(_.organizeBy(container, iteratee), function(obj) {
+      return result[obj.key] = obj.value;
     });
     return result;
   };

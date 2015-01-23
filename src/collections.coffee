@@ -38,8 +38,8 @@ _.select = _.filter
 _.where = (container, properties) ->
   results = []
   _.each container, (value, index, container) ->
-      if checkObjectForProperties(value, properties)
-        results.push(value)
+    if checkObjectForProperties(value, properties)
+      results.push(value)
   results
 
 checkObjectForProperties = (object, properties) ->
@@ -79,7 +79,7 @@ _.some = (container, callback) ->
 _.any = _.some
 
 _.contains = (container, value) ->
-   _.some container, (element) -> element is value
+  _.some container, (element) -> element is value
 
 #alias
 _.include = _.contains
@@ -87,7 +87,7 @@ _.include = _.contains
 _.invoke = (container, methodName) ->
   args = [].slice.call(arguments, 2)
   _.map container, (value) ->
-        value[methodName].apply(value, args)
+    value[methodName].apply(value, args)
 
 _.pluck = (container, key) ->
   _.map(container, (obj) -> obj[key])
@@ -103,7 +103,7 @@ _.max = (container, callback) ->
     maxVal = maxVal or count
     result = result or value
     if count > maxVal
-       result = value
+      result = value
   result or Number.POSITIVE_INFINITY
 
 
@@ -118,28 +118,37 @@ _.min = (container, callback) ->
     minVal = minVal or count
     result = result or value
     if count < minVal
-       result = value
+      result = value
   result or Number.POSITIVE_INFINITY
 
-_.sortBy = (container, callback) ->
+_.sortBy = (container, iteratee) ->
   _.map _.map(container, (value) ->
-    {key: callback(value), value: value}).sort((a,b) ->
+    {key: iteratee(value), value: value}).sort((a,b) ->
       a.key > b.key), (obj) ->
         obj.value
 
-_.groupBy = (container, callback) ->
 
-  iteratee = (value, callback)->
-    if typeof callback is "string"
-      value[callback]
+_.organizeBy = (container, iteratee)->
+  getKey = (value, iteratee) -> 
+    if typeof iteratee is "string"
+      value[iteratee]
     else
-      callback(value)
+      iteratee(value)
 
+  _.map container, (value) ->
+    key: getKey(value, iteratee)
+    value: value
+
+_.groupBy = (container, iteratee) ->
   result = {}
-  arr = _.map container, (value) ->
-    {key: iteratee(value, callback), value: value}
-  _.each arr, (obj) ->
+  _.each _.organizeBy(container, iteratee), (obj) ->
     if result[obj.key] is undefined
       result[obj.key] = []
     result[obj.key].push(obj.value)
+  result
+
+_.indexBy = (container, iteratee) ->
+  result = {}
+  _.each _.organizeBy(container, iteratee), (obj) ->
+    result[obj.key] = obj.value
   result
