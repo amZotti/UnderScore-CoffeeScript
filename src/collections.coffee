@@ -12,24 +12,25 @@ _.map = (container, callback, context = this) ->
   else
     (callback.call(context, value, key, container) for own key, value of container)
 
-_.reduce = (container, callback, startingValue = 0) ->
-  _.each container, (element, index, container) ->
-    startingValue = callback startingValue, element, index, container
+_.reduce = (container, callback, startingValue = 0, context = this) ->
+  iteratee = (element, index, container) ->
+    startingValue = callback.call(context, startingValue, element, index, container)
+  _.each container, iteratee, context
   startingValue
 
-_.find = (container, callback) ->
+_.find = (container, callback, context = this) ->
   result = undefined
   _.each container, (value, index, container) ->
-    result = value if result is undefined and callback(value) is true
+    result = value if result is undefined and callback.call(context, value) is true
   result
 
 #alias
 _.detect = _.find
 
-_.filter = (container, callback) ->
+_.filter = (container, callback, context = this) ->
   results = []
   _.each container, (value, index, container) ->
-    if callback(value) then results.push(value)
+    if callback.call(context, value) then results.push(value)
   results
 
 #alias
@@ -58,22 +59,22 @@ _.findWhere = (container, properties) ->
   _.where(container, properties)[0]
 
 
-_.reject = (container, callback) ->
+_.reject = (container, callback, context = this) ->
   _.filter container, (value) ->
-    !callback(value)
+    !callback.call(context, value)
 
-_.every = (container, callback) ->
+_.every = (container, callback, context = this) ->
   status = true
   _.each container, (value) ->
-    unless callback(value)
+    unless callback.call(context, value)
       status = false
   status
 
 #alias
 _.all = _.every
 
-_.some = (container, callback) ->
-  _.filter(container, callback).length isnt 0
+_.some = (container, callback, context = this) ->
+  _.filter(container, callback, context).length isnt 0
 
 #alias
 _.any = _.some
@@ -92,12 +93,12 @@ _.invoke = (container, methodName) ->
 _.pluck = (container, key) ->
   _.map(container, (obj) -> obj[key])
 
-_.max = (container, callback) ->
+_.max = (container, callback, context = this) ->
   result = undefined
   maxVal = undefined
   _.each container, (value) ->
     if callback
-      count = callback(value)
+      count = callback.call(context, value)
     else
       count = value
     maxVal = maxVal or count
@@ -107,12 +108,12 @@ _.max = (container, callback) ->
   result or Number.POSITIVE_INFINITY
 
 
-_.min = (container, callback) ->
+_.min = (container, callback, context = this) ->
   result = undefined
   minVal = undefined
   _.each container, (value) ->
     if callback
-      count = callback(value)
+      count = callback.call(context, value)
     else
       count = value
     minVal = minVal or count

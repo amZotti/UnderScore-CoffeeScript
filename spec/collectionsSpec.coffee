@@ -64,6 +64,14 @@ describe "reduce", ->
   it "should reduce correctly when provided a starting value", ->
     result = _.reduce(arr, arrayCallback, startingValue)
     expect(result).toEqual(16)
+  
+  it "should apply the function in the context of the object passed in", ->
+    context = {}
+    contextCallback = (startingValue, element, index, arr) ->
+      startingValue += element
+      this.value = startingValue
+    _.reduce(arr, contextCallback, startingValue, context)
+    expect(context.value).toEqual(16)
 
 describe "find", ->
   callback = (num)-> num % 2 is 0

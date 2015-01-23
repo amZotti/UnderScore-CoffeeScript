@@ -54,21 +54,29 @@
     }
   };
 
-  _.reduce = function(container, callback, startingValue) {
+  _.reduce = function(container, callback, startingValue, context) {
+    var iteratee;
     if (startingValue == null) {
       startingValue = 0;
     }
-    _.each(container, function(element, index, container) {
-      return startingValue = callback(startingValue, element, index, container);
-    });
+    if (context == null) {
+      context = this;
+    }
+    iteratee = function(element, index, container) {
+      return startingValue = callback.call(context, startingValue, element, index, container);
+    };
+    _.each(container, iteratee, context);
     return startingValue;
   };
 
-  _.find = function(container, callback) {
+  _.find = function(container, callback, context) {
     var result;
+    if (context == null) {
+      context = this;
+    }
     result = void 0;
     _.each(container, function(value, index, container) {
-      if (result === void 0 && callback(value) === true) {
+      if (result === void 0 && callback.call(context, value) === true) {
         return result = value;
       }
     });
@@ -77,11 +85,14 @@
 
   _.detect = _.find;
 
-  _.filter = function(container, callback) {
+  _.filter = function(container, callback, context) {
     var results;
+    if (context == null) {
+      context = this;
+    }
     results = [];
     _.each(container, function(value, index, container) {
-      if (callback(value)) {
+      if (callback.call(context, value)) {
         return results.push(value);
       }
     });
@@ -125,17 +136,23 @@
     return _.where(container, properties)[0];
   };
 
-  _.reject = function(container, callback) {
+  _.reject = function(container, callback, context) {
+    if (context == null) {
+      context = this;
+    }
     return _.filter(container, function(value) {
-      return !callback(value);
+      return !callback.call(context, value);
     });
   };
 
-  _.every = function(container, callback) {
+  _.every = function(container, callback, context) {
     var status;
+    if (context == null) {
+      context = this;
+    }
     status = true;
     _.each(container, function(value) {
-      if (!callback(value)) {
+      if (!callback.call(context, value)) {
         return status = false;
       }
     });
@@ -144,8 +161,11 @@
 
   _.all = _.every;
 
-  _.some = function(container, callback) {
-    return _.filter(container, callback).length !== 0;
+  _.some = function(container, callback, context) {
+    if (context == null) {
+      context = this;
+    }
+    return _.filter(container, callback, context).length !== 0;
   };
 
   _.any = _.some;
@@ -172,14 +192,17 @@
     });
   };
 
-  _.max = function(container, callback) {
+  _.max = function(container, callback, context) {
     var maxVal, result;
+    if (context == null) {
+      context = this;
+    }
     result = void 0;
     maxVal = void 0;
     _.each(container, function(value) {
       var count;
       if (callback) {
-        count = callback(value);
+        count = callback.call(context, value);
       } else {
         count = value;
       }
@@ -192,14 +215,17 @@
     return result || Number.POSITIVE_INFINITY;
   };
 
-  _.min = function(container, callback) {
+  _.min = function(container, callback, context) {
     var minVal, result;
+    if (context == null) {
+      context = this;
+    }
     result = void 0;
     minVal = void 0;
     _.each(container, function(value) {
       var count;
       if (callback) {
-        count = callback(value);
+        count = callback.call(context, value);
       } else {
         count = value;
       }

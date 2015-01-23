@@ -100,10 +100,20 @@
       result = _.reduce(obj, objCallback);
       return expect(result).toEqual(6);
     });
-    return it("should reduce correctly when provided a starting value", function() {
+    it("should reduce correctly when provided a starting value", function() {
       var result;
       result = _.reduce(arr, arrayCallback, startingValue);
       return expect(result).toEqual(16);
+    });
+    return it("should apply the function in the context of the object passed in", function() {
+      var context, contextCallback;
+      context = {};
+      contextCallback = function(startingValue, element, index, arr) {
+        startingValue += element;
+        return this.value = startingValue;
+      };
+      _.reduce(arr, contextCallback, startingValue, context);
+      return expect(context.value).toEqual(16);
     });
   });
 
