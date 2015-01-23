@@ -5,13 +5,16 @@
 
   window._ = {};
 
-  _.each = function(container, callback) {
+  _.each = function(container, callback, context) {
     var index, item, key, value, _i, _len, _results, _results1;
+    if (context == null) {
+      context = this;
+    }
     if (Array.isArray(container)) {
       _results = [];
       for (index = _i = 0, _len = container.length; _i < _len; index = ++_i) {
         item = container[index];
-        _results.push(callback(item, index, container));
+        _results.push(callback.call(context, item, index, container));
       }
       return _results;
     } else {
@@ -19,14 +22,17 @@
       for (key in container) {
         if (!__hasProp.call(container, key)) continue;
         value = container[key];
-        _results1.push(callback(value, key, container));
+        _results1.push(callback.call(context, value, key, container));
       }
       return _results1;
     }
   };
 
-  _.map = function(container, callback) {
+  _.map = function(container, callback, context) {
     var index, item, key, value, _i, _len, _results, _results1;
+    if (context == null) {
+      context = this;
+    }
     callback = callback || function(value) {
       return value;
     };
@@ -34,7 +40,7 @@
       _results = [];
       for (index = _i = 0, _len = container.length; _i < _len; index = ++_i) {
         item = container[index];
-        _results.push(callback(item, index, container));
+        _results.push(callback.call(context, item, index, container));
       }
       return _results;
     } else {
@@ -42,7 +48,7 @@
       for (key in container) {
         if (!__hasProp.call(container, key)) continue;
         value = container[key];
-        _results1.push(callback(value, key, container));
+        _results1.push(callback.call(context, value, key, container));
       }
       return _results1;
     }

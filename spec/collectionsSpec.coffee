@@ -16,6 +16,12 @@ describe "each", ->
     _.each(obj, (value, key) -> newObj[key] = value + 1)
     expect(newObj['a']).toEqual(2)
 
+  it "should apply the function in the context of the object passed in", ->
+    arr = [1, 2, 3]
+    results = {}
+    _.each(arr, ((value, index) -> this[index] = value), results)
+    expect(results).toEqual({0: 1, 1: 2, 2: 3})
+
 describe "map", ->
   it "shoud return a new array with the provided function applied to each element of an array", ->
     arr = [1, 2, 3]
@@ -25,6 +31,12 @@ describe "map", ->
   it "should return an array with the provided function applied to each value of an object", ->
     newArr = _.map(obj, (value, key) -> obj[key] = obj[key] * 2)
     expect(newArr).toEqual([2,4,6])
+
+  it "should apply the function in the context of the object passed in", ->
+    arr = [1, 2, 3]
+    results = {}
+    _.map(arr, ((value, index) -> this[index] = value), results)
+    expect(results).toEqual({0: 1, 1: 2, 2: 3})
 
 describe "reduce", ->
   arr = []

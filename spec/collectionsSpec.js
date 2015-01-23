@@ -18,13 +18,26 @@
       });
       return expect(newArr[0]).toEqual(2);
     });
-    return it("should apply the function to every value in object", function() {
+    it("should apply the function to every value in object", function() {
       var newObj;
       newObj = {};
       _.each(obj, function(value, key) {
         return newObj[key] = value + 1;
       });
       return expect(newObj['a']).toEqual(2);
+    });
+    return it("should apply the function in the context of the object passed in", function() {
+      var arr, results;
+      arr = [1, 2, 3];
+      results = {};
+      _.each(arr, (function(value, index) {
+        return this[index] = value;
+      }), results);
+      return expect(results).toEqual({
+        0: 1,
+        1: 2,
+        2: 3
+      });
     });
   });
 
@@ -37,12 +50,25 @@
       });
       return expect(newArr).toEqual([2, 4, 6]);
     });
-    return it("should return an array with the provided function applied to each value of an object", function() {
+    it("should return an array with the provided function applied to each value of an object", function() {
       var newArr;
       newArr = _.map(obj, function(value, key) {
         return obj[key] = obj[key] * 2;
       });
       return expect(newArr).toEqual([2, 4, 6]);
+    });
+    return it("should apply the function in the context of the object passed in", function() {
+      var arr, results;
+      arr = [1, 2, 3];
+      results = {};
+      _.map(arr, (function(value, index) {
+        return this[index] = value;
+      }), results);
+      return expect(results).toEqual({
+        0: 1,
+        1: 2,
+        2: 3
+      });
     });
   });
 

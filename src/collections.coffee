@@ -1,16 +1,16 @@
 window._ = {}
-_.each = (container, callback) ->
+_.each = (container, callback, context = this) ->
   if Array.isArray container
-    callback item, index, container for item, index in container
+    callback.call(context, item, index, container) for item, index in container
   else
-    callback value, key, container for own key, value of container
+    callback.call(context, value, key, container) for own key, value of container
 
-_.map = (container, callback) ->
+_.map = (container, callback, context = this) ->
   callback = callback or (value) -> value
   if Array.isArray container
-    (callback item, index, container for item, index in container)
+    (callback.call(context, item, index, container) for item, index in container)
   else
-    (callback value, key, container for own key, value of container)
+    (callback.call(context, value, key, container) for own key, value of container)
 
 _.reduce = (container, callback, startingValue = 0) ->
   _.each container, (element, index, container) ->
