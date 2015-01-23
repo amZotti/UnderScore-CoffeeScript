@@ -650,4 +650,21 @@
     });
   });
 
+  describe("countBy", function() {
+    return it("should split collection into groups and return a count for the number of values in each group.", function() {
+      var result;
+      result = _.countBy([1, 2, 3, 4, 5], function(num) {
+        if (num % 2 === 0) {
+          return 'even';
+        } else {
+          return 'odd';
+        }
+      });
+      return expect(result).toEqual({
+        odd: 3,
+        even: 2
+      });
+    });
+  });
+
 }).call(this);

@@ -314,4 +314,8 @@ describe "indexBy", ->
     result = _.indexBy(stooges, 'age')
     expect(result).toEqual({"40": {name: 'moe', age: 40}, "50": {name: 'larry', age: 50}, "60": {name: 'curly', age: 60}})
 
+describe "countBy", ->
+  it "should split collection into groups and return a count for the number of values in each group.", ->
+    result = _.countBy [1, 2, 3, 4, 5], (num) -> if num % 2 is 0 then 'even' else 'odd'
+    expect(result).toEqual({odd: 3, even: 2})
 
