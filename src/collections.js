@@ -257,4 +257,16 @@
     return result;
   };
 
+  _.countBy = function(container, iteratee) {
+    var result;
+    result = {};
+    _.each(_.organizeBy(container, iteratee), function(obj) {
+      if (result[obj.key] === void 0) {
+        result[obj.key] = 0;
+      }
+      return result[obj.key] += 1;
+    });
+    return result;
+  };
+
 }).call(this);

@@ -152,3 +152,12 @@ _.indexBy = (container, iteratee) ->
   _.each _.organizeBy(container, iteratee), (obj) ->
     result[obj.key] = obj.value
   result
+
+_.countBy = (container, iteratee) ->
+  result = {}
+  _.each _.organizeBy(container, iteratee), (obj) ->
+    if result[obj.key] is undefined
+      result[obj.key] = 0
+    result[obj.key] += 1
+  result
+
