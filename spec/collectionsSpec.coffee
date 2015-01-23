@@ -290,3 +290,11 @@ describe "min", ->
     result = _.min([], ->)
     expect(result).toEqual(Number.POSITIVE_INFINITY)
 
+describe "sortBy", ->
+  it "should sort arrays in ascending order", ->
+    result = _.sortBy([1, 2, 3, 4, 5, 6], (num) -> Math.sin(num))
+    expect(result).toEqual([5, 4, 6, 3, 1, 2])
+
+  it "should sort objects in ascending order and return contents in array", ->
+    result = _.sortBy({ a: {age: 5}, b: {age: 222}, c: {age: 1}}, (value) -> value.age )
+    expect(result).toEqual([{"age":1},{"age":5},{"age":222}])

@@ -514,15 +514,15 @@
         age: 60
       });
     });
-    it("should evaluate to infinity if container is empty", function() {
-      var result;
-      result = _.max([], function() {});
-      return expect(result).toEqual(Number.POSITIVE_INFINITY);
-    });
-    return it("should return the maximum value in the container when not passed a callback", function() {
+    it("should return the maximum value in the container when not passed a callback", function() {
       var result;
       result = _.max([54, 43, 12, 455, 12]);
       return expect(result).toEqual(455);
+    });
+    return it("should evaluate to infinity if container is empty", function() {
+      var result;
+      result = _.max([], function() {});
+      return expect(result).toEqual(Number.POSITIVE_INFINITY);
     });
   });
 
@@ -549,15 +549,50 @@
         age: 40
       });
     });
-    it("should evaluate to infinity if container is empty", function() {
+    it("should return the minimum value in the container when not passed a callback", function() {
+      var result;
+      result = _.min([54, 43, 12, 455, 12]);
+      return expect(result).toEqual(12);
+    });
+    return it("should evaluate to infinity if container is empty", function() {
       var result;
       result = _.min([], function() {});
       return expect(result).toEqual(Number.POSITIVE_INFINITY);
     });
-    return it("should return the minimum value in the container when not passed a callback", function() {
+  });
+
+  describe("sortBy", function() {
+    it("should sort arrays in ascending order", function() {
       var result;
-      result = _.min([54, 43, 12, 455, 12]);
-      return expect(result).toEqual(12);
+      result = _.sortBy([1, 2, 3, 4, 5, 6], function(num) {
+        return Math.sin(num);
+      });
+      return expect(result).toEqual([5, 4, 6, 3, 1, 2]);
+    });
+    return it("should sort objects in ascending order and return contents in array", function() {
+      var result;
+      result = _.sortBy({
+        a: {
+          age: 5
+        },
+        b: {
+          age: 222
+        },
+        c: {
+          age: 1
+        }
+      }, function(value) {
+        return value.age;
+      });
+      return expect(result).toEqual([
+        {
+          "age": 1
+        }, {
+          "age": 5
+        }, {
+          "age": 222
+        }
+      ]);
     });
   });
 
