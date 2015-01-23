@@ -262,7 +262,31 @@ describe "pluck", ->
 
 describe "max", ->
 
-  it "should return the maximum value in the container", ->
+  it "should return the maximum value in the container when passed into a callback", ->
     stooges = [{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}];
     result = _.max(stooges, (stooge) -> stooge.age);
     expect(result).toEqual({name: 'curly', age: 60})
+
+  it "should return the maximum value in the container when not passed a callback", ->
+    result = _.max([54, 43, 12, 455, 12])
+    expect(result).toEqual(455)
+
+  it "should evaluate to infinity if container is empty", ->
+    result = _.max([], ->)
+    expect(result).toEqual(Number.POSITIVE_INFINITY)
+
+describe "min", ->
+
+  it "should return the minimum value in the container when passed into a callback", ->
+    stooges = [{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}];
+    result = _.min(stooges, (stooge) -> stooge.age);
+    expect(result).toEqual({name: 'moe', age: 40})
+
+  it "should return the minimum value in the container when not passed a callback", ->
+    result = _.min([54, 43, 12, 455, 12])
+    expect(result).toEqual(12)
+
+  it "should evaluate to infinity if container is empty", ->
+    result = _.min([], ->)
+    expect(result).toEqual(Number.POSITIVE_INFINITY)
+

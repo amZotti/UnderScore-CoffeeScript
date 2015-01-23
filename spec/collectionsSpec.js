@@ -492,7 +492,7 @@
   });
 
   describe("max", function() {
-    return it("should return the maximum value in the container", function() {
+    it("should return the maximum value in the container when passed into a callback", function() {
       var result, stooges;
       stooges = [
         {
@@ -513,6 +513,51 @@
         name: 'curly',
         age: 60
       });
+    });
+    it("should evaluate to infinity if container is empty", function() {
+      var result;
+      result = _.max([], function() {});
+      return expect(result).toEqual(Number.POSITIVE_INFINITY);
+    });
+    return it("should return the maximum value in the container when not passed a callback", function() {
+      var result;
+      result = _.max([54, 43, 12, 455, 12]);
+      return expect(result).toEqual(455);
+    });
+  });
+
+  describe("min", function() {
+    it("should return the minimum value in the container when passed into a callback", function() {
+      var result, stooges;
+      stooges = [
+        {
+          name: 'moe',
+          age: 40
+        }, {
+          name: 'larry',
+          age: 50
+        }, {
+          name: 'curly',
+          age: 60
+        }
+      ];
+      result = _.min(stooges, function(stooge) {
+        return stooge.age;
+      });
+      return expect(result).toEqual({
+        name: 'moe',
+        age: 40
+      });
+    });
+    it("should evaluate to infinity if container is empty", function() {
+      var result;
+      result = _.min([], function() {});
+      return expect(result).toEqual(Number.POSITIVE_INFINITY);
+    });
+    return it("should return the minimum value in the container when not passed a callback", function() {
+      var result;
+      result = _.min([54, 43, 12, 455, 12]);
+      return expect(result).toEqual(12);
     });
   });
 
