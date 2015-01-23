@@ -27,6 +27,9 @@
 
   _.map = function(container, callback) {
     var index, item, key, value, _i, _len, _results, _results1;
+    callback = callback || function(value) {
+      return value;
+    };
     if (Array.isArray(container)) {
       _results = [];
       for (index = _i = 0, _len = container.length; _i < _len; index = ++_i) {
@@ -201,6 +204,12 @@
       }
     });
     return result || Number.POSITIVE_INFINITY;
+  };
+
+  _.sortBy = function(container, callback) {
+    var arr;
+    arr = _.map(container);
+    return arr;
   };
 
 }).call(this);

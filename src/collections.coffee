@@ -6,6 +6,7 @@ _.each = (container, callback) ->
     callback value, key, container for own key, value of container
 
 _.map = (container, callback) ->
+  callback = callback or (value) -> value
   if Array.isArray container
     (callback item, index, container for item, index in container)
   else
@@ -120,3 +121,6 @@ _.min = (container, callback) ->
        result = value
   result or Number.POSITIVE_INFINITY
 
+_.sortBy = (container, callback) ->
+  arr = _.map(container)
+  arr
