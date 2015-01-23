@@ -307,3 +307,11 @@ describe "groupBy", ->
   it "should split a collection into sets, grouped by result of a mutual property on each object", ->
     result = _.groupBy(['one', 'two', 'three'], 'length')
     expect(result).toEqual({3: ["one", "two"], 5: ["three"]})
+
+describe "indexBy", ->
+  it "should split a collection into objects, organized by a property value or callback", ->
+    stooges = [{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}];
+    result = _.indexBy(stooges, 'age')
+    expect(result).toEqual({"40": {name: 'moe', age: 40}, "50": {name: 'larry', age: 50}, "60": {name: 'curly', age: 60}})
+
+

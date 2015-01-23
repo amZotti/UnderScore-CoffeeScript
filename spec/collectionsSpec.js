@@ -617,4 +617,37 @@
     });
   });
 
+  describe("indexBy", function() {
+    return it("should split a collection into objects, organized by a property value or callback", function() {
+      var result, stooges;
+      stooges = [
+        {
+          name: 'moe',
+          age: 40
+        }, {
+          name: 'larry',
+          age: 50
+        }, {
+          name: 'curly',
+          age: 60
+        }
+      ];
+      result = _.indexBy(stooges, 'age');
+      return expect(result).toEqual({
+        "40": {
+          name: 'moe',
+          age: 40
+        },
+        "50": {
+          name: 'larry',
+          age: 50
+        },
+        "60": {
+          name: 'curly',
+          age: 60
+        }
+      });
+    });
+  });
+
 }).call(this);
