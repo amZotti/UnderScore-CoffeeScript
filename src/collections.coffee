@@ -95,9 +95,28 @@ _.max = (container, callback) ->
   result = undefined
   maxVal = undefined
   _.each container, (value) ->
-    maxVal = maxVal or callback(value)
+    if callback
+      count = callback(value)
+    else
+      count = value
+    maxVal = maxVal or count
     result = result or value
-    if callback(value) > maxVal
-      result = value
-  result
+    if count > maxVal
+       result = value
+  result or Number.POSITIVE_INFINITY
+
+
+_.min = (container, callback) ->
+  result = undefined
+  minVal = undefined
+  _.each container, (value) ->
+    if callback
+      count = callback(value)
+    else
+      count = value
+    minVal = minVal or count
+    result = result or value
+    if count < minVal
+       result = value
+  result or Number.POSITIVE_INFINITY
 

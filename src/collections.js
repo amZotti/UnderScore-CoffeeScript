@@ -168,13 +168,39 @@
     result = void 0;
     maxVal = void 0;
     _.each(container, function(value) {
-      maxVal = maxVal || callback(value);
+      var count;
+      if (callback) {
+        count = callback(value);
+      } else {
+        count = value;
+      }
+      maxVal = maxVal || count;
       result = result || value;
-      if (callback(value) > maxVal) {
+      if (count > maxVal) {
         return result = value;
       }
     });
-    return result;
+    return result || Number.POSITIVE_INFINITY;
+  };
+
+  _.min = function(container, callback) {
+    var minVal, result;
+    result = void 0;
+    minVal = void 0;
+    _.each(container, function(value) {
+      var count;
+      if (callback) {
+        count = callback(value);
+      } else {
+        count = value;
+      }
+      minVal = minVal || count;
+      result = result || value;
+      if (count < minVal) {
+        return result = value;
+      }
+    });
+    return result || Number.POSITIVE_INFINITY;
   };
 
 }).call(this);
