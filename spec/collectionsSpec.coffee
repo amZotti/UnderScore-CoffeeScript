@@ -298,3 +298,12 @@ describe "sortBy", ->
   it "should sort objects in ascending order and return contents in array", ->
     result = _.sortBy({ a: {age: 5}, b: {age: 222}, c: {age: 1}}, (value) -> value.age )
     expect(result).toEqual([{"age":1},{"age":5},{"age":222}])
+
+describe "groupBy", ->
+  it "should split a collection into sets, grouped by result of running each through the callback", ->
+    result = _.groupBy([1.3, 2.1, 2.4], (num) ->  Math.floor(num))
+    expect(result).toEqual({1: [1.3], 2: [2.1, 2.4]})
+
+  it "should split a collection into sets, grouped by result of a mutual property on each object", ->
+    result = _.groupBy(['one', 'two', 'three'], 'length')
+    expect(result).toEqual({3: ["one", "two"], 5: ["three"]})

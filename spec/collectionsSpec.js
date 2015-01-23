@@ -596,4 +596,25 @@
     });
   });
 
+  describe("groupBy", function() {
+    it("should split a collection into sets, grouped by result of running each through the callback", function() {
+      var result;
+      result = _.groupBy([1.3, 2.1, 2.4], function(num) {
+        return Math.floor(num);
+      });
+      return expect(result).toEqual({
+        1: [1.3],
+        2: [2.1, 2.4]
+      });
+    });
+    return it("should split a collection into sets, grouped by result of a mutual property on each object", function() {
+      var result;
+      result = _.groupBy(['one', 'two', 'three'], 'length');
+      return expect(result).toEqual({
+        3: ["one", "two"],
+        5: ["three"]
+      });
+    });
+  });
+
 }).call(this);
