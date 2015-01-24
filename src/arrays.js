@@ -8,7 +8,7 @@
     if (n === 0) {
       return array[0];
     }
-    if (n >= array.length) {
+    if (n >= _.size(array)) {
       return array;
     }
     return _.map((function() {
@@ -28,12 +28,32 @@
     if (n === 0) {
       return array.pop() && array;
     }
-    if (n >= array.length) {
+    if (n >= _.size(array)) {
       return [];
     }
     return _.map((function() {
       _results = [];
       for (var _i = 0, _ref = _.size(array) - n; 0 <= _ref ? _i < _ref : _i > _ref; 0 <= _ref ? _i++ : _i--){ _results.push(_i); }
+      return _results;
+    }).apply(this), function(value) {
+      return array[value];
+    });
+  };
+
+  _.last = function(array, n) {
+    var _i, _ref, _ref1, _results;
+    if (n == null) {
+      n = 0;
+    }
+    if (n === 0) {
+      return array[_.size(array) - 1];
+    }
+    if (n >= _.size(array)) {
+      return array;
+    }
+    return _.map((function() {
+      _results = [];
+      for (var _i = _ref = n - 1, _ref1 = _.size(array); _ref <= _ref1 ? _i < _ref1 : _i > _ref1; _ref <= _ref1 ? _i++ : _i--){ _results.push(_i); }
       return _results;
     }).apply(this), function(value) {
       return array[value];
