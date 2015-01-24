@@ -1,43 +1,38 @@
 window._ = {}
-_.each = (list, callback, context = this) ->
+_.each = _.forEach = (list, callback, context = this) ->
   if Array.isArray list
     callback.call(context, item, index, list) for item, index in list
   else
     callback.call(context, value, key, list) for own key, value of list
 
-_.map = (list, callback, context = this) ->
+
+_.map = _.collect = (list, callback, context = this) ->
   callback = callback or (value) -> value
   if Array.isArray list
     (callback.call(context, item, index, list) for item, index in list)
   else
     (callback.call(context, value, key, list) for own key, value of list)
 
-_.reduce = (list, callback, startingValue = 0, context = this) ->
+_.reduce = _.inject = _.foldl = (list, callback, startingValue = 0, context = this) ->
   iteratee = (element, index, list) ->
     startingValue = callback.call(context, startingValue, element, index, list)
   _.each list, iteratee, context
   startingValue
 
-_.reduceRight = (list, callback, startingValue = 0, context = this) ->
+_.reduceRight = _.foldr = (list, callback, startingValue = 0, context = this) ->
   _.reduce(list.reverse(), callback, startingValue, context)
 
-_.find = (list, callback, context = this) ->
+_.find = _.detect = (list, callback, context = this) ->
   result = undefined
   _.each list, (value, index, list) ->
     result = value if result is undefined and callback.call(context, value) is true
   result
 
-#alias
-_.detect = _.find
-
-_.filter = (list, callback, context = this) ->
+_.filter = _.select = (list, callback, context = this) ->
   results = []
   _.each list, (value, index, list) ->
     if callback.call(context, value) then results.push(value)
   results
-
-#alias
-_.select = _.filter
 
 _.where = (list, properties) ->
   results = []
@@ -66,27 +61,18 @@ _.reject = (list, callback, context = this) ->
   _.filter list, (value) ->
     !callback.call(context, value)
 
-_.every = (list, callback, context = this) ->
+_.every = _.all = (list, callback, context = this) ->
   status = true
   _.each list, (value) ->
     unless callback.call(context, value)
       status = false
   status
 
-#alias
-_.all = _.every
-
-_.some = (list, callback, context = this) ->
+_.some = _.any = (list, callback, context = this) ->
   _.filter(list, callback, context).length isnt 0
 
-#alias
-_.any = _.some
-
-_.contains = (list, value) ->
+_.contains = _.include = (list, value) ->
   _.some list, (element) -> element is value
-
-#alias
-_.include = _.contains
 
 _.invoke = (list, methodName) ->
   args = [].slice.call(arguments, 2)

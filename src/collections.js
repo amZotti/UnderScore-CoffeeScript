@@ -5,7 +5,7 @@
 
   window._ = {};
 
-  _.each = function(list, callback, context) {
+  _.each = _.forEach = function(list, callback, context) {
     var index, item, key, value, _i, _len, _results, _results1;
     if (context == null) {
       context = this;
@@ -28,7 +28,7 @@
     }
   };
 
-  _.map = function(list, callback, context) {
+  _.map = _.collect = function(list, callback, context) {
     var index, item, key, value, _i, _len, _results, _results1;
     if (context == null) {
       context = this;
@@ -54,7 +54,7 @@
     }
   };
 
-  _.reduce = function(list, callback, startingValue, context) {
+  _.reduce = _.inject = _.foldl = function(list, callback, startingValue, context) {
     var iteratee;
     if (startingValue == null) {
       startingValue = 0;
