@@ -5,30 +5,30 @@
 
   window._ = {};
 
-  _.each = function(container, callback, context) {
+  _.each = function(list, callback, context) {
     var index, item, key, value, _i, _len, _results, _results1;
     if (context == null) {
       context = this;
     }
-    if (Array.isArray(container)) {
+    if (Array.isArray(list)) {
       _results = [];
-      for (index = _i = 0, _len = container.length; _i < _len; index = ++_i) {
-        item = container[index];
-        _results.push(callback.call(context, item, index, container));
+      for (index = _i = 0, _len = list.length; _i < _len; index = ++_i) {
+        item = list[index];
+        _results.push(callback.call(context, item, index, list));
       }
       return _results;
     } else {
       _results1 = [];
-      for (key in container) {
-        if (!__hasProp.call(container, key)) continue;
-        value = container[key];
-        _results1.push(callback.call(context, value, key, container));
+      for (key in list) {
+        if (!__hasProp.call(list, key)) continue;
+        value = list[key];
+        _results1.push(callback.call(context, value, key, list));
       }
       return _results1;
     }
   };
 
-  _.map = function(container, callback, context) {
+  _.map = function(list, callback, context) {
     var index, item, key, value, _i, _len, _results, _results1;
     if (context == null) {
       context = this;
@@ -36,25 +36,25 @@
     callback = callback || function(value) {
       return value;
     };
-    if (Array.isArray(container)) {
+    if (Array.isArray(list)) {
       _results = [];
-      for (index = _i = 0, _len = container.length; _i < _len; index = ++_i) {
-        item = container[index];
-        _results.push(callback.call(context, item, index, container));
+      for (index = _i = 0, _len = list.length; _i < _len; index = ++_i) {
+        item = list[index];
+        _results.push(callback.call(context, item, index, list));
       }
       return _results;
     } else {
       _results1 = [];
-      for (key in container) {
-        if (!__hasProp.call(container, key)) continue;
-        value = container[key];
-        _results1.push(callback.call(context, value, key, container));
+      for (key in list) {
+        if (!__hasProp.call(list, key)) continue;
+        value = list[key];
+        _results1.push(callback.call(context, value, key, list));
       }
       return _results1;
     }
   };
 
-  _.reduce = function(container, callback, startingValue, context) {
+  _.reduce = function(list, callback, startingValue, context) {
     var iteratee;
     if (startingValue == null) {
       startingValue = 0;
@@ -62,20 +62,20 @@
     if (context == null) {
       context = this;
     }
-    iteratee = function(element, index, container) {
-      return startingValue = callback.call(context, startingValue, element, index, container);
+    iteratee = function(element, index, list) {
+      return startingValue = callback.call(context, startingValue, element, index, list);
     };
-    _.each(container, iteratee, context);
+    _.each(list, iteratee, context);
     return startingValue;
   };
 
-  _.find = function(container, callback, context) {
+  _.find = function(list, callback, context) {
     var result;
     if (context == null) {
       context = this;
     }
     result = void 0;
-    _.each(container, function(value, index, container) {
+    _.each(list, function(value, index, list) {
       if (result === void 0 && callback.call(context, value) === true) {
         return result = value;
       }
@@ -85,13 +85,13 @@
 
   _.detect = _.find;
 
-  _.filter = function(container, callback, context) {
+  _.filter = function(list, callback, context) {
     var results;
     if (context == null) {
       context = this;
     }
     results = [];
-    _.each(container, function(value, index, container) {
+    _.each(list, function(value, index, list) {
       if (callback.call(context, value)) {
         return results.push(value);
       }
@@ -101,10 +101,10 @@
 
   _.select = _.filter;
 
-  _.where = function(container, properties) {
+  _.where = function(list, properties) {
     var results;
     results = [];
-    _.each(container, function(value, index, container) {
+    _.each(list, function(value, index, list) {
       if (checkObjectForProperties(value, properties)) {
         return results.push(value);
       }
@@ -132,26 +132,26 @@
     return false;
   };
 
-  _.findWhere = function(container, properties) {
-    return _.where(container, properties)[0];
+  _.findWhere = function(list, properties) {
+    return _.where(list, properties)[0];
   };
 
-  _.reject = function(container, callback, context) {
+  _.reject = function(list, callback, context) {
     if (context == null) {
       context = this;
     }
-    return _.filter(container, function(value) {
+    return _.filter(list, function(value) {
       return !callback.call(context, value);
     });
   };
 
-  _.every = function(container, callback, context) {
+  _.every = function(list, callback, context) {
     var status;
     if (context == null) {
       context = this;
     }
     status = true;
-    _.each(container, function(value) {
+    _.each(list, function(value) {
       if (!callback.call(context, value)) {
         return status = false;
       }
@@ -161,45 +161,45 @@
 
   _.all = _.every;
 
-  _.some = function(container, callback, context) {
+  _.some = function(list, callback, context) {
     if (context == null) {
       context = this;
     }
-    return _.filter(container, callback, context).length !== 0;
+    return _.filter(list, callback, context).length !== 0;
   };
 
   _.any = _.some;
 
-  _.contains = function(container, value) {
-    return _.some(container, function(element) {
+  _.contains = function(list, value) {
+    return _.some(list, function(element) {
       return element === value;
     });
   };
 
   _.include = _.contains;
 
-  _.invoke = function(container, methodName) {
+  _.invoke = function(list, methodName) {
     var args;
     args = [].slice.call(arguments, 2);
-    return _.map(container, function(value) {
+    return _.map(list, function(value) {
       return value[methodName].apply(value, args);
     });
   };
 
-  _.pluck = function(container, key) {
-    return _.map(container, function(obj) {
+  _.pluck = function(list, key) {
+    return _.map(list, function(obj) {
       return obj[key];
     });
   };
 
-  _.max = function(container, callback, context) {
+  _.max = function(list, callback, context) {
     var maxVal, result;
     if (context == null) {
       context = this;
     }
     result = void 0;
     maxVal = void 0;
-    _.each(container, function(value) {
+    _.each(list, function(value) {
       var count;
       if (callback) {
         count = callback.call(context, value);
@@ -215,14 +215,14 @@
     return result || Number.POSITIVE_INFINITY;
   };
 
-  _.min = function(container, callback, context) {
+  _.min = function(list, callback, context) {
     var minVal, result;
     if (context == null) {
       context = this;
     }
     result = void 0;
     minVal = void 0;
-    _.each(container, function(value) {
+    _.each(list, function(value) {
       var count;
       if (callback) {
         count = callback.call(context, value);
@@ -238,11 +238,11 @@
     return result || Number.POSITIVE_INFINITY;
   };
 
-  _.sortBy = function(container, iteratee, context) {
+  _.sortBy = function(list, iteratee, context) {
     if (context == null) {
       context = this;
     }
-    return _.map(_.map(container, (function(value) {
+    return _.map(_.map(list, (function(value) {
       return {
         key: iteratee(value),
         value: value
@@ -254,7 +254,7 @@
     }, context);
   };
 
-  _.organizeBy = function(container, iteratee) {
+  _.organizeBy = function(list, iteratee) {
     var getKey;
     getKey = function(value, iteratee) {
       if (typeof iteratee === "string") {
@@ -263,7 +263,7 @@
         return iteratee(value);
       }
     };
-    return _.map(container, function(value) {
+    return _.map(list, function(value) {
       return {
         key: getKey(value, iteratee),
         value: value
@@ -271,13 +271,13 @@
     });
   };
 
-  _.groupBy = function(container, iteratee, context) {
+  _.groupBy = function(list, iteratee, context) {
     var result;
     if (context == null) {
       context = this;
     }
     result = {};
-    _.each(_.organizeBy(container, iteratee, context), function(obj) {
+    _.each(_.organizeBy(list, iteratee, context), function(obj) {
       if (result[obj.key] === void 0) {
         result[obj.key] = [];
       }
@@ -286,25 +286,25 @@
     return result;
   };
 
-  _.indexBy = function(container, iteratee, context) {
+  _.indexBy = function(list, iteratee, context) {
     var result;
     if (context == null) {
       context = this;
     }
     result = {};
-    _.each(_.organizeBy(container, iteratee, context), function(obj) {
+    _.each(_.organizeBy(list, iteratee, context), function(obj) {
       return result[obj.key] = obj.value;
     });
     return result;
   };
 
-  _.countBy = function(container, iteratee, context) {
+  _.countBy = function(list, iteratee, context) {
     var result;
     if (context == null) {
       context = this;
     }
     result = {};
-    _.each(_.organizeBy(container, iteratee, context), function(obj) {
+    _.each(_.organizeBy(list, iteratee, context), function(obj) {
       if (result[obj.key] === void 0) {
         result[obj.key] = 0;
       }
@@ -313,23 +313,52 @@
     return result;
   };
 
-  _.shuffle = function(container) {
-    var popRandomElementFrom, size;
-    if (!Array.isArray(container)) {
-      container = _.map(container, function(value) {
+  _.objectValuesToArray = function(list) {
+    if (!Array.isArray(list)) {
+      return list = _.map(list, function(value) {
         return value;
       });
+    } else {
+      return list;
     }
-    size = container.length - 1;
-    popRandomElementFrom = function(array, index) {
-      var element;
-      element = array[index];
-      array[index] = array[size];
+  };
+
+  _.randomIndex = function(size) {
+    return Math.floor(Math.random() * size);
+  };
+
+  _.shuffle = function(list) {
+    var popRandomElementFrom, size, _i, _results;
+    list = _.objectValuesToArray(list);
+    size = list.length;
+    popRandomElementFrom = function(list, index) {
+      var item;
+      item = list[index];
+      list[index] = list[size];
       size -= 1;
-      return element;
+      return item;
     };
-    return _.map(container, function() {
-      return popRandomElementFrom(container, Math.floor(Math.random() * size));
+    return _.map((function() {
+      _results = [];
+      for (var _i = 1; 1 <= size ? _i <= size : _i >= size; 1 <= size ? _i++ : _i--){ _results.push(_i); }
+      return _results;
+    }).apply(this), function() {
+      return popRandomElementFrom(list, _.randomIndex(list));
+    });
+  };
+
+  _.sample = function(list, n) {
+    var _i, _results;
+    if (n == null) {
+      n = 1;
+    }
+    list = _.objectValuesToArray(list);
+    return _.map((function() {
+      _results = [];
+      for (var _i = 1; 1 <= n ? _i <= n : _i >= n; 1 <= n ? _i++ : _i--){ _results.push(_i); }
+      return _results;
+    }).apply(this), function() {
+      return list[_.randomIndex(list.length)];
     });
   };
 
