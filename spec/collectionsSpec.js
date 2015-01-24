@@ -703,4 +703,23 @@
     });
   });
 
+  describe("shuffle", function() {
+    it("should randomize an array of values", function() {
+      var arr, result;
+      arr = [1, 2, 3, 4, 5, 6];
+      result = _.shuffle(arr);
+      return expect(result).not.toEqual(arr);
+    });
+    return it("should randomize an object of values", function() {
+      var result;
+      obj = {
+        a: [1, 2, 3],
+        b: 'fefe',
+        c: 242
+      };
+      result = _.shuffle(obj);
+      return expect(result).not.toEqual(obj);
+    });
+  });
+
 }).call(this);

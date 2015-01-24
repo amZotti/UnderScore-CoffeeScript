@@ -64,7 +64,7 @@ describe "reduce", ->
   it "should reduce correctly when provided a starting value", ->
     result = _.reduce(arr, arrayCallback, startingValue)
     expect(result).toEqual(16)
-  
+
   it "should apply the function in the context of the object passed in", ->
     context = {}
     contextCallback = (startingValue, element, index, arr) ->
@@ -338,4 +338,15 @@ describe "countBy", ->
   it "should split collection into groups and return a count for the number of values in each group.", ->
     result = _.countBy [1, 2, 3, 4, 5], (num) -> if num % 2 is 0 then 'even' else 'odd'
     expect(result).toEqual({odd: 3, even: 2})
+
+describe "shuffle", ->
+  it "should randomize an array of values", ->
+    arr = [1, 2, 3, 4, 5, 6]
+    result = _.shuffle(arr)
+    expect(result).not.toEqual(arr)
+
+  it "should randomize an object of values", ->
+    obj = {a: [1,2,3], b: 'fefe', c: 242}
+    result = _.shuffle(obj)
+    expect(result).not.toEqual(obj)
 
