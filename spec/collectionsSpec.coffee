@@ -73,6 +73,12 @@ describe "reduce", ->
     _.reduce(arr, contextCallback, startingValue, context)
     expect(context.value).toEqual(16)
 
+describe "reduceRight", ->
+  it "should reduce values in list from right to left", ->
+    list = [[0, 1], [2, 3], [4, 5]];
+    flat = _.reduceRight(list, ((a, b) -> a.concat(b)), []);
+    expect(flat).toEqual([4, 5, 2, 3, 0, 1])
+
 describe "find", ->
   callback = (num)-> num % 2 is 0
 

@@ -117,6 +117,17 @@
     });
   });
 
+  describe("reduceRight", function() {
+    return it("should reduce values in list from right to left", function() {
+      var flat, list;
+      list = [[0, 1], [2, 3], [4, 5]];
+      flat = _.reduceRight(list, (function(a, b) {
+        return a.concat(b);
+      }), []);
+      return expect(flat).toEqual([4, 5, 2, 3, 0, 1]);
+    });
+  });
+
   describe("find", function() {
     var callback;
     callback = function(num) {
