@@ -61,7 +61,7 @@
     });
   };
 
-  _.rest = function(array, index) {
+  _.rest = _.tail = _.drop = function(array, index) {
     var size, _i, _results;
     if (index == null) {
       index = 1;
@@ -76,6 +76,12 @@
       return _results;
     }).apply(this), function(value) {
       return array[value];
+    });
+  };
+
+  _.compact = function(array) {
+    return _.filter(array, function(value) {
+      return !!value;
     });
   };
 

@@ -14,7 +14,11 @@ _.last = (array, n = 0) ->
   if n >= size then return array
   _.map [n - 1...size], (value) -> array[value]
 
-_.rest = (array, index = 1) ->
+_.rest = _.tail = _.drop = (array, index = 1) ->
   size = _.size array
   if index >= size then return []
   _.map [index...size], (value) -> array[value]
+
+_.compact = (array) ->
+  _.filter array, (value) -> 
+    not not value
