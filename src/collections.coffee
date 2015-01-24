@@ -190,3 +190,8 @@ _.sample = (list, n = 1) ->
   list = _.objectValuesToArray(list)
   _.map [1..n], ->
     list[_.randomIndex(list.length)]
+
+_.toArray = (list) ->
+  _.map list, (value) ->
+    value
+

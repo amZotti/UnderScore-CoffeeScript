@@ -362,4 +362,10 @@
     });
   };
 
+  _.toArray = function(list) {
+    return _.map(list, function(value) {
+      return value;
+    });
+  };
+
 }).call(this);
