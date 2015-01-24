@@ -198,3 +198,5 @@ _.toArray = (list) ->
 _.size = (list) ->
   _.toArray(list).length
 
+_.partition = (array, callback) ->
+  [_.filter(array, callback), _.reject(array, callback)]

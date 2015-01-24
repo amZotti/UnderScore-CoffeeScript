@@ -372,4 +372,8 @@
     return _.toArray(list).length;
   };
 
+  _.partition = function(array, callback) {
+    return [_.filter(array, callback), _.reject(array, callback)];
+  };
+
 }).call(this);
