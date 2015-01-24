@@ -54,3 +54,8 @@ describe 'arrays', ->
     it 'should return the empty array if index exceeds size', ->
       result = _.rest(arr, 33)
       expect(result).toEqual([])
+
+  describe '_.compact', ->
+    it 'should return a new array with all falsey values removed', ->
+      result = _.compact([0, 1, false, 2, '', 3]);
+      expect(result).toEqual([1, 2, 3])

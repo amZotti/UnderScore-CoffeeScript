@@ -57,7 +57,7 @@
         return expect(result).toEqual(arr);
       });
     });
-    return describe('_.rest', function() {
+    describe('_.rest', function() {
       it('should return all elements except first', function() {
         var result;
         result = _.rest(arr);
@@ -72,6 +72,13 @@
         var result;
         result = _.rest(arr, 33);
         return expect(result).toEqual([]);
+      });
+    });
+    return describe('_.compact', function() {
+      return it('should return a new array with all falsey values removed', function() {
+        var result;
+        result = _.compact([0, 1, false, 2, '', 3]);
+        return expect(result).toEqual([1, 2, 3]);
       });
     });
   });
