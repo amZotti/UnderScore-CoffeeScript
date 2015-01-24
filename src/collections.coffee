@@ -1,34 +1,34 @@
 window._ = {}
-_.each = _.forEach = (list, callback, context = this) ->
+_.each = _.forEach = (list, callback, context = @) ->
   if Array.isArray list
     callback.call(context, item, index, list) for item, index in list
   else
     callback.call(context, value, key, list) for own key, value of list
 
 
-_.map = _.collect = (list, callback, context = this) ->
+_.map = _.collect = (list, callback, context = @) ->
   callback = callback or (value) -> value
   if Array.isArray list
     (callback.call(context, item, index, list) for item, index in list)
   else
     (callback.call(context, value, key, list) for own key, value of list)
 
-_.reduce = _.inject = _.foldl = (list, callback, startingValue = 0, context = this) ->
+_.reduce = _.inject = _.foldl = (list, callback, startingValue = 0, context = @) ->
   iteratee = (element, index, list) ->
     startingValue = callback.call(context, startingValue, element, index, list)
   _.each list, iteratee, context
   startingValue
 
-_.reduceRight = _.foldr = (list, callback, startingValue = 0, context = this) ->
+_.reduceRight = _.foldr = (list, callback, startingValue = 0, context = @) ->
   _.reduce(list.reverse(), callback, startingValue, context)
 
-_.find = _.detect = (list, callback, context = this) ->
+_.find = _.detect = (list, callback, context = @) ->
   result = undefined
   _.each list, (value, index, list) ->
     result = value if result is undefined and callback.call(context, value) is true
   result
 
-_.filter = _.select = (list, callback, context = this) ->
+_.filter = _.select = (list, callback, context = @) ->
   results = []
   _.each list, (value, index, list) ->
     if callback.call(context, value) then results.push(value)
@@ -57,18 +57,18 @@ _.findWhere = (list, properties) ->
   _.where(list, properties)[0]
 
 
-_.reject = (list, callback, context = this) ->
+_.reject = (list, callback, context = @) ->
   _.filter list, (value) ->
     !callback.call(context, value)
 
-_.every = _.all = (list, callback, context = this) ->
+_.every = _.all = (list, callback, context = @) ->
   status = true
   _.each list, (value) ->
     unless callback.call(context, value)
       status = false
   status
 
-_.some = _.any = (list, callback, context = this) ->
+_.some = _.any = (list, callback, context = @) ->
   _.filter(list, callback, context).length isnt 0
 
 _.contains = _.include = (list, value) ->
@@ -82,36 +82,35 @@ _.invoke = (list, methodName) ->
 _.pluck = (list, key) ->
   _.map(list, (obj) -> obj[key])
 
-_.max = (list, callback, context = this) ->
+_.maxOrMin = (list, callback, context, equality) ->
   result = undefined
-  maxVal = undefined
+  m = undefined
   _.each list, (value) ->
     if callback
       count = callback.call(context, value)
     else
       count = value
-    maxVal = maxVal or count
+    m = m or count
     result = result or value
-    if count > maxVal
+    if equality(m, count)
       result = value
   result or Number.POSITIVE_INFINITY
 
+_.max = (list, callback, context = @) ->
+  _.maxOrMin list,
+  callback,
+  context,
+  (m, count) ->
+    count > m
 
-_.min = (list, callback, context = this) ->
-  result = undefined
-  minVal = undefined
-  _.each list, (value) ->
-    if callback
-      count = callback.call(context, value)
-    else
-      count = value
-    minVal = minVal or count
-    result = result or value
-    if count < minVal
-      result = value
-  result or Number.POSITIVE_INFINITY
+_.min = (list, callback, context = @) ->
+  _.maxOrMin list,
+  callback,
+  context,
+  (m, count) ->
+    count < m
 
-_.sortBy = (list, iteratee, context = this) ->
+_.sortBy = (list, iteratee, context = @) ->
   _.map _.map(list, ((value) ->
     {key: iteratee(value), value: value}), context).sort((a,b) ->
       a.key > b.key),
@@ -129,7 +128,7 @@ _.organizeBy = (list, iteratee)->
     key: getKey(value, iteratee)
     value: value
 
-_.groupBy = (list, iteratee, context = this) ->
+_.groupBy = (list, iteratee, context = @) ->
   result = {}
   _.each _.organizeBy(list, iteratee, context), (obj) ->
     if result[obj.key] is undefined
@@ -137,13 +136,13 @@ _.groupBy = (list, iteratee, context = this) ->
     result[obj.key].push(obj.value)
   result
 
-_.indexBy = (list, iteratee, context = this) ->
+_.indexBy = (list, iteratee, context = @) ->
   result = {}
   _.each _.organizeBy(list, iteratee, context), (obj) ->
     result[obj.key] = obj.value
   result
 
-_.countBy = (list, iteratee, context = this) ->
+_.countBy = (list, iteratee, context = @) ->
   result = {}
   _.each _.organizeBy(list, iteratee, context), (obj) ->
     if result[obj.key] is undefined

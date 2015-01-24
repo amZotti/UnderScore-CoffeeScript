@@ -69,7 +69,7 @@
     return startingValue;
   };
 
-  _.reduceRight = function(list, callback, startingValue, context) {
+  _.reduceRight = _.foldr = function(list, callback, startingValue, context) {
     if (startingValue == null) {
       startingValue = 0;
     }
@@ -79,7 +79,7 @@
     return _.reduce(list.reverse(), callback, startingValue, context);
   };
 
-  _.find = function(list, callback, context) {
+  _.find = _.detect = function(list, callback, context) {
     var result;
     if (context == null) {
       context = this;
@@ -93,9 +93,7 @@
     return result;
   };
 
-  _.detect = _.find;
-
-  _.filter = function(list, callback, context) {
+  _.filter = _.select = function(list, callback, context) {
     var results;
     if (context == null) {
       context = this;
@@ -108,8 +106,6 @@
     });
     return results;
   };
-
-  _.select = _.filter;
 
   _.where = function(list, properties) {
     var results;
@@ -155,7 +151,7 @@
     });
   };
 
-  _.every = function(list, callback, context) {
+  _.every = _.all = function(list, callback, context) {
     var status;
     if (context == null) {
       context = this;
@@ -169,24 +165,18 @@
     return status;
   };
 
-  _.all = _.every;
-
-  _.some = function(list, callback, context) {
+  _.some = _.any = function(list, callback, context) {
     if (context == null) {
       context = this;
     }
     return _.filter(list, callback, context).length !== 0;
   };
 
-  _.any = _.some;
-
-  _.contains = function(list, value) {
+  _.contains = _.include = function(list, value) {
     return _.some(list, function(element) {
       return element === value;
     });
   };
-
-  _.include = _.contains;
 
   _.invoke = function(list, methodName) {
     var args;
@@ -202,13 +192,10 @@
     });
   };
 
-  _.max = function(list, callback, context) {
-    var maxVal, result;
-    if (context == null) {
-      context = this;
-    }
+  _.maxOrMin = function(list, callback, context, equality) {
+    var m, result;
     result = void 0;
-    maxVal = void 0;
+    m = void 0;
     _.each(list, function(value) {
       var count;
       if (callback) {
@@ -216,36 +203,31 @@
       } else {
         count = value;
       }
-      maxVal = maxVal || count;
+      m = m || count;
       result = result || value;
-      if (count > maxVal) {
+      if (equality(m, count)) {
         return result = value;
       }
     });
     return result || Number.POSITIVE_INFINITY;
   };
 
-  _.min = function(list, callback, context) {
-    var minVal, result;
+  _.max = function(list, callback, context) {
     if (context == null) {
       context = this;
     }
-    result = void 0;
-    minVal = void 0;
-    _.each(list, function(value) {
-      var count;
-      if (callback) {
-        count = callback.call(context, value);
-      } else {
-        count = value;
-      }
-      minVal = minVal || count;
-      result = result || value;
-      if (count < minVal) {
-        return result = value;
-      }
+    return _.maxOrMin(list, callback, context, function(m, count) {
+      return count > m;
     });
-    return result || Number.POSITIVE_INFINITY;
+  };
+
+  _.min = function(list, callback, context) {
+    if (context == null) {
+      context = this;
+    }
+    return _.maxOrMin(list, callback, context, function(m, count) {
+      return count < m;
+    });
   };
 
   _.sortBy = function(list, iteratee, context) {
