@@ -368,4 +368,8 @@
     });
   };
 
+  _.size = function(list) {
+    return _.toArray(list).length;
+  };
+
 }).call(this);

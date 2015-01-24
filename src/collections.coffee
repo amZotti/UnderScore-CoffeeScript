@@ -195,3 +195,6 @@ _.toArray = (list) ->
   _.map list, (value) ->
     value
 
+_.size = (list) ->
+  _.toArray(list).length
+
