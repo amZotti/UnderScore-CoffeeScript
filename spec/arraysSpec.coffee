@@ -1,31 +1,43 @@
 describe 'arrays', ->
   arr = null
-  beforeEach -> 
+  beforeEach ->
     arr = [5, 4, 3, 2, 1]
 
   describe '_.first', ->
-    it 'should return the first element of an array when n argument is not provided', ->
+    it 'should return the first element', ->
       result = _.first arr;
       expect(result).toEqual(5)
 
-    it 'should return the first n elements of an array when passed n as an argument', ->
+    it 'should return the first n elements when n is provided', ->
       result = _.first arr, 3
       expect(result).toEqual([5, 4, 3])
 
-    it 'should return all the elements if n is greater than or equal to the arrays length', ->
+    it 'should return all the elements if n exceeds size', ->
       result = _.first arr, 20
       expect(result).toEqual(arr)
 
   describe '_.initial', ->
-    it 'should return all elements except the last in the array when n argument is not provided', ->
+    it 'should return all elements except the last', ->
       result = _.initial(arr);
       expect(result).toEqual([5, 4, 3, 2])
 
-    it 'should exclude n elements when n is passed as an argument', ->
+    it 'should exclude n elements when n is provided', ->
       result = _.initial(arr, 2)
       expect(result).toEqual([5, 4, 3])
 
-    it 'should return an empty array if n exceeds the number of elements in array', ->
+    it 'should return an empty array if n exceeds size', ->
       result = _.initial(arr, 99)
       expect(result).toEqual([])
 
+  describe '_.last', ->
+    it 'should return the last element', ->
+      result = _.last(arr)
+      expect(result).toEqual(1)
+
+    it 'should accept argument n which will return last n elements', ->
+      result = _.last(arr, 3)
+      expect(result).toEqual([3, 2, 1])
+
+    it 'should return the entire array if n exceeds size', ->
+      result = _.last(arr, 33)
+      expect(result).toEqual(arr)
