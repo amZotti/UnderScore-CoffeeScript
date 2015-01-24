@@ -379,3 +379,8 @@ describe "size", ->
   it "should return the number of values in a list", ->
     result = _.size({one: 1, two: 2, three: 3});
     expect(result).toEqual(3)
+
+describe "partition", ->
+  it "should split array into two arrays: one whose elements all satisfy predicate and one whose elements all do not satisfy predicate.", ->
+    result = _.partition([0, 1, 2, 3, 4, 5], (value) -> value % 2 is 1);
+    expect(result).toEqual([[1, 3, 5], [0, 2, 4]])

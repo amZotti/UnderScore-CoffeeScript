@@ -778,4 +778,14 @@
     });
   });
 
+  describe("partition", function() {
+    return it("should split array into two arrays: one whose elements all satisfy predicate and one whose elements all do not satisfy predicate.", function() {
+      var result;
+      result = _.partition([0, 1, 2, 3, 4, 5], function(value) {
+        return value % 2 === 1;
+      });
+      return expect(result).toEqual([[1, 3, 5], [0, 2, 4]]);
+    });
+  });
+
 }).call(this);
