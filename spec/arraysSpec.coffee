@@ -41,3 +41,16 @@ describe 'arrays', ->
     it 'should return the entire array if n exceeds size', ->
       result = _.last(arr, 33)
       expect(result).toEqual(arr)
+
+  describe '_.rest', ->
+    it 'should return all elements except first', ->
+      result = _.rest(arr)
+      expect(result).toEqual([4, 3, 2, 1])
+
+    it 'should accept argument index which will return elements onward starting at index', ->
+      result = _.rest(arr, 3)
+      expect(result).toEqual([2, 1])
+
+    it 'should return the empty array if index exceeds size', ->
+      result = _.rest(arr, 33)
+      expect(result).toEqual([])

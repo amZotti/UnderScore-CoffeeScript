@@ -40,7 +40,7 @@
         return expect(result).toEqual([]);
       });
     });
-    return describe('_.last', function() {
+    describe('_.last', function() {
       it('should return the last element', function() {
         var result;
         result = _.last(arr);
@@ -55,6 +55,23 @@
         var result;
         result = _.last(arr, 33);
         return expect(result).toEqual(arr);
+      });
+    });
+    return describe('_.rest', function() {
+      it('should return all elements except first', function() {
+        var result;
+        result = _.rest(arr);
+        return expect(result).toEqual([4, 3, 2, 1]);
+      });
+      it('should accept argument index which will return elements onward starting at index', function() {
+        var result;
+        result = _.rest(arr, 3);
+        return expect(result).toEqual([2, 1]);
+      });
+      return it('should return the empty array if index exceeds size', function() {
+        var result;
+        result = _.rest(arr, 33);
+        return expect(result).toEqual([]);
       });
     });
   });
