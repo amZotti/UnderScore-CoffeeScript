@@ -366,3 +366,11 @@ describe "sample", ->
     result = _.sample(arr, 3)
     expect(result.length).toEqual(3)
 
+describe "toArray", ->
+  it "should create a real array from the arguments psuedo-array", ->
+    result = (-> _.toArray(arguments).slice(1))(1, 2, 3, 4)
+    expect(result).toEqual([2, 3, 4])
+
+  it "should create a real array from an object", ->
+    result = _.toArray({a: 1, b: 2, c: 3})
+    expect(result).toEqual([1, 2, 3])
