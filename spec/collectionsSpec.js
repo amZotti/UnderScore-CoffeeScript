@@ -766,4 +766,16 @@
     });
   });
 
+  describe("size", function() {
+    return it("should return the number of values in a list", function() {
+      var result;
+      result = _.size({
+        one: 1,
+        two: 2,
+        three: 3
+      });
+      return expect(result).toEqual(3);
+    });
+  });
+
 }).call(this);

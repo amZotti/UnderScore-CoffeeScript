@@ -374,3 +374,8 @@ describe "toArray", ->
   it "should create a real array from an object", ->
     result = _.toArray({a: 1, b: 2, c: 3})
     expect(result).toEqual([1, 2, 3])
+
+describe "size", ->
+  it "should return the number of values in a list", ->
+    result = _.size({one: 1, two: 2, three: 3});
+    expect(result).toEqual(3)
