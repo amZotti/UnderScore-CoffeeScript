@@ -350,3 +350,19 @@ describe "shuffle", ->
     result = _.shuffle(obj)
     expect(result).not.toEqual(obj)
 
+describe "sample", ->
+  it "should return a random value from the array", ->
+    arr = [1,2,3,4,5,6]
+    result = _.sample(arr)
+    expect(result).not.toEqual(undefined)
+
+  it "should return a random value from the object", ->
+    obj = {a: 1, b: 2, c: 3}
+    result = _.sample(obj)
+    expect(result).not.toEqual(undefined)
+
+  it "should return n random values from the array when passed n as an argument", ->
+    arr = [1,2,3,4,5,6]
+    result = _.sample(arr, 3)
+    expect(result.length).toEqual(3)
+

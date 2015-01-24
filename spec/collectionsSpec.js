@@ -722,4 +722,29 @@
     });
   });
 
+  describe("sample", function() {
+    it("should return a random value from the array", function() {
+      var arr, result;
+      arr = [1, 2, 3, 4, 5, 6];
+      result = _.sample(arr);
+      return expect(result).not.toEqual(void 0);
+    });
+    it("should return a random value from the object", function() {
+      var result;
+      obj = {
+        a: 1,
+        b: 2,
+        c: 3
+      };
+      result = _.sample(obj);
+      return expect(result).not.toEqual(void 0);
+    });
+    return it("should return n random values from the array when passed n as an argument", function() {
+      var arr, result;
+      arr = [1, 2, 3, 4, 5, 6];
+      result = _.sample(arr, 3);
+      return expect(result.length).toEqual(3);
+    });
+  });
+
 }).call(this);
