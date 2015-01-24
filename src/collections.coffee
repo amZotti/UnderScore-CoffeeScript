@@ -18,6 +18,9 @@ _.reduce = (list, callback, startingValue = 0, context = this) ->
   _.each list, iteratee, context
   startingValue
 
+_.reduceRight = (list, callback, startingValue = 0, context = this) ->
+  _.reduce(list.reverse(), callback, startingValue, context)
+
 _.find = (list, callback, context = this) ->
   result = undefined
   _.each list, (value, index, list) ->

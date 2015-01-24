@@ -69,6 +69,16 @@
     return startingValue;
   };
 
+  _.reduceRight = function(list, callback, startingValue, context) {
+    if (startingValue == null) {
+      startingValue = 0;
+    }
+    if (context == null) {
+      context = this;
+    }
+    return _.reduce(list.reverse(), callback, startingValue, context);
+  };
+
   _.find = function(list, callback, context) {
     var result;
     if (context == null) {
