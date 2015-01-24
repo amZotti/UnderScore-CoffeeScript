@@ -13,3 +13,8 @@ _.last = (array, n = 0) ->
   if n is 0 then return array[size - 1]
   if n >= size then return array
   _.map [n - 1...size], (value) -> array[value]
+
+_.rest = (array, index = 1) ->
+  size = _.size array
+  if index >= size then return []
+  _.map [index...size], (value) -> array[value]

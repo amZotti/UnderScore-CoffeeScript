@@ -41,19 +41,38 @@
   };
 
   _.last = function(array, n) {
-    var _i, _ref, _ref1, _results;
+    var size, _i, _ref, _results;
     if (n == null) {
       n = 0;
     }
+    size = _.size(array);
     if (n === 0) {
-      return array[_.size(array) - 1];
+      return array[size - 1];
     }
-    if (n >= _.size(array)) {
+    if (n >= size) {
       return array;
     }
     return _.map((function() {
       _results = [];
-      for (var _i = _ref = n - 1, _ref1 = _.size(array); _ref <= _ref1 ? _i < _ref1 : _i > _ref1; _ref <= _ref1 ? _i++ : _i--){ _results.push(_i); }
+      for (var _i = _ref = n - 1; _ref <= size ? _i < size : _i > size; _ref <= size ? _i++ : _i--){ _results.push(_i); }
+      return _results;
+    }).apply(this), function(value) {
+      return array[value];
+    });
+  };
+
+  _.rest = function(array, index) {
+    var size, _i, _results;
+    if (index == null) {
+      index = 1;
+    }
+    size = _.size(array);
+    if (index >= size) {
+      return [];
+    }
+    return _.map((function() {
+      _results = [];
+      for (var _i = index; index <= size ? _i < size : _i > size; index <= size ? _i++ : _i--){ _results.push(_i); }
       return _results;
     }).apply(this), function(value) {
       return array[value];
