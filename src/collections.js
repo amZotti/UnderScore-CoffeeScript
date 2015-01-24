@@ -238,17 +238,20 @@
     return result || Number.POSITIVE_INFINITY;
   };
 
-  _.sortBy = function(container, iteratee) {
-    return _.map(_.map(container, function(value) {
+  _.sortBy = function(container, iteratee, context) {
+    if (context == null) {
+      context = this;
+    }
+    return _.map(_.map(container, (function(value) {
       return {
         key: iteratee(value),
         value: value
       };
-    }).sort(function(a, b) {
+    }), context).sort(function(a, b) {
       return a.key > b.key;
     }), function(obj) {
       return obj.value;
-    });
+    }, context);
   };
 
   _.organizeBy = function(container, iteratee) {
@@ -268,10 +271,13 @@
     });
   };
 
-  _.groupBy = function(container, iteratee) {
+  _.groupBy = function(container, iteratee, context) {
     var result;
+    if (context == null) {
+      context = this;
+    }
     result = {};
-    _.each(_.organizeBy(container, iteratee), function(obj) {
+    _.each(_.organizeBy(container, iteratee, context), function(obj) {
       if (result[obj.key] === void 0) {
         result[obj.key] = [];
       }
@@ -280,19 +286,25 @@
     return result;
   };
 
-  _.indexBy = function(container, iteratee) {
+  _.indexBy = function(container, iteratee, context) {
     var result;
+    if (context == null) {
+      context = this;
+    }
     result = {};
-    _.each(_.organizeBy(container, iteratee), function(obj) {
+    _.each(_.organizeBy(container, iteratee, context), function(obj) {
       return result[obj.key] = obj.value;
     });
     return result;
   };
 
-  _.countBy = function(container, iteratee) {
+  _.countBy = function(container, iteratee, context) {
     var result;
+    if (context == null) {
+      context = this;
+    }
     result = {};
-    _.each(_.organizeBy(container, iteratee), function(obj) {
+    _.each(_.organizeBy(container, iteratee, context), function(obj) {
       if (result[obj.key] === void 0) {
         result[obj.key] = 0;
       }

@@ -122,15 +122,15 @@ _.min = (container, callback, context = this) ->
       result = value
   result or Number.POSITIVE_INFINITY
 
-_.sortBy = (container, iteratee) ->
-  _.map _.map(container, (value) ->
-    {key: iteratee(value), value: value}).sort((a,b) ->
-      a.key > b.key), (obj) ->
-        obj.value
-
+_.sortBy = (container, iteratee, context = this) ->
+  _.map _.map(container, ((value) ->
+    {key: iteratee(value), value: value}), context).sort((a,b) ->
+      a.key > b.key),
+      (obj) -> obj.value,
+      context
 
 _.organizeBy = (container, iteratee)->
-  getKey = (value, iteratee) -> 
+  getKey = (value, iteratee) ->
     if typeof iteratee is "string"
       value[iteratee]
     else
@@ -140,25 +140,24 @@ _.organizeBy = (container, iteratee)->
     key: getKey(value, iteratee)
     value: value
 
-_.groupBy = (container, iteratee) ->
+_.groupBy = (container, iteratee, context = this) ->
   result = {}
-  _.each _.organizeBy(container, iteratee), (obj) ->
+  _.each _.organizeBy(container, iteratee, context), (obj) ->
     if result[obj.key] is undefined
       result[obj.key] = []
     result[obj.key].push(obj.value)
   result
 
-_.indexBy = (container, iteratee) ->
+_.indexBy = (container, iteratee, context = this) ->
   result = {}
-  _.each _.organizeBy(container, iteratee), (obj) ->
+  _.each _.organizeBy(container, iteratee, context), (obj) ->
     result[obj.key] = obj.value
   result
 
-_.countBy = (container, iteratee) ->
+_.countBy = (container, iteratee, context = this) ->
   result = {}
-  _.each _.organizeBy(container, iteratee), (obj) ->
+  _.each _.organizeBy(container, iteratee, context), (obj) ->
     if result[obj.key] is undefined
       result[obj.key] = 0
     result[obj.key] += 1
   result
-
