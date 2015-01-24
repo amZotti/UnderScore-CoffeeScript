@@ -161,3 +161,20 @@ _.countBy = (container, iteratee, context = this) ->
       result[obj.key] = 0
     result[obj.key] += 1
   result
+
+_.shuffle = (container) ->
+  if not Array.isArray(container)
+    container = _.map container,
+    (value) -> value
+
+  size = container.length - 1
+
+  popRandomElementFrom = (array, index) ->
+    element = array[index]
+    array[index] = array[size]
+    size -= 1
+    element
+
+  _.map container, ->
+    popRandomElementFrom container,
+    (Math.floor(Math.random() * size))

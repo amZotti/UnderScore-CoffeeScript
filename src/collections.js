@@ -313,4 +313,24 @@
     return result;
   };
 
+  _.shuffle = function(container) {
+    var popRandomElementFrom, size;
+    if (!Array.isArray(container)) {
+      container = _.map(container, function(value) {
+        return value;
+      });
+    }
+    size = container.length - 1;
+    popRandomElementFrom = function(array, index) {
+      var element;
+      element = array[index];
+      array[index] = array[size];
+      size -= 1;
+      return element;
+    };
+    return _.map(container, function() {
+      return popRandomElementFrom(container, Math.floor(Math.random() * size));
+    });
+  };
+
 }).call(this);
