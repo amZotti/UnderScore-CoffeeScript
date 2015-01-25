@@ -52,3 +52,19 @@ _.zip = (arrays...) ->
   _.map longestArray, (value, index) ->
     _.map arrays, (array) ->
       array[index]
+
+log = (value) ->
+  console.log(JSON.stringify(value))
+
+format = (arrays) ->
+  if arrays.length is 2
+    arrays = _.zip(arrays[0], arrays[1])
+  else
+    arrays = arrays[0]
+
+_.object = (arrays...) ->
+  arrays = format arrays
+  result = {}
+  _.each arrays, (array) ->
+    result[array[0]] = array[1]
+  result
