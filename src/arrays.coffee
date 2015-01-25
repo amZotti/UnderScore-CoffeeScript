@@ -37,3 +37,9 @@ _.flatten = (array, shallow = false) ->
 _.without = (array, values...) ->
   _.reject array, (value) ->
     value in values
+
+_.uniq = _.unique = (array, iteratee = (value) -> value) ->
+  results = []
+  _.filter array, (value) ->
+    unless _.contains(results, iteratee value)
+      results.push iteratee value

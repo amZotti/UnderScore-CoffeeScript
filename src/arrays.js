@@ -98,4 +98,19 @@
     });
   };
 
+  _.uniq = _.unique = function(array, iteratee) {
+    var iterateeResults;
+    if (iteratee == null) {
+      iteratee = function(value) {
+        return value;
+      };
+    }
+    iterateeResults = [];
+    return _.filter(array, function(value) {
+      if (!_.contains(iterateeResults, iteratee(value))) {
+        return iterateeResults.push(iteratee(value));
+      }
+    });
+  };
+
 }).call(this);
