@@ -68,3 +68,10 @@ _.object = (arrays...) ->
   _.each arrays, (array) ->
     result[array[0]] = array[1]
   result
+
+_.indexOf = (array, value) ->
+  result = []
+  _.each array, (item, index) ->
+    if item is value then result.push index
+  result[0] or -1
+

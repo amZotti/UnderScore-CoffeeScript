@@ -155,4 +155,15 @@
     return result;
   };
 
+  _.indexOf = function(array, value) {
+    var result;
+    result = [];
+    _.each(array, function(item, index) {
+      if (item === value) {
+        return result.push(index);
+      }
+    });
+    return result[0] || -1;
+  };
+
 }).call(this);
