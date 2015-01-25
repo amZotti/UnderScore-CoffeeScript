@@ -99,18 +99,24 @@
   };
 
   _.uniq = _.unique = function(array, iteratee) {
-    var iterateeResults;
+    var results;
     if (iteratee == null) {
       iteratee = function(value) {
         return value;
       };
     }
-    iterateeResults = [];
+    results = [];
     return _.filter(array, function(value) {
-      if (!_.contains(iterateeResults, iteratee(value))) {
-        return iterateeResults.push(iteratee(value));
+      if (!_.contains(results, iteratee(value))) {
+        return results.push(iteratee(value));
       }
     });
+  };
+
+  _.union = function() {
+    var arrays;
+    arrays = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+    return _.uniq(_.flatten(arrays));
   };
 
 }).call(this);

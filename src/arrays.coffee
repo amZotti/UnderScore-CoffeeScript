@@ -43,3 +43,6 @@ _.uniq = _.unique = (array, iteratee = (value) -> value) ->
   _.filter array, (value) ->
     unless _.contains(results, iteratee value)
       results.push iteratee value
+
+_.union = (arrays...) ->
+  _.uniq _.flatten arrays
