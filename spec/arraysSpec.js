@@ -74,11 +74,23 @@
         return expect(result).toEqual([]);
       });
     });
-    return describe('_.compact', function() {
+    describe('_.compact', function() {
       return it('should return a new array with all falsey values removed', function() {
         var result;
         result = _.compact([0, 1, false, 2, '', 3]);
         return expect(result).toEqual([1, 2, 3]);
+      });
+    });
+    return describe('_.flatten', function() {
+      it('should flatten a nested array', function() {
+        var result;
+        result = _.flatten([1, [2], [3, [[4]]]]);
+        return expect(result).toEqual([1, 2, 3, 4]);
+      });
+      return it('should flatten only a single level if shallow argument is provided', function() {
+        var result;
+        result = _.flatten([1, [2], [3, [[4]]]], true);
+        return expect(result).toEqual([1, 2, 3, [[4]]]);
       });
     });
   });

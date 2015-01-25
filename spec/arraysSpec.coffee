@@ -59,3 +59,13 @@ describe 'arrays', ->
     it 'should return a new array with all falsey values removed', ->
       result = _.compact([0, 1, false, 2, '', 3]);
       expect(result).toEqual([1, 2, 3])
+
+  describe '_.flatten', ->
+    it 'should flatten a nested array', ->
+      result = _.flatten([1, [2], [3, [[4]]]])
+      expect(result).toEqual([1, 2, 3, 4])
+
+    it 'should flatten only a single level if shallow argument is provided', ->
+      result = _.flatten([1, [2], [3, [[4]]]], true)
+      expect(result).toEqual([1, 2, 3, [[4]]])
+
