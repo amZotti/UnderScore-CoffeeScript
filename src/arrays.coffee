@@ -75,3 +75,6 @@ _.indexOf = (array, value) ->
     if item is value then result.push index
   result[0] or -1
 
+_.intersection = (arrays...) ->
+  _.compact _.map arrays[0], (item) ->
+    item if _.every arrays, (array) -> item in array

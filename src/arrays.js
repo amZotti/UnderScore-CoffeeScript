@@ -166,4 +166,16 @@
     return result[0] || -1;
   };
 
+  _.intersection = function() {
+    var arrays;
+    arrays = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+    return _.compact(_.map(arrays[0], function(item) {
+      if (_.every(arrays, function(array) {
+        return __indexOf.call(array, item) >= 0;
+      })) {
+        return item;
+      }
+    }));
+  };
+
 }).call(this);
