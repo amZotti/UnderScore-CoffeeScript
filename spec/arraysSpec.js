@@ -153,7 +153,7 @@
         });
       });
     });
-    return describe('indexOf', function() {
+    describe('indexOf', function() {
       it('should return the first index of the provided value', function() {
         var result;
         result = _.indexOf([1, 2, 3], 2);
@@ -163,6 +163,13 @@
         var result;
         result = _.indexOf(arr, "barbeque");
         return expect(result).toEqual(-1);
+      });
+    });
+    return describe('intersection', function() {
+      return it('should return an array with items that are present in each array arguments', function() {
+        var result;
+        result = _.intersection([1, 2, 3], [101, 2, 1, 10], [2, 1]);
+        return expect(result).toEqual([1, 2]);
       });
     });
   });

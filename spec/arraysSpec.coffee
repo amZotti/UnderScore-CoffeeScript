@@ -114,3 +114,8 @@ describe 'arrays', ->
     it 'should return -1 if value cannot be found', ->
       result = _.indexOf(arr, "barbeque")
       expect(result).toEqual(-1)
+  
+  describe 'intersection', ->
+    it 'should return an array with items that are present in each array arguments', ->
+      result = _.intersection([1, 2, 3], [101, 2, 1, 10], [2, 1])
+      expect(result).toEqual([1, 2])
