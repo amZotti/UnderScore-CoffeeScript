@@ -83,3 +83,7 @@ describe 'arrays', ->
       result = _.uniq(arr, (value) -> value % 2 is 0)
       expect(result).toEqual([5, 4])
 
+  describe '_.union', ->
+    it 'should return the list of unique items in order they appear in the passed in arrays', ->
+      result = _.union([1, 2, 3], [101, 2, 1, 10], [2, 1])
+      expect(result).toEqual([1, 2, 3, 101, 10])

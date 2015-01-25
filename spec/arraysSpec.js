@@ -100,7 +100,7 @@
         return expect(result).toEqual([2, 3, 4]);
       });
     });
-    return describe('_.uniq', function() {
+    describe('_.uniq', function() {
       it('should produce a duplicate free version of the array', function() {
         var result;
         result = _.uniq([1, 2, 1, 3, 1, 4]);
@@ -112,6 +112,13 @@
           return value % 2 === 0;
         });
         return expect(result).toEqual([5, 4]);
+      });
+    });
+    return describe('_.union', function() {
+      return it('should return the list of unique items in order they appear in the passed in arrays', function() {
+        var result;
+        result = _.union([1, 2, 3], [101, 2, 1, 10], [2, 1]);
+        return expect(result).toEqual([1, 2, 3, 101, 10]);
       });
     });
   });
