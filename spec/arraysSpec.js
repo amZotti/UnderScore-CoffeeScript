@@ -93,11 +93,25 @@
         return expect(result).toEqual([1, 2, 3, [[4]]]);
       });
     });
-    return describe('_.without', function() {
+    describe('_.without', function() {
       return it('should return a copy of the array with all instances of the values passed in as arguments removed', function() {
         var result;
         result = _.without([1, 2, 1, 0, 3, 1, 4], 0, 1);
         return expect(result).toEqual([2, 3, 4]);
+      });
+    });
+    return describe('_.uniq', function() {
+      it('should produce a duplicate free version of the array', function() {
+        var result;
+        result = _.uniq([1, 2, 1, 3, 1, 4]);
+        return expect(result).toEqual([1, 2, 3, 4]);
+      });
+      return it('should compute unique items based on transformation', function() {
+        var result;
+        result = _.uniq(arr, function(value) {
+          return value % 2 === 0;
+        });
+        return expect(result).toEqual([5, 4]);
       });
     });
   });

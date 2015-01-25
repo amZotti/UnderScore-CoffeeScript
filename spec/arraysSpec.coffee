@@ -73,3 +73,13 @@ describe 'arrays', ->
     it 'should return a copy of the array with all instances of the values passed in as arguments removed', ->
       result = _.without([1, 2, 1, 0, 3, 1, 4], 0, 1)
       expect(result).toEqual([2, 3, 4])
+
+  describe '_.uniq', ->
+    it 'should produce a duplicate free version of the array', ->
+      result = _.uniq([1, 2, 1, 3, 1, 4])
+      expect(result).toEqual([1, 2, 3, 4])
+
+    it 'should compute unique items based on transformation', ->
+      result = _.uniq(arr, (value) -> value % 2 is 0)
+      expect(result).toEqual([5, 4])
+
