@@ -121,7 +121,7 @@
         return expect(result).toEqual([1, 2, 3, 101, 10]);
       });
     });
-    return describe('_.zip', function() {
+    describe('_.zip', function() {
       it('should merge together arrays with corresponding positions', function() {
         var result;
         result = _.zip(['moe', 'larry', 'curly'], [30, 40, 50], [true, false, false]);
@@ -131,6 +131,26 @@
         var result;
         result = _.zip([1, 2, 3], ['a', 'b']);
         return expect(result).toEqual([[1, 'a'], [2, 'b'], [3, void 0]]);
+      });
+    });
+    return describe('_.object', function() {
+      it('should merge an array of keys with an array of values to creates an object', function() {
+        var result;
+        result = _.object(['moe', 'larry', 'curly'], [30, 40, 50]);
+        return expect(result).toEqual({
+          moe: 30,
+          larry: 40,
+          curly: 50
+        });
+      });
+      return it('should merge arrays of [key, value] in an array into an object', function() {
+        var result;
+        result = _.object([['moe', 30], ['larry', 40], ['curly', 50]]);
+        return expect(result).toEqual({
+          moe: 30,
+          larry: 40,
+          curly: 50
+        });
       });
     });
   });

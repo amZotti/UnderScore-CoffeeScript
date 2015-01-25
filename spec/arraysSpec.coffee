@@ -96,3 +96,12 @@ describe 'arrays', ->
     it 'should fill missing values in with undefined', ->
       result = _.zip([1,2,3,],['a','b'])
       expect(result).toEqual([[1, 'a'], [2, 'b'], [3, undefined]])
+
+  describe '_.object', ->
+    it 'should merge an array of keys with an array of values to creates an object', ->
+      result = _.object(['moe', 'larry', 'curly'], [30, 40, 50])
+      expect(result).toEqual({moe: 30, larry: 40, curly: 50})
+
+    it 'should merge arrays of [key, value] in an array into an object', ->
+      result = _.object([['moe', 30], ['larry', 40], ['curly', 50]])
+      expect(result).toEqual({moe: 30, larry: 40, curly: 50})
