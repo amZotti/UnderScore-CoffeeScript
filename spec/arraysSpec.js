@@ -81,7 +81,7 @@
         return expect(result).toEqual([1, 2, 3]);
       });
     });
-    return describe('_.flatten', function() {
+    describe('_.flatten', function() {
       it('should flatten a nested array', function() {
         var result;
         result = _.flatten([1, [2], [3, [[4]]]]);
@@ -91,6 +91,13 @@
         var result;
         result = _.flatten([1, [2], [3, [[4]]]], true);
         return expect(result).toEqual([1, 2, 3, [[4]]]);
+      });
+    });
+    return describe('_.without', function() {
+      return it('should return a copy of the array with all instances of the values passed in as arguments removed', function() {
+        var result;
+        result = _.without([1, 2, 1, 0, 3, 1, 4], 0, 1);
+        return expect(result).toEqual([2, 3, 4]);
       });
     });
   });

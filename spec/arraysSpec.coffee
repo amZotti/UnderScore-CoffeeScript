@@ -69,3 +69,7 @@ describe 'arrays', ->
       result = _.flatten([1, [2], [3, [[4]]]], true)
       expect(result).toEqual([1, 2, 3, [[4]]])
 
+  describe '_.without', ->
+    it 'should return a copy of the array with all instances of the values passed in as arguments removed', ->
+      result = _.without([1, 2, 1, 0, 3, 1, 4], 0, 1)
+      expect(result).toEqual([2, 3, 4])
