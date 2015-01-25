@@ -20,3 +20,17 @@ _.rest = _.tail = _.drop = (array, index = 1) ->
 _.compact = (array) ->
   _.filter array, (value) ->
     not not value
+
+flatten = (array, shallow, results, pushNextItem = true) ->
+  for item in array
+    isArray = Array.isArray item
+    if isArray is true and pushNextItem is false then results.push item
+    else if isArray is true and shallow is false then flatten item, shallow, results
+    else if isArray is true and shallow is true then flatten item, shallow, results, false
+    else results.push item
+
+_.flatten = (array, shallow = false) ->
+  results = []
+  flatten(array, shallow, results)
+  results
+
