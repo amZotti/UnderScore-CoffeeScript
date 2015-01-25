@@ -34,3 +34,6 @@ _.flatten = (array, shallow = false) ->
   flatten(array, shallow, results)
   results
 
+_.without = (array, values...) ->
+  _.reject array, (value) ->
+    value in values
