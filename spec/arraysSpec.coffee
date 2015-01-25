@@ -105,3 +105,12 @@ describe 'arrays', ->
     it 'should merge arrays of [key, value] in an array into an object', ->
       result = _.object([['moe', 30], ['larry', 40], ['curly', 50]])
       expect(result).toEqual({moe: 30, larry: 40, curly: 50})
+
+  describe 'indexOf', ->
+    it 'should return the first index of the provided value', ->
+      result = _.indexOf([1, 2, 3], 2)
+      expect(result).toEqual(1)
+
+    it 'should return -1 if value cannot be found', ->
+      result = _.indexOf(arr, "barbeque")
+      expect(result).toEqual(-1)

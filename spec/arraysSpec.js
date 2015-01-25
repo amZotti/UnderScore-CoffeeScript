@@ -133,7 +133,7 @@
         return expect(result).toEqual([[1, 'a'], [2, 'b'], [3, void 0]]);
       });
     });
-    return describe('_.object', function() {
+    describe('_.object', function() {
       it('should merge an array of keys with an array of values to creates an object', function() {
         var result;
         result = _.object(['moe', 'larry', 'curly'], [30, 40, 50]);
@@ -151,6 +151,18 @@
           larry: 40,
           curly: 50
         });
+      });
+    });
+    return describe('indexOf', function() {
+      it('should return the first index of the provided value', function() {
+        var result;
+        result = _.indexOf([1, 2, 3], 2);
+        return expect(result).toEqual(1);
+      });
+      return it('should return -1 if value cannot be found', function() {
+        var result;
+        result = _.indexOf(arr, "barbeque");
+        return expect(result).toEqual(-1);
       });
     });
   });
