@@ -87,3 +87,12 @@ describe 'arrays', ->
     it 'should return the list of unique items in order they appear in the passed in arrays', ->
       result = _.union([1, 2, 3], [101, 2, 1, 10], [2, 1])
       expect(result).toEqual([1, 2, 3, 101, 10])
+
+  describe '_.zip', ->
+    it 'should merge together arrays with corresponding positions', ->
+      result = _.zip(['moe', 'larry', 'curly'], [30, 40, 50], [true, false, false])
+      expect(result).toEqual([["moe", 30, true], ["larry", 40, false], ["curly", 50, false]])
+
+    it 'should fill missing values in with undefined', ->
+      result = _.zip([1,2,3,],['a','b'])
+      expect(result).toEqual([[1, 'a'], [2, 'b'], [3, undefined]])

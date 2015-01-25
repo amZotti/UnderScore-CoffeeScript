@@ -114,11 +114,23 @@
         return expect(result).toEqual([5, 4]);
       });
     });
-    return describe('_.union', function() {
+    describe('_.union', function() {
       return it('should return the list of unique items in order they appear in the passed in arrays', function() {
         var result;
         result = _.union([1, 2, 3], [101, 2, 1, 10], [2, 1]);
         return expect(result).toEqual([1, 2, 3, 101, 10]);
+      });
+    });
+    return describe('_.zip', function() {
+      it('should merge together arrays with corresponding positions', function() {
+        var result;
+        result = _.zip(['moe', 'larry', 'curly'], [30, 40, 50], [true, false, false]);
+        return expect(result).toEqual([["moe", 30, true], ["larry", 40, false], ["curly", 50, false]]);
+      });
+      return it('should fill missing values in with undefined', function() {
+        var result;
+        result = _.zip([1, 2, 3], ['a', 'b']);
+        return expect(result).toEqual([[1, 'a'], [2, 'b'], [3, void 0]]);
       });
     });
   });
