@@ -46,3 +46,9 @@ _.uniq = _.unique = (array, iteratee = (value) -> value) ->
 
 _.union = (arrays...) ->
   _.uniq _.flatten arrays
+
+_.zip = (arrays...) ->
+  longestArray = _.sortBy(arrays, (array) -> -array.length)[0]
+  _.map longestArray, (value, index) ->
+    _.map arrays, (array) ->
+      array[index]

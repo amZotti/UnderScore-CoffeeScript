@@ -119,4 +119,17 @@
     return _.uniq(_.flatten(arrays));
   };
 
+  _.zip = function() {
+    var arrays, longestArray;
+    arrays = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+    longestArray = _.sortBy(arrays, function(array) {
+      return -array.length;
+    })[0];
+    return _.map(longestArray, function(value, index) {
+      return _.map(arrays, function(array) {
+        return array[index];
+      });
+    });
+  };
+
 }).call(this);
