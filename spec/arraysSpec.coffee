@@ -66,7 +66,7 @@ describe 'arrays', ->
       expect(result).toEqual([1, 2, 3, 4])
 
     it 'should flatten only a single level if shallow argument is provided', ->
-      result = _.flatten([1, [2], [3, [[4]]]], true)
+      result = _.flatten([1, [2], [3, [[4]]]], true) 
       expect(result).toEqual([1, 2, 3, [[4]]])
 
   describe '_.without', ->
@@ -106,7 +106,7 @@ describe 'arrays', ->
       result = _.object([['moe', 30], ['larry', 40], ['curly', 50]])
       expect(result).toEqual({moe: 30, larry: 40, curly: 50})
 
-  describe 'indexOf', ->
+  describe '_.indexOf', ->
     it 'should return the first index of the provided value', ->
       result = _.indexOf([1, 2, 3], 2)
       expect(result).toEqual(1)
@@ -115,12 +115,17 @@ describe 'arrays', ->
       result = _.indexOf(arr, "barbeque")
       expect(result).toEqual(-1)
   
-  describe 'intersection', ->
+  describe '_.intersection', ->
     it 'should return an array with items that are present in each array arguments', ->
       result = _.intersection([1, 2, 3], [101, 2, 1, 10], [2, 1])
       expect(result).toEqual([1, 2])
 
-  describe 'difference', ->
-  it 'shouldreturns values from array that are not present in other arrays', ->
+  describe '_.difference', ->
+  it 'should return values from array that are not present in other arrays', ->
     result = _.difference([1, 2, 3, 4, 5], [5, 2, 10])
     expect(result).toEqual([1, 3, 4])
+
+  describe '_.lastIndexOf', ->
+    it 'should return the index of the last occurrence of value in the array, or -1 if value is not present', ->
+      result = _.lastIndexOf([1, 2, 3, 1, 2, 3], 2)
+      expect(result).toEqual(4)

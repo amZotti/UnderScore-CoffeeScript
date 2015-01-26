@@ -153,7 +153,7 @@
         });
       });
     });
-    describe('indexOf', function() {
+    describe('_.indexOf', function() {
       it('should return the first index of the provided value', function() {
         var result;
         result = _.indexOf([1, 2, 3], 2);
@@ -165,18 +165,25 @@
         return expect(result).toEqual(-1);
       });
     });
-    describe('intersection', function() {
+    describe('_.intersection', function() {
       return it('should return an array with items that are present in each array arguments', function() {
         var result;
         result = _.intersection([1, 2, 3], [101, 2, 1, 10], [2, 1]);
         return expect(result).toEqual([1, 2]);
       });
     });
-    describe('difference', function() {});
-    return it('shouldreturns values from array that are not present in other arrays', function() {
+    describe('_.difference', function() {});
+    it('should return values from array that are not present in other arrays', function() {
       var result;
       result = _.difference([1, 2, 3, 4, 5], [5, 2, 10]);
       return expect(result).toEqual([1, 3, 4]);
+    });
+    return describe('_.lastIndexOf', function() {
+      return it('should return the index of the last occurrence of value in the array, or -1 if value is not present', function() {
+        var result;
+        result = _.lastIndexOf([1, 2, 3, 1, 2, 3], 2);
+        return expect(result).toEqual(4);
+      });
     });
   });
 
