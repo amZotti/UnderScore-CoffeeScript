@@ -145,4 +145,20 @@ describe 'arrays', ->
         if num % 2 is 0 then num + 10 else num
       result = _.sortedIndex([10, 20, 30, 40, 50], 35, iteratee)
       expect(result).toEqual(2)
+  
+  describe '_.range', ->
+    it 'should create a range of values provided stop value', ->
+      expect(_.range(10)).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+    it 'should create a range of values provided start and stop values', ->
+      expect(_.range(1, 11)).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+
+    it 'should create a range of values with steps', ->
+      expect(_.range(0, 30, 5)).toEqual([0, 5, 10, 15, 20, 25])
+
+    it 'should create a range of negative values', ->
+      expect(_.range(0, -10, -1)).toEqual([0, -1, -2, -3, -4, -5, -6, -7, -8, -9])
+
+    it 'should default to empty array', ->
+      expect(_.range(0)).toEqual([])
 

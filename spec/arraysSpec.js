@@ -185,7 +185,7 @@
         return expect(result).toEqual(4);
       });
     });
-    return describe('_.sortedIndex', function() {
+    describe('_.sortedIndex', function() {
       it('should determine where a given value will be inserted in a sorted list', function() {
         var result;
         result = _.sortedIndex([10, 20, 30, 40, 50], 35);
@@ -217,9 +217,25 @@
             return num;
           }
         };
-        window.iteratee = iteratee;
         result = _.sortedIndex([10, 20, 30, 40, 50], 35, iteratee);
         return expect(result).toEqual(2);
+      });
+    });
+    return describe('_.range', function() {
+      it('should create a range of values provided stop value', function() {
+        return expect(_.range(10)).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+      });
+      it('should create a range of values provided start and stop values', function() {
+        return expect(_.range(1, 11)).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+      });
+      it('should create a range of values with steps', function() {
+        return expect(_.range(0, 30, 5)).toEqual([0, 5, 10, 15, 20, 25]);
+      });
+      it('should create a range of negative values', function() {
+        return expect(_.range(0, -10, -1)).toEqual([0, -1, -2, -3, -4, -5, -6, -7, -8, -9]);
+      });
+      return it('should default to empty array', function() {
+        return expect(_.range(0)).toEqual([]);
       });
     });
   });
