@@ -86,3 +86,15 @@ _.lastIndexOf = (array, value, fromIndex = 0) ->
   (_.last _.compact _.map array, (item, index) ->
     if fromIndex <= index and item is value then return index) or -1
 
+_.transform = (value, iteratee) ->
+  if typeof iteratee is 'string'
+    value[iteratee]
+  else if typeof iteratee is 'undefined'
+    value
+  else
+    iteratee.call this, value
+
+_.sortedIndex = (array, value, iteratee) ->
+  value = _.transform(value, iteratee)
+  _.first _.compact _.map array, (item, index) ->
+    if _.transform(item, iteratee) >= value then return index

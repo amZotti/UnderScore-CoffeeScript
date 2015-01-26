@@ -195,4 +195,23 @@
     })))) || -1;
   };
 
+  _.transform = function(value, iteratee) {
+    if (typeof iteratee === 'string') {
+      return value[iteratee];
+    } else if (typeof iteratee === 'undefined') {
+      return value;
+    } else {
+      return iteratee.call(this, value);
+    }
+  };
+
+  _.sortedIndex = function(array, value, iteratee) {
+    value = _.transform(value, iteratee);
+    return _.first(_.compact(_.map(array, function(item, index) {
+      if (_.transform(item, iteratee) >= value) {
+        return index;
+      }
+    })));
+  };
+
 }).call(this);
