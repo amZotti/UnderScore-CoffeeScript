@@ -78,3 +78,8 @@ _.indexOf = (array, value) ->
 _.intersection = (arrays...) ->
   _.compact _.map arrays[0], (item) ->
     item if _.every arrays, (array) -> item in array
+
+_.difference = (array, others...) ->
+  others = _.flatten(others)
+  _.reject array, (value) ->
+    value in others
