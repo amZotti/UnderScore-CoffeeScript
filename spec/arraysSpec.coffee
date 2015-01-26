@@ -119,3 +119,8 @@ describe 'arrays', ->
     it 'should return an array with items that are present in each array arguments', ->
       result = _.intersection([1, 2, 3], [101, 2, 1, 10], [2, 1])
       expect(result).toEqual([1, 2])
+
+  describe 'difference', ->
+  it 'shouldreturns values from array that are not present in other arrays', ->
+    result = _.difference([1, 2, 3, 4, 5], [5, 2, 10])
+    expect(result).toEqual([1, 3, 4])

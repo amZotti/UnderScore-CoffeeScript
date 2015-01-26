@@ -165,12 +165,18 @@
         return expect(result).toEqual(-1);
       });
     });
-    return describe('intersection', function() {
+    describe('intersection', function() {
       return it('should return an array with items that are present in each array arguments', function() {
         var result;
         result = _.intersection([1, 2, 3], [101, 2, 1, 10], [2, 1]);
         return expect(result).toEqual([1, 2]);
       });
+    });
+    describe('difference', function() {});
+    return it('shouldreturns values from array that are not present in other arrays', function() {
+      var result;
+      result = _.difference([1, 2, 3, 4, 5], [5, 2, 10]);
+      return expect(result).toEqual([1, 3, 4]);
     });
   });
 
