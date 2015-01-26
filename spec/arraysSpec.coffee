@@ -129,3 +129,20 @@ describe 'arrays', ->
     it 'should return the index of the last occurrence of value in the array, or -1 if value is not present', ->
       result = _.lastIndexOf([1, 2, 3, 1, 2, 3], 2)
       expect(result).toEqual(4)
+
+  describe '_.sortedIndex', ->
+    it 'should determine where a given value will be inserted in a sorted list', ->
+      result = _.sortedIndex([10, 20, 30, 40, 50], 35)
+      expect(result).toEqual(3)
+
+    it 'should determine where a given object will be inserted in a sorted list', ->
+      stooges = [{name: 'moe', age: 40}, {name: 'curly', age: 60}]
+      result =  _.sortedIndex(stooges, {name: 'larry', age: 50}, 'age')
+      expect(result).toEqual(1)
+
+    it 'should accept an optional callback which transforms', ->
+      iteratee = (num) -> 
+        if num % 2 is 0 then num + 10 else num
+      result = _.sortedIndex([10, 20, 30, 40, 50], 35, iteratee)
+      expect(result).toEqual(2)
+

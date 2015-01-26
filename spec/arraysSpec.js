@@ -178,11 +178,48 @@
       result = _.difference([1, 2, 3, 4, 5], [5, 2, 10]);
       return expect(result).toEqual([1, 3, 4]);
     });
-    return describe('_.lastIndexOf', function() {
+    describe('_.lastIndexOf', function() {
       return it('should return the index of the last occurrence of value in the array, or -1 if value is not present', function() {
         var result;
         result = _.lastIndexOf([1, 2, 3, 1, 2, 3], 2);
         return expect(result).toEqual(4);
+      });
+    });
+    return describe('_.sortedIndex', function() {
+      it('should determine where a given value will be inserted in a sorted list', function() {
+        var result;
+        result = _.sortedIndex([10, 20, 30, 40, 50], 35);
+        return expect(result).toEqual(3);
+      });
+      it('should determine where a given object will be inserted in a sorted list', function() {
+        var result, stooges;
+        stooges = [
+          {
+            name: 'moe',
+            age: 40
+          }, {
+            name: 'curly',
+            age: 60
+          }
+        ];
+        result = _.sortedIndex(stooges, {
+          name: 'larry',
+          age: 50
+        }, 'age');
+        return expect(result).toEqual(1);
+      });
+      return it('should accept an optional callback which transforms', function() {
+        var iteratee, result;
+        iteratee = function(num) {
+          if (num % 2 === 0) {
+            return num + 10;
+          } else {
+            return num;
+          }
+        };
+        window.iteratee = iteratee;
+        result = _.sortedIndex([10, 20, 30, 40, 50], 35, iteratee);
+        return expect(result).toEqual(2);
       });
     });
   });
