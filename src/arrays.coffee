@@ -98,3 +98,8 @@ _.sortedIndex = (array, value, iteratee) ->
   value = _.transform(value, iteratee)
   _.first _.compact _.map array, (item, index) ->
     if _.transform(item, iteratee) >= value then return index
+
+_.range = (start, stop, step = 1) ->
+  stop = stop or start
+  if start is stop then start = 0
+  (i for i in [start...stop] by step)

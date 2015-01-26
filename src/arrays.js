@@ -214,4 +214,20 @@
     })));
   };
 
+  _.range = function(start, stop, step) {
+    var i, _i, _results;
+    if (step == null) {
+      step = 1;
+    }
+    stop = stop || start;
+    if (start === stop) {
+      start = 0;
+    }
+    _results = [];
+    for (i = _i = start; step > 0 ? _i < stop : _i > stop; i = _i += step) {
+      _results.push(i);
+    }
+    return _results;
+  };
+
 }).call(this);
