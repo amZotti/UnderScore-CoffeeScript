@@ -70,10 +70,8 @@ _.object = (arrays...) ->
   result
 
 _.indexOf = (array, value) ->
-  result = []
-  _.each array, (item, index) ->
-    if item is value then result.push index
-  result[0] or -1
+  (_.first _.compact _.map array, (item, index) ->
+    if item is value then return index) or -1
 
 _.intersection = (arrays...) ->
   _.compact _.map arrays[0], (item) ->
@@ -83,3 +81,8 @@ _.difference = (array, others...) ->
   others = _.flatten(others)
   _.reject array, (value) ->
     value in others
+
+_.lastIndexOf = (array, value, fromIndex = 0) ->
+  (_.last _.compact _.map array, (item, index) ->
+    if fromIndex <= index and item is value then return index) or -1
+

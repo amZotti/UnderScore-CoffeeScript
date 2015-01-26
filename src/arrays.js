@@ -156,14 +156,11 @@
   };
 
   _.indexOf = function(array, value) {
-    var result;
-    result = [];
-    _.each(array, function(item, index) {
+    return (_.first(_.compact(_.map(array, function(item, index) {
       if (item === value) {
-        return result.push(index);
+        return index;
       }
-    });
-    return result[0] || -1;
+    })))) || -1;
   };
 
   _.intersection = function() {
@@ -179,14 +176,23 @@
   };
 
   _.difference = function() {
-    var array, others, result;
+    var array, others;
     array = arguments[0], others = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
     others = _.flatten(others);
-    result = _.reject(array, function(value) {
+    return _.reject(array, function(value) {
       return __indexOf.call(others, value) >= 0;
     });
-    log(result);
-    return result;
+  };
+
+  _.lastIndexOf = function(array, value, fromIndex) {
+    if (fromIndex == null) {
+      fromIndex = 0;
+    }
+    return (_.last(_.compact(_.map(array, function(item, index) {
+      if (fromIndex <= index && item === value) {
+        return index;
+      }
+    })))) || -1;
   };
 
 }).call(this);
