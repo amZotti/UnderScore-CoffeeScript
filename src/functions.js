@@ -53,4 +53,12 @@
     };
   };
 
+  _.delay = function() {
+    var args, fn, wait;
+    fn = arguments[0], wait = arguments[1], args = 3 <= arguments.length ? __slice.call(arguments, 2) : [];
+    return setTimeout((function() {
+      return fn.apply(fn, args);
+    }), wait);
+  };
+
 }).call(this);

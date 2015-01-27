@@ -22,3 +22,6 @@ _.memoize = (fn) ->
   cache = {}
   return (args...) ->
     cache[args[0]] or cache[args[0]] = fn.apply(this, args)
+
+_.delay = (fn, wait, args...) ->
+  setTimeout((-> fn.apply(fn, args)), wait)
