@@ -105,4 +105,17 @@
     };
   };
 
+  _.once = function(fn) {
+    var called;
+    called = false;
+    return function() {
+      var args;
+      args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+      if (!called) {
+        called = true;
+        return fn.apply(fn, args);
+      }
+    };
+  };
+
 }).call(this);

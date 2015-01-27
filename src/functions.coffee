@@ -48,3 +48,12 @@ _.debounce = (fn, wait) ->
     else
       clearTimeout(id)
       id = _.delay((-> blocking = false), wait)
+
+_.once = (fn) ->
+  called = false
+  (args...) ->
+    unless called
+      called = true
+      fn.apply(fn, args)
+
+
