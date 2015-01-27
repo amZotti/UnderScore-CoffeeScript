@@ -69,7 +69,7 @@
       });
     });
     describe('_.memoize', function() {
-      it('should return a new working function', function() {
+      it('should return a new working version of the function', function() {
         var add, result;
         add = function(a, b) {
           return a + b;
@@ -87,13 +87,23 @@
         return expect(result).toEqual(fn());
       });
     });
-    return describe('_.once', function() {
-      return it('should return a function that only executes once', function() {
+    describe('_.once', function() {
+      return it('should return a version of the function that only executes once', function() {
         var fn;
         fn = _.once(function() {
           return Math.random();
         });
         return expect(fn()).not.toEqual(fn());
+      });
+    });
+    return describe('_.after', function() {
+      return it('should return a version of the function that only execute once it is called count times', function() {
+        var fn;
+        fn = _.after(2, (function() {
+          return "works";
+        }));
+        expect(fn()).toEqual(void 0);
+        return expect(fn()).toEqual("works");
       });
     });
   });

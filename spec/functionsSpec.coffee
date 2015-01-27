@@ -39,7 +39,7 @@ describe 'functions', ->
       expect(result).toEqual(15)
 
   describe '_.memoize', ->
-    it 'should return a new working function', ->
+    it 'should return a new working version of the function', ->
       add = (a, b) -> a + b
       add = _.memoize(add)
       result = add(1,5)
@@ -51,6 +51,12 @@ describe 'functions', ->
       expect(result).toEqual(fn())
 
   describe '_.once', ->
-    it 'should return a function that only executes once', ->
+    it 'should return a version of the function that only executes once', ->
       fn = _.once(-> Math.random())
       expect(fn()).not.toEqual(fn())
+
+  describe '_.after', ->
+    it 'should return a version of the function that only execute once it is called count times', ->
+      fn = _.after(2, (-> "works"))
+      expect(fn()).toEqual(undefined)
+      expect(fn()).toEqual("works")
