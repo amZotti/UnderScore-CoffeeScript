@@ -56,4 +56,8 @@ _.once = (fn) ->
       called = true
       fn.apply(fn, args)
 
+_.after = (count, fn) ->
+  (args...) ->
+    if --count < 1
+      fn.apply(fn, args)
 

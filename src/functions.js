@@ -118,4 +118,14 @@
     };
   };
 
+  _.after = function(count, fn) {
+    return function() {
+      var args;
+      args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+      if (--count < 1) {
+        return fn.apply(fn, args);
+      }
+    };
+  };
+
 }).call(this);
