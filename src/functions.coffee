@@ -17,3 +17,8 @@ _.partial = (fn, partial...) ->
   return (full...) ->
     args = fillInArguments(partial, full)
     fn.apply(this, args)
+
+_.memoize = (fn) ->
+  cache = {}
+  return (args...) ->
+    cache[args[0]] or cache[args[0]] = fn.apply(this, args)

@@ -43,4 +43,14 @@
     };
   };
 
+  _.memoize = function(fn) {
+    var cache;
+    cache = {};
+    return function() {
+      var args;
+      args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+      return cache[args[0]] || (cache[args[0]] = fn.apply(this, args));
+    };
+  };
+
 }).call(this);
