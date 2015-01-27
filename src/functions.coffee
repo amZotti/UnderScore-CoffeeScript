@@ -29,3 +29,11 @@ _.delay = (fn, wait, args...) ->
 _.defer = (fn, args...) ->
   _.delay(fn, 1, args)
 
+_.thorttle = (fn, wait) ->
+  blocking = false
+  block = ->
+  (args...) ->
+    unless blocking
+      fn.apply(fn, args)
+      blocking = true
+      _.delay((-> blocking = false), wait)

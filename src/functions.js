@@ -61,8 +61,27 @@
     }), wait);
   };
 
-  _.defer = function(fn, args) {
+  _.defer = function() {
+    var args, fn;
+    fn = arguments[0], args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
     return _.delay(fn, 1, args);
+  };
+
+  _.thorttle = function(fn, wait) {
+    var block, blocking;
+    blocking = false;
+    block = function() {};
+    return function() {
+      var args;
+      args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+      if (!blocking) {
+        fn.apply(fn, args);
+        blocking = true;
+        return _.delay((function() {
+          return blocking = false;
+        }), wait);
+      }
+    };
   };
 
 }).call(this);
