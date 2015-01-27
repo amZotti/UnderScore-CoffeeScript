@@ -25,3 +25,7 @@ _.memoize = (fn) ->
 
 _.delay = (fn, wait, args...) ->
   setTimeout((-> fn.apply(fn, args)), wait)
+
+_.defer = (fn, args...) ->
+  _.delay(fn, 1, args)
+

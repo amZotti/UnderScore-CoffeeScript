@@ -68,7 +68,7 @@
         return expect(result).toEqual(15);
       });
     });
-    return describe('memoize', function() {
+    return describe('_.memoize', function() {
       it('should return a new working function', function() {
         var add, result;
         add = function(a, b) {

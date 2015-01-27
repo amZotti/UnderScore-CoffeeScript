@@ -61,4 +61,8 @@
     }), wait);
   };
 
+  _.defer = function(fn, args) {
+    return _.delay(fn, 1, args);
+  };
+
 }).call(this);

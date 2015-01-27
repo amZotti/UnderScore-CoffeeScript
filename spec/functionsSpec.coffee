@@ -38,7 +38,7 @@ describe 'functions', ->
       result = add5(10)
       expect(result).toEqual(15)
 
-  describe 'memoize', ->
+  describe '_.memoize', ->
     it 'should return a new working function', ->
       add = (a, b) -> a + b
       add = _.memoize(add)
