@@ -38,3 +38,14 @@ describe 'functions', ->
       result = add5(10)
       expect(result).toEqual(15)
 
+  describe 'memoize', ->
+    it 'should return a new working function', ->
+      add = (a, b) -> a + b
+      add = _.memoize(add)
+      result = add(1,5)
+      expect(result).toEqual(6)
+
+    it 'should cache the results of a function call and return the cached results when the same arguments are inputted', ->
+      fn = _.memoize(-> Math.random())
+      result = fn()
+      expect(result).toEqual(fn())

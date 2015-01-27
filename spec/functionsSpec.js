@@ -48,7 +48,7 @@
         return expect(buttonView.onClick()).toEqual("Clicked on underscore");
       });
     });
-    return describe('_.partial', function() {
+    describe('_.partial', function() {
       it('should prime functions with argument prior to their invocation', function() {
         var add, add5, result;
         add = function(a, b) {
@@ -66,6 +66,25 @@
         add5 = _.partial(add, '_', 5);
         result = add5(10);
         return expect(result).toEqual(15);
+      });
+    });
+    return describe('memoize', function() {
+      it('should return a new working function', function() {
+        var add, result;
+        add = function(a, b) {
+          return a + b;
+        };
+        add = _.memoize(add);
+        result = add(1, 5);
+        return expect(result).toEqual(6);
+      });
+      return it('should cache the results of a function call and return the cached results when the same arguments are inputted', function() {
+        var fn, result;
+        fn = _.memoize(function() {
+          return Math.random();
+        });
+        result = fn();
+        return expect(result).toEqual(fn());
       });
     });
   });
