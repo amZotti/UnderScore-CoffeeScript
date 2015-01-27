@@ -31,9 +31,20 @@ _.defer = (fn, args...) ->
 
 _.thorttle = (fn, wait) ->
   blocking = false
-  block = ->
   (args...) ->
     unless blocking
       fn.apply(fn, args)
       blocking = true
       _.delay((-> blocking = false), wait)
+
+_.debounce = (fn, wait) ->
+  blocking = false
+  id = undefined
+  (args...) ->
+    unless blocking
+      fn.apply(fn, args)
+      blocking = true
+      id = _.delay((-> blocking = false), wait)
+    else
+      clearTimeout(id)
+      id = _.delay((-> blocking = false), wait)

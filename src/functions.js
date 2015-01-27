@@ -68,9 +68,8 @@
   };
 
   _.thorttle = function(fn, wait) {
-    var block, blocking;
+    var blocking;
     blocking = false;
-    block = function() {};
     return function() {
       var args;
       args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
@@ -78,6 +77,28 @@
         fn.apply(fn, args);
         blocking = true;
         return _.delay((function() {
+          return blocking = false;
+        }), wait);
+      }
+    };
+  };
+
+  _.debounce = function(fn, wait) {
+    var blocking, id;
+    blocking = false;
+    id = void 0;
+    return function() {
+      var args;
+      args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+      if (!blocking) {
+        fn.apply(fn, args);
+        blocking = true;
+        return id = _.delay((function() {
+          return blocking = false;
+        }), wait);
+      } else {
+        clearTimeout(id);
+        return id = _.delay((function() {
           return blocking = false;
         }), wait);
       }
