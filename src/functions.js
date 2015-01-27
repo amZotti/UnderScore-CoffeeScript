@@ -13,4 +13,13 @@
     };
   };
 
+  _.bindAll = function() {
+    var functions, object;
+    object = arguments[0], functions = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
+    _.each(functions, function(fn) {
+      return _.bind(fn, object);
+    });
+    return object;
+  };
+
 }).call(this);
