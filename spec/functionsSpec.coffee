@@ -15,4 +15,12 @@ describe 'functions', ->
       result = _.bind(fn, {}, 1, 2)
       expect(result(1)).toEqual(4)
 
-
+  describe '_.bindAll', ->
+    it 'should bind multiple functions to an object at once', ->
+      buttonView =
+        label  : 'underscore'
+        onClick: -> "Clicked on #{@label}"
+        onHover: -> "Hovered on #{@label}"
+      _.bindAll(buttonView, 'onClick', 'onHover')
+      expect(buttonView.onHover()).toEqual("Hovered on underscore")
+      expect(buttonView.onClick()).toEqual("Clicked on underscore")
