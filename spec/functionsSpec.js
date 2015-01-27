@@ -31,7 +31,7 @@
         return expect(result(1)).toEqual(4);
       });
     });
-    return describe('_.bindAll', function() {
+    describe('_.bindAll', function() {
       return it('should bind multiple functions to an object at once', function() {
         var buttonView;
         buttonView = {
@@ -46,6 +46,26 @@
         _.bindAll(buttonView, 'onClick', 'onHover');
         expect(buttonView.onHover()).toEqual("Hovered on underscore");
         return expect(buttonView.onClick()).toEqual("Clicked on underscore");
+      });
+    });
+    return describe('_.partial', function() {
+      it('should prime functions with argument prior to their invocation', function() {
+        var add, add5, result;
+        add = function(a, b) {
+          return a + b;
+        };
+        add5 = _.partial(add, 5);
+        result = add5(10);
+        return expect(result).toEqual(15);
+      });
+      return it('should accept \'_\' as an argument to denote an argument which should be filled at execution time', function() {
+        var add, add5, result;
+        add = function(a, b) {
+          return a + b;
+        };
+        add5 = _.partial(add, '_', 5);
+        result = add5(10);
+        return expect(result).toEqual(15);
       });
     });
   });

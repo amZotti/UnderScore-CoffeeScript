@@ -24,3 +24,17 @@ describe 'functions', ->
       _.bindAll(buttonView, 'onClick', 'onHover')
       expect(buttonView.onHover()).toEqual("Hovered on underscore")
       expect(buttonView.onClick()).toEqual("Clicked on underscore")
+
+  describe '_.partial', ->
+    it 'should prime functions with argument prior to their invocation', ->
+      add = (a, b) -> a + b
+      add5 = _.partial(add, 5)
+      result = add5(10)
+      expect(result).toEqual(15)
+
+    it 'should accept \'_\' as an argument to denote an argument which should be filled at execution time', ->
+      add = (a, b) -> a + b
+      add5 = _.partial(add, '_', 5)
+      result = add5(10)
+      expect(result).toEqual(15)
+
