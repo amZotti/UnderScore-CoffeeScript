@@ -49,3 +49,8 @@ describe 'functions', ->
       fn = _.memoize(-> Math.random())
       result = fn()
       expect(result).toEqual(fn())
+
+  describe '_.once', ->
+    it 'should return a function that only executes once', ->
+      fn = _.once(-> Math.random())
+      expect(fn()).not.toEqual(fn())

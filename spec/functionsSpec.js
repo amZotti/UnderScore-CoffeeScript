@@ -68,7 +68,7 @@
         return expect(result).toEqual(15);
       });
     });
-    return describe('_.memoize', function() {
+    describe('_.memoize', function() {
       it('should return a new working function', function() {
         var add, result;
         add = function(a, b) {
@@ -85,6 +85,15 @@
         });
         result = fn();
         return expect(result).toEqual(fn());
+      });
+    });
+    return describe('_.once', function() {
+      return it('should return a function that only executes once', function() {
+        var fn;
+        fn = _.once(function() {
+          return Math.random();
+        });
+        return expect(fn()).not.toEqual(fn());
       });
     });
   });
