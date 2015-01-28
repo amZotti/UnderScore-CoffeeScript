@@ -15,6 +15,11 @@ describe 'objects', ->
       expect(results).toEqual([["one", 1], ["two", 2], ["three", 3]])
 
   describe '_.invert', ->
-    it 'should return a copy of the object where the keys and values have been swapped', ->
+    it 'should return an object where the keys and values have been swapped', ->
       results = _.invert({Moe: "Moses", Larry: "Louis", Curly: "Jerome"})
       expect(results).toEqual({Moses: "Moe", Louis: "Larry", Jerome: "Curly"})
+
+  describe '_.functions', ->
+    it 'should return a sorted list of the names of every method in an object', ->
+      results = _.functions(_)
+      expect(results.length).not.toEqual(0)

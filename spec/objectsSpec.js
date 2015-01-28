@@ -34,8 +34,8 @@
         return expect(results).toEqual([["one", 1], ["two", 2], ["three", 3]]);
       });
     });
-    return describe('_.invert', function() {
-      return it('should return a copy of the object where the keys and values have been swapped', function() {
+    describe('_.invert', function() {
+      return it('should return an object where the keys and values have been swapped', function() {
         var results;
         results = _.invert({
           Moe: "Moses",
@@ -47,6 +47,13 @@
           Louis: "Larry",
           Jerome: "Curly"
         });
+      });
+    });
+    return describe('_.functions', function() {
+      return it('should return a sorted list of the names of every method in an object', function() {
+        var results;
+        results = _.functions(_);
+        return expect(results.length).not.toEqual(0);
       });
     });
   });
