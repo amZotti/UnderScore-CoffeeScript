@@ -77,3 +77,11 @@ describe 'objects', ->
     it 'should return false if passed primitive value', ->
       result = _.isObject(2)
       expect(result).toBe(false)
+
+    it 'should return true if object is an Arguments object', ->
+      result = _.isArgument(((a, b, c)-> arguments)(1, 2, 3))
+      expect(result).toBe(true)
+    
+    it 'should return false if object is not an Arguments object', ->
+      result = _.isArgument([1, 2, 3])
+      expect(result).toBe(false)

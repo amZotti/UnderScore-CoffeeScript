@@ -145,9 +145,21 @@
         });
         return expect(result).toBe(true);
       });
-      return it('should return false if passed primitive value', function() {
+      it('should return false if passed primitive value', function() {
         var result;
         result = _.isObject(2);
+        return expect(result).toBe(false);
+      });
+      it('should return true if object is an Arguments object', function() {
+        var result;
+        result = _.isArgument((function(a, b, c) {
+          return arguments;
+        })(1, 2, 3));
+        return expect(result).toBe(true);
+      });
+      return it('should return false if object is not an Arguments object', function() {
+        var result;
+        result = _.isArgument([1, 2, 3]);
         return expect(result).toBe(false);
       });
     });
