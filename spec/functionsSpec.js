@@ -129,12 +129,25 @@
         return expect(hello()).toEqual("before, hello: moe, after");
       });
     });
-    return describe('_.negate', function() {
+    describe('_.negate', function() {
       return it('should return a new negated version of the predicate function', function() {
         var isFalsy, result;
         isFalsy = _.negate(Boolean);
         result = _.find([-2, -1, 0, 1, 2], isFalsy);
         return expect(result).toEqual(0);
+      });
+    });
+    return describe('_.compose', function() {
+      return it('should return a composition of all the functions passed in. Each function consumes the return value of the last', function() {
+        var exclaim, greet, result;
+        greet = function(name) {
+          return "hi " + name;
+        };
+        exclaim = function(message) {
+          return message.toUpperCase();
+        };
+        result = _.compose(greet, exclaim)('tony');
+        return expect(result).toEqual('HI TONY');
       });
     });
   });

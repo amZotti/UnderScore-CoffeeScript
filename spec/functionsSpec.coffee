@@ -79,3 +79,10 @@ describe 'functions', ->
       isFalsy = _.negate(Boolean)
       result = _.find([-2, -1, 0, 1, 2], isFalsy)
       expect(result).toEqual(0)
+
+  describe '_.compose', ->
+    it 'should return a composition of all the functions passed in. Each function consumes the return value of the last', ->
+      greet = (name) -> "hi #{name}"
+      exclaim = (message) -> message.toUpperCase()
+      result = _.compose(greet, exclaim)('tony')
+      expect(result).toEqual('HI TONY')
