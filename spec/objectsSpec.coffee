@@ -52,3 +52,11 @@ describe 'objects', ->
       expect(_.isElement([])).toBe(false)
       expect(_.isElement(32)).toBe(false)
       expect(_.isElement({})).toBe(false)
+
+  describe '_.isArray', ->
+    it 'should return false if object is not an Array', ->
+      results = (-> _.isArray arguments)()
+      expect(results).toBe(false)
+
+    it 'should return true if object is an Array', ->
+      expect(_.isArray([1, 2, 3])).toBe(true)

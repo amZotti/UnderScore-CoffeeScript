@@ -102,7 +102,7 @@
         });
       });
     });
-    return describe('_.isElement', function() {
+    describe('_.isElement', function() {
       it('should return true if object is a DOM element', function() {
         var results;
         results = _.isElement(document.getElementsByTagName('body')[0]);
@@ -113,6 +113,18 @@
         expect(_.isElement([])).toBe(false);
         expect(_.isElement(32)).toBe(false);
         return expect(_.isElement({})).toBe(false);
+      });
+    });
+    return describe('_.isArray', function() {
+      it('should return false if object is not an Array', function() {
+        var results;
+        results = (function() {
+          return _.isArray(arguments);
+        })();
+        return expect(results).toBe(false);
+      });
+      return it('should return true if object is an Array', function() {
+        return expect(_.isArray([1, 2, 3])).toBe(true);
       });
     });
   });
