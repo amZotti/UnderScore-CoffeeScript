@@ -129,15 +129,25 @@
   };
 
   _.before = function(count, fn) {
-    result;
+    var result;
+    result = void 0;
     return function() {
-      var args, result;
+      var args;
       args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
       if (0 < --count) {
         return result = fn.apply(fn, args);
       } else {
         return result;
       }
+    };
+  };
+
+  _.wrap = function(fn, wrapper) {
+    return function() {
+      var args;
+      args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+      args.unshift(fn);
+      return wrapper.apply(wrapper, args);
     };
   };
 

@@ -69,3 +69,7 @@ _.before = (count, fn) ->
     else
       result
 
+_.wrap = (fn, wrapper) ->
+  (args...) -> 
+    args.unshift(fn)
+    wrapper.apply(wrapper, args)
