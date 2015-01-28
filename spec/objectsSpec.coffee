@@ -13,3 +13,8 @@ describe 'objects', ->
     it 'should convert an object into a list of [key, value] pairs', ->
       results = _.pairs({one: 1, two: 2, three: 3})
       expect(results).toEqual([["one", 1], ["two", 2], ["three", 3]])
+
+  describe '_.invert', ->
+    it 'should return a copy of the object where the keys and values have been swapped', ->
+      results = _.invert({Moe: "Moses", Larry: "Louis", Curly: "Jerome"})
+      expect(results).toEqual({Moses: "Moe", Louis: "Larry", Jerome: "Curly"})
