@@ -22,3 +22,14 @@ _.extend = (destination, sources...) ->
     _.each obj, (value, key) ->
       destination[key] = value
   destination
+
+_.isFunction = (object) ->
+  typeof object is 'function'
+
+_.pick = (obj, keys...) ->
+  fn = keys[0]
+  result = {}
+  _.each obj, (value, key) ->
+    if _.isFunction(fn) and fn(value) or key in keys
+      result[key] = value
+  result
