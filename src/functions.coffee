@@ -73,3 +73,7 @@ _.wrap = (fn, wrapper) ->
   (args...) -> 
     args.unshift(fn)
     wrapper.apply(wrapper, args)
+
+_.negate = (predicate) ->
+  (args...) ->
+    not predicate.apply(predicate, args)

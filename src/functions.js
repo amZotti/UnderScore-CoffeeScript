@@ -151,4 +151,12 @@
     };
   };
 
+  _.negate = function(predicate) {
+    return function() {
+      var args;
+      args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+      return !predicate.apply(predicate, args);
+    };
+  };
+
 }).call(this);
