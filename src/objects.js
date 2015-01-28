@@ -18,4 +18,12 @@
     });
   };
 
+  _.invert = function(obj) {
+    _.each(obj, function(value, key) {
+      obj[value] = key;
+      return delete obj[key];
+    });
+    return obj;
+  };
+
 }).call(this);

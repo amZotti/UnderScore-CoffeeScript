@@ -6,3 +6,9 @@ _.values = (obj) ->
 
 _.pairs = (obj) ->
   _.map obj, (value, key) -> [key, value]
+
+_.invert = (obj) ->
+  _.each obj, (value, key) ->
+    obj[value] = key
+    delete obj[key]
+  obj
