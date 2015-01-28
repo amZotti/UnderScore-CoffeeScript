@@ -159,4 +159,17 @@
     };
   };
 
+  _.compose = function() {
+    var functions;
+    functions = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+    return function() {
+      var args;
+      args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+      _.each(functions, function(fn) {
+        return args = [fn.apply(fn, args)];
+      });
+      return args[0];
+    };
+  };
+
 }).call(this);

@@ -77,3 +77,9 @@ _.wrap = (fn, wrapper) ->
 _.negate = (predicate) ->
   (args...) ->
     not predicate.apply(predicate, args)
+
+_.compose = (functions...) ->
+  (args...) ->
+    _.each functions, (fn) ->
+      args = [fn.apply(fn, args)]
+    args[0]
