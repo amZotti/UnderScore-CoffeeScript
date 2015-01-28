@@ -42,3 +42,13 @@ describe 'objects', ->
       result = _.pick({name: 'moe', age: 50, userid: 'moe1'}, (value, key, object) -> typeof value is 'number')
       expect(result).toEqual({age: 50})
 
+  describe '_.isElement', ->
+    it 'should return true if object is a DOM element', ->
+      results = _.isElement(document.getElementsByTagName('body')[0])
+      expect(results).toBe(true)
+
+    it 'should return false if not DOM node', ->
+      expect(_.isElement('test')).toBe(false)
+      expect(_.isElement([])).toBe(false)
+      expect(_.isElement(32)).toBe(false)
+      expect(_.isElement({})).toBe(false)

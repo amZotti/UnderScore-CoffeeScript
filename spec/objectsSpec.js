@@ -75,7 +75,7 @@
         return expect(_.isFunction(alert)).toBe(true);
       });
     });
-    return describe('_.pick', function() {
+    describe('_.pick', function() {
       it('should return a copy of the object, filtered to only have values for the whitelisted keys', function() {
         var result;
         result = _.pick({
@@ -100,6 +100,19 @@
         return expect(result).toEqual({
           age: 50
         });
+      });
+    });
+    return describe('_.isElement', function() {
+      it('should return true if object is a DOM element', function() {
+        var results;
+        results = _.isElement(document.getElementsByTagName('body')[0]);
+        return expect(results).toBe(true);
+      });
+      return it('should return false if not DOM node', function() {
+        expect(_.isElement('test')).toBe(false);
+        expect(_.isElement([])).toBe(false);
+        expect(_.isElement(32)).toBe(false);
+        return expect(_.isElement({})).toBe(false);
       });
     });
   });
