@@ -115,7 +115,7 @@
         return expect(_.isElement({})).toBe(false);
       });
     });
-    return describe('_.isArray', function() {
+    describe('_.isArray', function() {
       it('should return false if object is not an Array', function() {
         var results;
         results = (function() {
@@ -125,6 +125,30 @@
       });
       return it('should return true if object is an Array', function() {
         return expect(_.isArray([1, 2, 3])).toBe(true);
+      });
+    });
+    return describe('_.isObject', function() {
+      it('should return true if passed a function', function() {
+        var result;
+        result = _.isObject(function() {});
+        return expect(result).toBe(true);
+      });
+      it('should return true if passed an array', function() {
+        var result;
+        result = _.isObject([1, 2, 3]);
+        return expect(result).toBe(true);
+      });
+      it('should return true if passed an object', function() {
+        var result;
+        result = _.isObject({
+          a: 1
+        });
+        return expect(result).toBe(true);
+      });
+      return it('should return false if passed primitive value', function() {
+        var result;
+        result = _.isObject(2);
+        return expect(result).toBe(false);
       });
     });
   });

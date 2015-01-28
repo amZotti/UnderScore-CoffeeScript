@@ -28,7 +28,7 @@ describe 'objects', ->
     it 'should copy all of the properties in the source objects over to the destination object', ->
       results = _.extend({name: 'moe'}, {age: 50})
       expect(results).toEqual({name: 'moe', age: 50})
-  
+
   describe '_.isFunction', ->
     it 'should return true if object is a function', ->
       expect(_.isFunction(alert)).toBe(true)
@@ -60,3 +60,20 @@ describe 'objects', ->
 
     it 'should return true if object is an Array', ->
       expect(_.isArray([1, 2, 3])).toBe(true)
+
+  describe '_.isObject', ->
+    it 'should return true if passed a function', ->
+      result = _.isObject(->)
+      expect(result).toBe(true)
+
+    it 'should return true if passed an array', ->
+      result = _.isObject([1, 2, 3])
+      expect(result).toBe(true)
+
+    it 'should return true if passed an object', ->
+      result = _.isObject({a: 1})
+      expect(result).toBe(true)
+
+    it 'should return false if passed primitive value', ->
+      result = _.isObject(2)
+      expect(result).toBe(false)
