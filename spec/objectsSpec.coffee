@@ -28,3 +28,17 @@ describe 'objects', ->
     it 'should copy all of the properties in the source objects over to the destination object', ->
       results = _.extend({name: 'moe'}, {age: 50})
       expect(results).toEqual({name: 'moe', age: 50})
+  
+  describe '_.isFunction', ->
+    it 'should return true if object is a function', ->
+      expect(_.isFunction(alert)).toBe(true)
+
+  describe '_.pick', ->
+    it 'should return a copy of the object, filtered to only have values for the whitelisted keys', ->
+      result= _.pick({name: 'moe', age: 50, userid: 'moe1'}, 'name', 'age')
+      expect(result).toEqual({name: 'moe', age: 50})
+
+    it 'should return a copy of the object, filtered to only have values which pass the predicate', ->
+      result = _.pick({name: 'moe', age: 50, userid: 'moe1'}, (value, key, object) -> typeof value is 'number')
+      expect(result).toEqual({age: 50})
+

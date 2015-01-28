@@ -56,7 +56,7 @@
         return expect(results.length).not.toEqual(0);
       });
     });
-    return describe('_.extend', function() {
+    describe('_.extend', function() {
       return it('should copy all of the properties in the source objects over to the destination object', function() {
         var results;
         results = _.extend({
@@ -66,6 +66,38 @@
         });
         return expect(results).toEqual({
           name: 'moe',
+          age: 50
+        });
+      });
+    });
+    describe('_.isFunction', function() {
+      return it('should return true if object is a function', function() {
+        return expect(_.isFunction(alert)).toBe(true);
+      });
+    });
+    return describe('_.pick', function() {
+      it('should return a copy of the object, filtered to only have values for the whitelisted keys', function() {
+        var result;
+        result = _.pick({
+          name: 'moe',
+          age: 50,
+          userid: 'moe1'
+        }, 'name', 'age');
+        return expect(result).toEqual({
+          name: 'moe',
+          age: 50
+        });
+      });
+      return it('should return a copy of the object, filtered to only have values which pass the predicate', function() {
+        var result;
+        result = _.pick({
+          name: 'moe',
+          age: 50,
+          userid: 'moe1'
+        }, function(value, key, object) {
+          return typeof value === 'number';
+        });
+        return expect(result).toEqual({
           age: 50
         });
       });
