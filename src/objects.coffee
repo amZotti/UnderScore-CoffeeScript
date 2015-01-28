@@ -39,3 +39,6 @@ _.isElement = (obj) ->
 
 _.isArray = (obj) ->
   Array.isArray(obj)
+
+_.isObject = (value) ->
+  typeof value is 'function' or typeof value is 'object'

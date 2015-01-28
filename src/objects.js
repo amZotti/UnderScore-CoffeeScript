@@ -73,4 +73,8 @@
     return Array.isArray(obj);
   };
 
+  _.isObject = function(value) {
+    return typeof value === 'function' || typeof value === 'object';
+  };
+
 }).call(this);
