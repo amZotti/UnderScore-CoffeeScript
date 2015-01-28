@@ -13,7 +13,7 @@ _.invert = (obj) ->
     delete obj[key]
   obj
 
-_.functions = (obj) ->
+_.functions = _.methods = (obj) ->
   _.compact _.map obj, (value, key) ->
     if typeof value is 'function' then key
 
@@ -33,3 +33,6 @@ _.pick = (obj, keys...) ->
     if _.isFunction(fn) and fn(value) or key in keys
       result[key] = value
   result
+
+_.isElement = (obj) -> 
+  not not (obj and obj.nodeType is 1)

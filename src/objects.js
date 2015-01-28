@@ -29,7 +29,7 @@
     return obj;
   };
 
-  _.functions = function(obj) {
+  _.functions = _.methods = function(obj) {
     return _.compact(_.map(obj, function(value, key) {
       if (typeof value === 'function') {
         return key;
@@ -48,8 +48,8 @@
     return destination;
   };
 
-  _.isFunction = function(value) {
-    return typeof value === 'function';
+  _.isFunction = function(object) {
+    return typeof object === 'function';
   };
 
   _.pick = function() {
@@ -63,6 +63,10 @@
       }
     });
     return result;
+  };
+
+  _.isElement = function(obj) {
+    return !!(obj && obj.nodeType === 1);
   };
 
 }).call(this);
