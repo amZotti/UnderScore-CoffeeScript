@@ -128,4 +128,17 @@
     };
   };
 
+  _.before = function(count, fn) {
+    result;
+    return function() {
+      var args, result;
+      args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+      if (0 < --count) {
+        return result = fn.apply(fn, args);
+      } else {
+        return result;
+      }
+    };
+  };
+
 }).call(this);

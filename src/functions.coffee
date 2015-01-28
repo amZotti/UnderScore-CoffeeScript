@@ -61,3 +61,11 @@ _.after = (count, fn) ->
     if --count < 1
       fn.apply(fn, args)
 
+_.before = (count, fn) ->
+  result = undefined
+  (args...) ->
+    if 0 < --count
+      result = fn.apply(fn, args)
+    else
+      result
+
