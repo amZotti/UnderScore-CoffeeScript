@@ -96,7 +96,7 @@
         return expect(fn()).not.toEqual(fn());
       });
     });
-    return describe('_.after', function() {
+    describe('_.after', function() {
       return it('should return a version of the function that only execute once it is called count times', function() {
         var fn;
         fn = _.after(2, (function() {
@@ -104,6 +104,17 @@
         }));
         expect(fn()).toEqual(void 0);
         return expect(fn()).toEqual("works");
+      });
+    });
+    return describe('_.before', function() {
+      return it('should return a version of the function that is only callable count times. After count calls it should return the value of the last successful call', function() {
+        var fn;
+        fn = _.before(3, (function(input) {
+          return input;
+        }));
+        expect(fn("works")).toEqual("works");
+        expect(fn("does not work")).toEqual("does not work");
+        return expect(fn("works")).toEqual("does not work");
       });
     });
   });

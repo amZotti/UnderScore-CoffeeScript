@@ -60,3 +60,11 @@ describe 'functions', ->
       fn = _.after(2, (-> "works"))
       expect(fn()).toEqual(undefined)
       expect(fn()).toEqual("works")
+
+  describe '_.before', ->
+    it 'should return a version of the function that is only callable count times. After count calls it should return the value of the last successful call', ->
+      fn = _.before(3, ((input) -> input))
+      expect(fn("works")).toEqual("works")
+      expect(fn("does not work")).toEqual("does not work")
+      expect(fn("works")).toEqual("does not work")
+      
