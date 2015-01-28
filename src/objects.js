@@ -69,4 +69,8 @@
     return !!(obj && obj.nodeType === 1);
   };
 
+  _.isArray = function(obj) {
+    return Array.isArray(obj);
+  };
+
 }).call(this);

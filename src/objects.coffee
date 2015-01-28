@@ -36,3 +36,6 @@ _.pick = (obj, keys...) ->
 
 _.isElement = (obj) -> 
   not not (obj and obj.nodeType is 1)
+
+_.isArray = (obj) ->
+  Array.isArray(obj)
