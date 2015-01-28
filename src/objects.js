@@ -77,4 +77,8 @@
     return typeof value === 'function' || typeof value === 'object';
   };
 
+  _.isArgument = function(obj) {
+    return obj.toString() === "[object Arguments]";
+  };
+
 }).call(this);

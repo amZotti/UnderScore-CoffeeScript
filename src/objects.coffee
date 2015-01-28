@@ -42,3 +42,6 @@ _.isArray = (obj) ->
 
 _.isObject = (value) ->
   typeof value is 'function' or typeof value is 'object'
+
+_.isArgument = (obj) ->
+  obj.toString() is "[object Arguments]"
