@@ -73,3 +73,9 @@ describe 'functions', ->
       hello = (name) -> "hello: #{name}"
       hello = _.wrap(hello, (func) -> "before, #{func('moe')}, after")
       expect(hello()).toEqual("before, hello: moe, after")
+
+  describe '_.negate', ->
+    it 'should return a new negated version of the predicate function', ->
+      isFalsy = _.negate(Boolean)
+      result = _.find([-2, -1, 0, 1, 2], isFalsy)
+      expect(result).toEqual(0)

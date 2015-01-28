@@ -117,7 +117,7 @@
         return expect(fn("works")).toEqual("does not work");
       });
     });
-    return describe('_.wrap', function() {
+    describe('_.wrap', function() {
       return it('should return a version of the function which has a wrapper applied to it. This allows the wrapper to execute code before and after the function runs, adjust the arguments, and execute it conditionally.', function() {
         var hello;
         hello = function(name) {
@@ -127,6 +127,14 @@
           return "before, " + (func('moe')) + ", after";
         });
         return expect(hello()).toEqual("before, hello: moe, after");
+      });
+    });
+    return describe('_.negate', function() {
+      return it('should return a new negated version of the predicate function', function() {
+        var isFalsy, result;
+        isFalsy = _.negate(Boolean);
+        result = _.find([-2, -1, 0, 1, 2], isFalsy);
+        return expect(result).toEqual(0);
       });
     });
   });
