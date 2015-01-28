@@ -106,7 +106,7 @@
         return expect(fn()).toEqual("works");
       });
     });
-    return describe('_.before', function() {
+    describe('_.before', function() {
       return it('should return a version of the function that is only callable count times. After count calls it should return the value of the last successful call', function() {
         var fn;
         fn = _.before(3, (function(input) {
@@ -115,6 +115,18 @@
         expect(fn("works")).toEqual("works");
         expect(fn("does not work")).toEqual("does not work");
         return expect(fn("works")).toEqual("does not work");
+      });
+    });
+    return describe('_.wrap', function() {
+      return it('should return a version of the function which has a wrapper applied to it. This allows the wrapper to execute code before and after the function runs, adjust the arguments, and execute it conditionally.', function() {
+        var hello;
+        hello = function(name) {
+          return "hello: " + name;
+        };
+        hello = _.wrap(hello, function(func) {
+          return "before, " + (func('moe')) + ", after";
+        });
+        return expect(hello()).toEqual("before, hello: moe, after");
       });
     });
   });

@@ -67,4 +67,9 @@ describe 'functions', ->
       expect(fn("works")).toEqual("works")
       expect(fn("does not work")).toEqual("does not work")
       expect(fn("works")).toEqual("does not work")
-      
+
+  describe '_.wrap', ->
+    it 'should return a version of the function which has a wrapper applied to it. This allows the wrapper to execute code before and after the function runs, adjust the arguments, and execute it conditionally.', ->
+      hello = (name) -> "hello: #{name}"
+      hello = _.wrap(hello, (func) -> "before, #{func('moe')}, after")
+      expect(hello()).toEqual("before, hello: moe, after")
