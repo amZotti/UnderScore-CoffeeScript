@@ -12,4 +12,10 @@
     });
   };
 
+  _.pairs = function(obj) {
+    return _.map(obj, function(value, key) {
+      return [key, value];
+    });
+  };
+
 }).call(this);
