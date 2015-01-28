@@ -9,4 +9,7 @@ describe 'objects', ->
       results = _.values({one: 1, two: 2, three: 3})
       expect(results).toEqual([1, 2, 3])
 
-
+  describe '_.pairs', ->
+    it 'should convert an object into a list of [key, value] pairs', ->
+      results = _.pairs({one: 1, two: 2, three: 3})
+      expect(results).toEqual([["one", 1], ["two", 2], ["three", 3]])

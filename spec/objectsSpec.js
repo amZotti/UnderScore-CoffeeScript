@@ -12,7 +12,7 @@
         return expect(results).toEqual(['one', 'two', 'three']);
       });
     });
-    return describe('_.values', function() {
+    describe('_.values', function() {
       return it('should return all of the values of the object\'s properties', function() {
         var results;
         results = _.values({
@@ -21,6 +21,17 @@
           three: 3
         });
         return expect(results).toEqual([1, 2, 3]);
+      });
+    });
+    return describe('_.pairs', function() {
+      return it('should convert an object into a list of [key, value] pairs', function() {
+        var results;
+        results = _.pairs({
+          one: 1,
+          two: 2,
+          three: 3
+        });
+        return expect(results).toEqual([["one", 1], ["two", 2], ["three", 3]]);
       });
     });
   });
