@@ -12,3 +12,7 @@ _.invert = (obj) ->
     obj[value] = key
     delete obj[key]
   obj
+
+_.functions = (obj) ->
+  _.compact _.map obj, (value, key) ->
+    if typeof value is 'function' then key

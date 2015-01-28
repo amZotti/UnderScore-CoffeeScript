@@ -26,4 +26,12 @@
     return obj;
   };
 
+  _.functions = function(obj) {
+    return _.compact(_.map(obj, function(value, key) {
+      if (typeof value === 'function') {
+        return key;
+      }
+    }));
+  };
+
 }).call(this);
