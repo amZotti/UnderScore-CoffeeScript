@@ -16,3 +16,9 @@ _.invert = (obj) ->
 _.functions = (obj) ->
   _.compact _.map obj, (value, key) ->
     if typeof value is 'function' then key
+
+_.extend = (destination, sources...) ->
+  _.each sources, (obj) ->
+    _.each obj, (value, key) ->
+      destination[key] = value
+  destination
