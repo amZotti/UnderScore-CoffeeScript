@@ -23,3 +23,8 @@ describe 'objects', ->
     it 'should return a sorted list of the names of every method in an object', ->
       results = _.functions(_)
       expect(results.length).not.toEqual(0)
+
+  describe '_.extend', ->
+    it 'should copy all of the properties in the source objects over to the destination object', ->
+      results = _.extend({name: 'moe'}, {age: 50})
+      expect(results).toEqual({name: 'moe', age: 50})

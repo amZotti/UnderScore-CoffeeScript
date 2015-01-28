@@ -49,11 +49,25 @@
         });
       });
     });
-    return describe('_.functions', function() {
+    describe('_.functions', function() {
       return it('should return a sorted list of the names of every method in an object', function() {
         var results;
         results = _.functions(_);
         return expect(results.length).not.toEqual(0);
+      });
+    });
+    return describe('_.extend', function() {
+      return it('should copy all of the properties in the source objects over to the destination object', function() {
+        var results;
+        results = _.extend({
+          name: 'moe'
+        }, {
+          age: 50
+        });
+        return expect(results).toEqual({
+          name: 'moe',
+          age: 50
+        });
       });
     });
   });
