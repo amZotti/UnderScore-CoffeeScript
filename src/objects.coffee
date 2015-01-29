@@ -45,3 +45,30 @@ _.isObject = (value) ->
 
 _.isArgument = (obj) ->
   obj.toString() is "[object Arguments]"
+
+_.isNumber = (value) ->
+  typeof value is 'number' or typeof value is 'NaN'
+
+_.isString = (value) ->
+  typeof value is 'string'
+
+_.isBoolean = (value) ->
+  typeof value is 'boolean'
+
+_.isDate = (value) ->
+  value instanceof Date
+
+_.isRegExp = (value) ->
+  value instanceof RegExp
+
+_.isNaN = (value) ->
+  Number.isNaN(value)
+
+_.isUndefined = (value) ->
+  value is undefined
+
+_.isNull = (value) ->
+  value is null
+
+_.isFinite = (value) ->
+  isFinite(value) and not isNaN(parseFloat(value))

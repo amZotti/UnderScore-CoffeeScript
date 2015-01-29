@@ -81,4 +81,40 @@
     return obj.toString() === "[object Arguments]";
   };
 
+  _.isNumber = function(value) {
+    return typeof value === 'number' || typeof value === 'NaN';
+  };
+
+  _.isString = function(value) {
+    return typeof value === 'string';
+  };
+
+  _.isBoolean = function(value) {
+    return typeof value === 'boolean';
+  };
+
+  _.isDate = function(value) {
+    return value instanceof Date;
+  };
+
+  _.isRegExp = function(value) {
+    return value instanceof RegExp;
+  };
+
+  _.isNaN = function(value) {
+    return Number.isNaN(value);
+  };
+
+  _.isUndefined = function(value) {
+    return value === void 0;
+  };
+
+  _.isNull = function(value) {
+    return value === null;
+  };
+
+  _.isFinite = function(value) {
+    return isFinite(value) && !isNaN(parseFloat(value));
+  };
+
 }).call(this);
