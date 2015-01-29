@@ -157,10 +157,54 @@
         })(1, 2, 3));
         return expect(result).toBe(true);
       });
-      return it('should return false if object is not an Arguments object', function() {
+      it('should return false if object is not an Arguments object', function() {
         var result;
         result = _.isArgument([1, 2, 3]);
         return expect(result).toBe(false);
+      });
+      return describe('_.omit', function() {
+        it('should return a copy of the object filtered to omit the blacklisted keys passed as strings', function() {
+          var result;
+          result = _.omit({
+            name: 'moe',
+            age: 50,
+            userid: 'moe1'
+          }, 'userid');
+          return expect(result).toEqual({
+            name: 'moe',
+            age: 50
+          });
+        });
+        it('should return a copy of the object filtered to omit the blacklisted keys passed as array', function() {
+          var result;
+          result = _.omit({
+            name: 'moe',
+            age: 50,
+            userid: 'moe1'
+          }, ['userid']);
+          return expect(result).toEqual({
+            name: 'moe',
+            age: 50
+          });
+        });
+        return it('should return a copy of the object filtered to omit the values which pass the predicate', function() {
+          var result;
+          result = _.omit({
+            a: 1,
+            b: 2,
+            c: 3,
+            d: 4,
+            e: 5,
+            f: 6
+          }, function(value, key) {
+            return value % 2 === 0;
+          });
+          return expect(result).toEqual({
+            a: 1,
+            c: 3,
+            e: 5
+          });
+        });
       });
     });
   });

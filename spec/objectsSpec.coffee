@@ -81,7 +81,20 @@ describe 'objects', ->
     it 'should return true if object is an Arguments object', ->
       result = _.isArgument(((a, b, c)-> arguments)(1, 2, 3))
       expect(result).toBe(true)
-    
+
     it 'should return false if object is not an Arguments object', ->
       result = _.isArgument([1, 2, 3])
       expect(result).toBe(false)
+
+    describe '_.omit', ->
+      it 'should return a copy of the object filtered to omit the blacklisted keys passed as strings', ->
+        result = _.omit({name: 'moe', age: 50, userid: 'moe1'}, 'userid')
+        expect(result).toEqual({name: 'moe', age: 50})
+
+      it 'should return a copy of the object filtered to omit the blacklisted keys passed as array', ->
+        result = _.omit({name: 'moe', age: 50, userid: 'moe1'}, ['userid'])
+        expect(result).toEqual({name: 'moe', age: 50})
+
+      it 'should return a copy of the object filtered to omit the values which pass the predicate', ->
+        result = _.omit({a: 1, b: 2, c: 3, d: 4, e: 5, f: 6}, (value, key) -> value % 2 is 0)
+        expect(result).toEqual({ a: 1, c: 3, e: 5 })
