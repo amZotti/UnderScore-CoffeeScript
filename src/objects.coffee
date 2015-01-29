@@ -26,14 +26,6 @@ _.extend = (destination, sources...) ->
 _.isFunction = (object) ->
   typeof object is 'function'
 
-_.pick = (obj, keys...) ->
-  fn = keys[0]
-  result = {}
-  _.each obj, (value, key) ->
-    if _.isFunction(fn) and fn(value) or key in keys
-      result[key] = value
-  result
-
 _.isElement = (obj) -> 
   not not (obj and obj.nodeType is 1)
 
@@ -72,3 +64,19 @@ _.isNull = (value) ->
 
 _.isFinite = (value) ->
   isFinite(value) and not isNaN(parseFloat(value))
+
+filterObject = (whiteList, obj, keys...) ->
+  keys = _.flatten(keys, true)
+  fn = keys[0]
+  result = {}
+  _.each obj, (value, key) ->
+      containsValue =  _.isFunction(fn) and fn(value) or key in keys
+      if whiteList and containsValue or not whiteList and not containsValue
+          result[key] = value
+  result
+
+_.pick = (obj, keys...) ->
+  filterObject(true, obj, _.flatten(keys, true))
+
+_.omit = (obj, keys...) ->
+  filterObject(false, obj, _.flatten(keys, true))
