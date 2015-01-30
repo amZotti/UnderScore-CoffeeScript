@@ -88,3 +88,8 @@ _.defaults = (object, defaults...) ->
         object[key] = value
   object
 
+_.clone = (obj) ->
+  result = {}
+  _.each obj, (value, key) ->
+    result[key] = value
+  result

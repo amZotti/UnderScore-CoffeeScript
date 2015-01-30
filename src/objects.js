@@ -146,4 +146,13 @@
     return object;
   };
 
+  _.clone = function(obj) {
+    var result;
+    result = {};
+    _.each(obj, function(value, key) {
+      return result[key] = value;
+    });
+    return result;
+  };
+
 }).call(this);
