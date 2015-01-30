@@ -90,6 +90,10 @@ _.defaults = (object, defaults...) ->
 
 _.clone = (obj) ->
   result = {}
+  console.log("WORKS")
   _.each obj, (value, key) ->
     result[key] = value
   result
+
+_.has = (obj, key) ->
+  Object.prototype.hasOwnProperty.call(obj, key)

@@ -149,10 +149,15 @@
   _.clone = function(obj) {
     var result;
     result = {};
+    console.log("WORKS");
     _.each(obj, function(value, key) {
       return result[key] = value;
     });
     return result;
+  };
+
+  _.has = function(obj, key) {
+    return Object.prototype.hasOwnProperty.call(obj, key);
   };
 
 }).call(this);
