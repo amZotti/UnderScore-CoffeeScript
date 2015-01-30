@@ -133,4 +133,17 @@
     return filterObject(false, obj, _.flatten(keys, true));
   };
 
+  _.defaults = function() {
+    var defaults, object;
+    object = arguments[0], defaults = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
+    _.each(defaults, function(obj) {
+      return _.each(obj, function(value, key) {
+        if (!object.hasOwnProperty(key)) {
+          return object[key] = value;
+        }
+      });
+    });
+    return object;
+  };
+
 }).call(this);

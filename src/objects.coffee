@@ -80,3 +80,11 @@ _.pick = (obj, keys...) ->
 
 _.omit = (obj, keys...) ->
   filterObject(false, obj, _.flatten(keys, true))
+
+_.defaults = (object, defaults...) ->
+  _.each defaults, (obj) ->
+    _.each obj, (value, key) ->
+      unless object.hasOwnProperty(key)
+        object[key] = value
+  object
+
