@@ -162,7 +162,7 @@
         result = _.isArgument([1, 2, 3]);
         return expect(result).toBe(false);
       });
-      return describe('_.omit', function() {
+      describe('_.omit', function() {
         it('should return a copy of the object filtered to omit the blacklisted keys passed as strings', function() {
           var result;
           result = _.omit({
@@ -203,6 +203,22 @@
             a: 1,
             c: 3,
             e: 5
+          });
+        });
+      });
+      return describe('_.defaults', function() {
+        return it('should fill in undefined properties in object with the first value present in the list of defaults object', function() {
+          var iceCream, result;
+          iceCream = {
+            flavor: "chocolate"
+          };
+          result = _.defaults(iceCream, {
+            flavor: "vanilla",
+            sprinkles: "lots"
+          });
+          return expect(result).toEqual({
+            flavor: "chocolate",
+            sprinkles: "lots"
           });
         });
       });

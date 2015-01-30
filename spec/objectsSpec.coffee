@@ -98,3 +98,9 @@ describe 'objects', ->
       it 'should return a copy of the object filtered to omit the values which pass the predicate', ->
         result = _.omit({a: 1, b: 2, c: 3, d: 4, e: 5, f: 6}, (value, key) -> value % 2 is 0)
         expect(result).toEqual({ a: 1, c: 3, e: 5 })
+
+    describe '_.defaults', ->
+      it 'should fill in undefined properties in object with the first value present in the list of defaults object', ->
+        iceCream = {flavor: "chocolate"}
+        result = _.defaults(iceCream, {flavor: "vanilla", sprinkles: "lots"})
+        expect(result).toEqual({flavor: "chocolate", sprinkles: "lots"})
