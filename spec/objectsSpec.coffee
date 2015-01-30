@@ -115,3 +115,8 @@ describe 'objects', ->
       result = _.has({a: 1, b: 2, c: 3}, "b")
       expect(result).toBe(true)
 
+  describe '_.moe', ->
+    it 'should return a function that will itself return the key property of any passed-in object', ->
+      moe = {name: 'moe'}
+      result = _.property('name')(moe)
+      expect(result).toEqual('moe')

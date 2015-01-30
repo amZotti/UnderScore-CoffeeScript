@@ -234,7 +234,7 @@
         });
       });
     });
-    return describe('_.has', function() {
+    describe('_.has', function() {
       return it('should return a boolean indicating whether an object has the specified key', function() {
         var result;
         result = _.has({
@@ -243,6 +243,16 @@
           c: 3
         }, "b");
         return expect(result).toBe(true);
+      });
+    });
+    return describe('_.moe', function() {
+      return it('should return a function that will itself return the key property of any passed-in object', function() {
+        var moe, result;
+        moe = {
+          name: 'moe'
+        };
+        result = _.property('name')(moe);
+        return expect(result).toEqual('moe');
       });
     });
   });
