@@ -109,3 +109,9 @@ describe 'objects', ->
     it 'should create a shallow-copied clone of the object', ->
       result = _.clone({name: 'moe'})
       expect(result).toEqual({name: 'moe'})
+
+  describe '_.has', ->
+    it 'should return a boolean indicating whether an object has the specified key', ->
+      result = _.has({a: 1, b: 2, c: 3}, "b")
+      expect(result).toBe(true)
+

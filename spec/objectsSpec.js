@@ -223,7 +223,7 @@
         });
       });
     });
-    return describe('_.clone', function() {
+    describe('_.clone', function() {
       return it('should create a shallow-copied clone of the object', function() {
         var result;
         result = _.clone({
@@ -232,6 +232,17 @@
         return expect(result).toEqual({
           name: 'moe'
         });
+      });
+    });
+    return describe('_.has', function() {
+      return it('should return a boolean indicating whether an object has the specified key', function() {
+        var result;
+        result = _.has({
+          a: 1,
+          b: 2,
+          c: 3
+        }, "b");
+        return expect(result).toBe(true);
       });
     });
   });
