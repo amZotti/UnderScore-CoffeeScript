@@ -97,3 +97,7 @@ _.clone = (obj) ->
 
 _.has = (obj, key) ->
   Object.prototype.hasOwnProperty.call(obj, key)
+
+_.property = (key) ->
+  (obj) ->
+    obj[key]

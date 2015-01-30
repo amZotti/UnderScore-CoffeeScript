@@ -160,4 +160,10 @@
     return Object.prototype.hasOwnProperty.call(obj, key);
   };
 
+  _.property = function(key) {
+    return function(obj) {
+      return obj[key];
+    };
+  };
+
 }).call(this);
