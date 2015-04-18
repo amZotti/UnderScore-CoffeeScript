@@ -13,12 +13,24 @@ module.exports = function(grunt) {
       spec: {
         expand: true,
         flatten: true,
-        cwd: './src',
+        cwd: './spec',
         src: ['*.coffee'],
-        dest: './src',
+        dest: './spec',
         ext: '.js'
+      }
+    },
+
+    watch: {
+      scripts: {
+        files: ['./spec/*.coffee', './src/*.coffee'],
+        tasks: ['coffee'],
+        options: {
+          spawn: false
+        }
       }
     }
   });
   grunt.loadNpmTasks('grunt-contrib-coffee');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.registerTask('default', ['watch']);
 };

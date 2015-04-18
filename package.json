@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/amZotti/UnderScore-CoffeeScript",
   "devDependencies": {
-    "grunt-contrib-coffee": "^0.13.0"
+    "grunt-contrib-coffee": "^0.13.0",
+    "grunt-contrib-watch": "^0.6.1"
   }
 }
