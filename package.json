@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/amZotti/UnderScore-CoffeeScript/issues"
   },
-  "homepage": "https://github.com/amZotti/UnderScore-CoffeeScript"
+  "homepage": "https://github.com/amZotti/UnderScore-CoffeeScript",
+  "devDependencies": {
+    "grunt-contrib-coffee": "^0.13.0"
+  }
 }
