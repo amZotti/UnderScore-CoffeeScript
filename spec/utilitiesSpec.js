@@ -6,11 +6,16 @@
         return expect(_.identity(5)).toEqual(5);
       });
     });
-    return describe('constant', function() {
+    describe('constant', function() {
       return it('should create a function that returns the same value that is used as the argument of _.constant', function() {
         var fn;
         fn = _.constant(5);
         return expect(fn()).toEqual(5);
+      });
+    });
+    return describe('noop', function() {
+      return it('should return undefined', function() {
+        return expect(_.noop()).toEqual(void 0);
       });
     });
   });

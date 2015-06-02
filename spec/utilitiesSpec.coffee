@@ -8,3 +8,7 @@ describe 'utilities', ->
       fn = _.constant(5)
       expect(fn()).toEqual(5)
 
+  describe 'noop', ->
+    it 'should return undefined', ->
+      expect(_.noop()).toEqual(undefined)
+
