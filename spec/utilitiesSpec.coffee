@@ -12,3 +12,8 @@ describe 'utilities', ->
     it 'should return undefined', ->
       expect(_.noop()).toEqual(undefined)
 
+  describe 'times', ->
+    it 'should invoke the given iteratee function n times', ->
+      result = _.times(5, _.identity)
+      expect(result).toEqual([1, 2, 3, 4, 5])
+

@@ -13,9 +13,16 @@
         return expect(fn()).toEqual(5);
       });
     });
-    return describe('noop', function() {
+    describe('noop', function() {
       return it('should return undefined', function() {
         return expect(_.noop()).toEqual(void 0);
+      });
+    });
+    return describe('times', function() {
+      return it('should invoke the given iteratee function n times', function() {
+        var result;
+        result = _.times(5, _.identity);
+        return expect(result).toEqual([1, 2, 3, 4, 5]);
       });
     });
   });

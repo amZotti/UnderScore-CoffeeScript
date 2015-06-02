@@ -6,8 +6,8 @@ _.constant = (value) ->
 
 _.noop = -> undefined
 
-_.times = (n, iteratee, context, args...) ->
-  iteratee.apply(context, args) for i in [0..n]
+_.times = (n, iteratee, context) ->
+  iteratee.call(context, i) for i in [1..n]
 
 _.random = (min = 0, max) ->
   min + Math.floor(Math.random() * (max - min + 1))
