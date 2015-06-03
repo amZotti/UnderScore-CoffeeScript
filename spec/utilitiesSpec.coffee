@@ -24,3 +24,11 @@ describe 'utilities', ->
     it 'should return a random integer between min and max', ->
       expect(_.random(1, 1000)).not.toEqual(_.random(1, 1000))
 
+  describe 'mixin', ->
+    it 'should extend functions to underscore object', ->
+      fn = (str) ->
+        str.charAt(0).toUpperCase() + str.substring(1)
+      _.mixin({capitalize: fn})
+      result = _.capitalize("lol it works")
+      expect(result).toEqual("Lol it works")
+

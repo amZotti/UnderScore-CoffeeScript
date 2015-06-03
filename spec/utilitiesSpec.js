@@ -25,12 +25,25 @@
         return expect(result).toEqual([1, 2, 3, 4, 5]);
       });
     });
-    return describe('random', function() {
+    describe('random', function() {
       it('should return NaN if no arguments are provided', function() {
         return expect(_.random()).toEqual(NaN);
       });
       return it('should return a random integer between min and max', function() {
         return expect(_.random(1, 1000)).not.toEqual(_.random(1, 1000));
+      });
+    });
+    return describe('mixin', function() {
+      return it('should extend functions to underscore object', function() {
+        var fn, result;
+        fn = function(str) {
+          return str.charAt(0).toUpperCase() + str.substring(1);
+        };
+        _.mixin({
+          capitalize: fn
+        });
+        result = _.capitalize("lol it works");
+        return expect(result).toEqual("Lol it works");
       });
     });
   });
