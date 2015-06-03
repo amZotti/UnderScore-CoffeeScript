@@ -46,11 +46,16 @@
         return expect(result).toEqual("Lol it works");
       });
     });
-    return describe('uniqueId', function() {
+    describe('uniqueId', function() {
       return it('should generate a globally-unique id', function() {
         _.uniqueId('bbq');
         _.uniqueId('bbq');
         return expect(_.uniqueId('bbq')).toEqual('bbq3');
+      });
+    });
+    return describe('escape', function() {
+      return it('Escapes a string for insertion into HTML, replacing &, <, >, ", `, and \'', function() {
+        return expect(_.escape('<"lol">')).toEqual('&#60;&#34;lol&#34;&#62;');
       });
     });
   });
