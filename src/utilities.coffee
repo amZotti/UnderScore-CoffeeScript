@@ -20,3 +20,9 @@ _.random = (min, max) ->
 _.mixin = (fns) ->
   for name of fns
     _[name] = fns[name]
+
+_.storage = {}
+
+_.uniqueId = (name) ->
+  _.storage[name] = _.storage[name] or 0
+  name + ++_.storage[name]

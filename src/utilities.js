@@ -43,4 +43,11 @@
     return results;
   };
 
+  _.storage = {};
+
+  _.uniqueId = function(name) {
+    _.storage[name] = _.storage[name] || 0;
+    return name + ++_.storage[name];
+  };
+
 }).call(this);
