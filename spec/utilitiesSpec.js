@@ -53,9 +53,14 @@
         return expect(_.uniqueId('bbq')).toEqual('bbq3');
       });
     });
-    return describe('escape', function() {
-      return it('Escapes a string for insertion into HTML, replacing &, <, >, ", `, and \'', function() {
+    describe('escape', function() {
+      return it('should escape a string for insertion into HTML, replacing &, <, >, ", `, and \'', function() {
         return expect(_.escape('<"lol">')).toEqual('&#60;&#34;lol&#34;&#62;');
+      });
+    });
+    return describe('unescape', function() {
+      return it('should function as the opposite of escape, replaces &amp;, &lt;, &gt;, &quot;, &#96; and &#x27; with their unescaped counterparts.', function() {
+        return expect(_.unescape('&#60;&#34;lol&#34;&#62;')).toEqual('<"lol">');
       });
     });
   });
