@@ -33,7 +33,7 @@
         return expect(_.random(1, 1000)).not.toEqual(_.random(1, 1000));
       });
     });
-    return describe('mixin', function() {
+    describe('mixin', function() {
       return it('should extend functions to underscore object', function() {
         var fn, result;
         fn = function(str) {
@@ -44,6 +44,13 @@
         });
         result = _.capitalize("lol it works");
         return expect(result).toEqual("Lol it works");
+      });
+    });
+    return describe('uniqueId', function() {
+      return it('should generate a globally-unique id', function() {
+        _.uniqueId('bbq');
+        _.uniqueId('bbq');
+        return expect(_.uniqueId('bbq')).toEqual('bbq3');
       });
     });
   });

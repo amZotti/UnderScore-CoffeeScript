@@ -32,3 +32,8 @@ describe 'utilities', ->
       result = _.capitalize("lol it works")
       expect(result).toEqual("Lol it works")
 
+  describe 'uniqueId', ->
+    it 'should generate a globally-unique id', ->
+      _.uniqueId('bbq')
+      _.uniqueId('bbq')
+      expect(_.uniqueId('bbq')).toEqual('bbq3')
