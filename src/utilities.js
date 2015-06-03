@@ -34,4 +34,13 @@
     return min + Math.floor(Math.random() * (max - min + 1));
   };
 
+  _.mixin = function(fns) {
+    var name, results;
+    results = [];
+    for (name in fns) {
+      results.push(_[name] = fns[name]);
+    }
+    return results;
+  };
+
 }).call(this);

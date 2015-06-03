@@ -16,3 +16,7 @@ _.random = (min, max) ->
     max = min
     min = 0
   min + Math.floor(Math.random() * (max - min + 1))
+
+_.mixin = (fns) ->
+  for name of fns
+    _[name] = fns[name]
