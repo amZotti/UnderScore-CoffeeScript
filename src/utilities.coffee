@@ -9,5 +9,10 @@ _.noop = -> undefined
 _.times = (n, iteratee, context) ->
   iteratee.call(context, i) for i in [1..n]
 
-_.random = (min = 0, max) ->
+_.random = (min, max) ->
+  if min is undefined
+    return NaN
+  if max is undefined
+    max = min
+    min = 0
   min + Math.floor(Math.random() * (max - min + 1))

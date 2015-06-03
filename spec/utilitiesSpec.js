@@ -18,11 +18,19 @@
         return expect(_.noop()).toEqual(void 0);
       });
     });
-    return describe('times', function() {
+    describe('times', function() {
       return it('should invoke the given iteratee function n times', function() {
         var result;
         result = _.times(5, _.identity);
         return expect(result).toEqual([1, 2, 3, 4, 5]);
+      });
+    });
+    return describe('random', function() {
+      it('should return NaN if no arguments are provided', function() {
+        return expect(_.random()).toEqual(NaN);
+      });
+      return it('should return a random integer between min and max', function() {
+        return expect(_.random(1, 1000)).not.toEqual(_.random(1, 1000));
       });
     });
   });

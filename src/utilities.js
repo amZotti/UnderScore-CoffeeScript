@@ -24,7 +24,11 @@
   };
 
   _.random = function(min, max) {
-    if (min == null) {
+    if (min === void 0) {
+      return NaN;
+    }
+    if (max === void 0) {
+      max = min;
       min = 0;
     }
     return min + Math.floor(Math.random() * (max - min + 1));

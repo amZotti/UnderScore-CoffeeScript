@@ -17,3 +17,10 @@ describe 'utilities', ->
       result = _.times(5, _.identity)
       expect(result).toEqual([1, 2, 3, 4, 5])
 
+  describe 'random', ->
+    it 'should return NaN if no arguments are provided', ->
+      expect(_.random()).toEqual(NaN)
+
+    it 'should return a random integer between min and max', ->
+      expect(_.random(1, 1000)).not.toEqual(_.random(1, 1000))
+
