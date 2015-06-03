@@ -40,3 +40,23 @@ _.escape = (str) ->
   for i in str
     newStr += _.escapeChar[i] or i
   newStr
+
+_.escapeChar['&#38;'] = '&'
+_.escapeChar['&#60;'] = '<'
+_.escapeChar['&#62;'] = '>'
+_.escapeChar['&#34;'] = '"'
+_.escapeChar['&#39;'] = '\''
+_.escapeChar['&#96;'] = '`'
+
+_.unescape = (str) ->
+  newStr = ''
+  i = 0
+  while i < str.length
+    escapeChar = _.escapeChar[str.substring(i, i + 5)]
+    if escapeChar
+      newStr += escapeChar
+      i += 4
+    else
+      newStr += str[i]
+    i++
+  newStr
