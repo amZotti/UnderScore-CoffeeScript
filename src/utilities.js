@@ -50,4 +50,28 @@
     return name + ++_.storage[name];
   };
 
+  _.escapeChar = {};
+
+  _.escapeChar['&'] = '&#38;';
+
+  _.escapeChar['<'] = '&#60;';
+
+  _.escapeChar['>'] = '&#62;';
+
+  _.escapeChar['"'] = '&#34;';
+
+  _.escapeChar['\''] = '&#39;';
+
+  _.escapeChar['`'] = '&#96;';
+
+  _.escape = function(str) {
+    var i, j, len, newStr;
+    newStr = '';
+    for (j = 0, len = str.length; j < len; j++) {
+      i = str[j];
+      newStr += _.escapeChar[i] || i;
+    }
+    return newStr;
+  };
+
 }).call(this);

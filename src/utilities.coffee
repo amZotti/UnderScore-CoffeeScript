@@ -26,3 +26,17 @@ _.storage = {}
 _.uniqueId = (name) ->
   _.storage[name] = _.storage[name] or 0
   name + ++_.storage[name]
+
+_.escapeChar = {}
+_.escapeChar['&'] = '&#38;'
+_.escapeChar['<'] = '&#60;'
+_.escapeChar['>'] = '&#62;'
+_.escapeChar['"'] = '&#34;'
+_.escapeChar['\''] = '&#39;'
+_.escapeChar['`'] = '&#96;'
+
+_.escape = (str) ->
+  newStr = ''
+  for i in str
+    newStr += _.escapeChar[i] or i
+  newStr
